@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/process-section",
+  "version": "1.0.0",
+  "title": "Process Section",
+  "category": "webdune",
+  "icon": "list-view",
+  "description": "A section showing a process with steps, image, and optional CTA button.",
+  "keywords": [
+    "process",
+    "steps",
+    "section",
+    "cta"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Sell your phone in<br>4 easy steps"
+    },
+    "steps": {
+      "type": "array",
+      "default": [
+        {
+          "title": "Get a quote",
+          "description": "Enter your phone details<br>and see its value instantly."
+        },
+        {
+          "title": "Send it for free",
+          "description": "Free insured courier, drop<br>off or book a home pickup."
+        },
+        {
+          "title": "We check it",
+          "description": "We confirm your phone's details<br>and update the quote if needed."
+        },
+        {
+          "title": "You get paid",
+          "description": "Cash to your bank (or charity)<br>within one business day."
+        }
+      ]
+    },
+    "image": {
+      "type": "object",
+      "default": {}
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Get started"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "showDecorativeLine": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

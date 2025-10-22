@@ -1,0 +1,57 @@
+// Webdune Blocks Layout Utilities
+
+// Global padding utility
+.padding-global {
+  padding-left: 5%;
+  padding-right: 5%;
+
+  @media (max-width: 768px) {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+}
+
+// Container utilities
+.container-large {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.container-medium {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container-small {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// Flex utilities
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+.gap-24 {
+  gap: 24px;
+}
+
+.gap-32 {
+  gap: 32px;
+}
