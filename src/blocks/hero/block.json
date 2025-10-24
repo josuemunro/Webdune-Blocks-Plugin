@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/hero",
+  "version": "1.0.0",
+  "title": "Hero Section",
+  "category": "webdune",
+  "icon": "cover-image",
+  "description": "Main hero section with heading, subheading, background image, and CTA button.",
+  "keywords": [
+    "hero",
+    "header",
+    "banner",
+    "homepage"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "padding": false,
+      "margin": false
+    },
+    "anchor": true
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "A better way to sell your phone"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "Fast. Fair. Free. As it should be."
+    },
+    "backgroundImage": {
+      "type": "object",
+      "default": {}
+    },
+    "heroImage": {
+      "type": "object",
+      "default": {}
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Get quote"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaOpenInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "gradientStart": {
+      "type": "string",
+      "default": "#52729b"
+    },
+    "gradientEnd": {
+      "type": "string",
+      "default": "#99a8b1"
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

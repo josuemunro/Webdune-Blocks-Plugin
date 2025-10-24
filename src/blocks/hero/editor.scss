@@ -1,0 +1,61 @@
+// Editor-specific styles for Hero block
+.wp-block-webdune-hero {
+  .hero-section {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    margin: 1rem 0;
+    position: relative;
+
+    &:hover {
+      border-color: #007cba;
+    }
+
+    &::before {
+      content: 'Hero Section';
+      position: absolute;
+      top: -1.5rem;
+      left: 0;
+      background: #007cba;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      z-index: 10;
+    }
+  }
+
+  .hero-image-placeholder {
+    background: #f0f0f0;
+    border: 2px dashed #ccc;
+    color: #666;
+    border-radius: 1rem;
+    padding: 3rem;
+    text-align: center;
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+  }
+
+  // Make text editable areas more visible in editor
+  .hero-heading,
+  .hero-subheading {
+    &:focus {
+      outline: 2px solid #007cba;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  // CTA button styling in editor
+  .hero-cta-button {
+    cursor: text;
+
+    &:hover {
+      background: #e6c233 !important;
+    }
+  }
+}

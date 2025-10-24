@@ -55,3 +55,33 @@
 .gap-32 {
   gap: 32px;
 }
+
+// Override WordPress theme constraints for full-width blocks
+.wp-block-group.alignfull,
+.wp-block-group[class*="alignfull"],
+.alignfull {
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+}
+
+// Override theme padding for full-width blocks
+.wp-block-group.alignfull .wp-block-group,
+.wp-block-group[class*="alignfull"] .wp-block-group,
+.alignfull .wp-block-group {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+// Ensure our blocks can break out of theme constraints
+.wp-block-webdune-hero,
+.wp-block-webdune-process-section,
+.wp-block-webdune-cta-section {
+  &.alignfull {
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}

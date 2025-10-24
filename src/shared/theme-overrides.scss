@@ -1,0 +1,73 @@
+// Theme Overrides for Full-Width Blocks
+// This file removes WordPress theme constraints that prevent full-width layouts
+
+// Remove padding and width constraints from blocks marked as alignfull
+.wp-site-blocks {
+
+  // Remove top margin from main content area
+  main.wp-block-group {
+    margin-top: 0 !important;
+  }
+
+  // Remove padding from entry-content that contains our blocks
+  .entry-content,
+  .wp-block-post-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    // Target only our full-width blocks
+    >.alignfull {
+      margin-left: calc(50% - 50vw) !important;
+      margin-right: calc(50% - 50vw) !important;
+      max-width: 100vw !important;
+      width: 100vw !important;
+    }
+  }
+}
+
+// Override theme's global padding for our custom blocks
+[class*="wp-block-webdune"] {
+  &.alignfull {
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
+
+// Remove constrained layout padding for full-width blocks
+.has-global-padding {
+  >.alignfull {
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
+
+// Ensure section elements inside alignfull blocks take full width
+.alignfull>section {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+// Additional fix for Twenty Twenty-Five and similar themes
+.wp-block-group.is-layout-constrained {
+  >.alignfull {
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
+
+// Remove padding from post content wrapper for full-width blocks
+.wp-block-post-content.has-global-padding {
+  >* {
+    &.alignfull {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+}
