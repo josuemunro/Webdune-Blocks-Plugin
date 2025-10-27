@@ -1,0 +1,89 @@
+/* Editor-specific styles for 2-Column Flexible Block */
+
+.webdune-two-column-flexible {
+  .two-col-block_grid {
+    min-height: 300px;
+    border: 1px dashed #ddd;
+    padding: 1rem;
+  }
+
+  .two-col-block_text-content,
+  .two-col-block_media-content {
+    border: 1px dashed #ccc;
+    padding: 1.5rem;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .two-col-block_cta {
+    .components-text-control__input {
+      margin-bottom: 0.5rem;
+    }
+
+    .block-editor-url-input {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .media-placeholder {
+    padding: 3rem;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    color: #666;
+  }
+
+  .image-wrapper {
+    position: relative;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .video-wrapper {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .video-overlay {
+      position: static;
+    }
+
+    video {
+      max-width: 100%;
+    }
+  }
+
+  .double-images-wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .double-image-first,
+    .double-image-second {
+      flex: 1;
+      min-width: 200px;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  // Show edit controls on hover
+  .components-button {
+    margin-top: 0.5rem;
+  }
+}

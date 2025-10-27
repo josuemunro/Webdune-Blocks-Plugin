@@ -1,78 +1,114 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {
-  const blockProps = useBlockProps.save();
   const {
     heading,
     subheading,
-    backgroundImage,
     heroImage,
-    ctaText,
-    ctaUrl,
-    ctaOpenInNewTab,
+    searchPlaceholder,
+    searchButtonText,
     gradientStart,
     gradientEnd
   } = attributes;
 
+  const blockProps = useBlockProps.save({
+    className: 'webdune-hero-block',
+  });
+
   return (
-    <section {...blockProps} className="hero-section alignfull">
-      <div
-        className="hero-background"
+    <section {...blockProps}>
+      <section
+        className="section_home-hero"
         style={{
-          backgroundImage: backgroundImage.url ? `url(${backgroundImage.url})` : undefined,
-          background: `linear-gradient(180deg, ${gradientStart} 0%, ${gradientEnd} 100%)`
+          backgroundImage: `linear-gradient(${gradientStart}, ${gradientEnd})`
         }}
       >
-        <div className="hero-content">
-          <div className="hero-text">
-            {heading && (
-              <RichText.Content
-                tagName="h1"
-                value={heading}
-                className="hero-heading"
-              />
-            )}
+        <div className="padding-global z-index-1">
+          <div className="w-layout-blockcontainer container-medium w-container">
+            <div className="home-hero_wrap">
+              <div className="home-hero_content">
+                {heading && (
+                  <RichText.Content
+                    tagName="h1"
+                    className="text-color-white"
+                    value={heading}
+                  />
+                )}
 
-            {subheading && (
-              <RichText.Content
-                tagName="p"
-                value={subheading}
-                className="hero-subheading"
-              />
-            )}
+                {subheading && (
+                  <RichText.Content
+                    tagName="div"
+                    className="home-hero_subheading"
+                    value={subheading}
+                  />
+                )}
+
+                <div className="home-hero_phone-lockup-wrap w-form">
+                  <form
+                    id="wf-form-Home-hero-phone-lookup"
+                    name="wf-form-Home-hero-phone-lookup"
+                    data-name="Home hero phone lookup"
+                    method="get"
+                    className="home-hero_phone-lookup"
+                    data-wf-page-id="68f9aab9d5bffd1726ea4995"
+                    data-wf-element-id="9f50d013-d3f2-90f2-ccd7-ef7550657864"
+                  >
+                    <input
+                      className="home-hero_phone-lookup-input w-input"
+                      maxLength="256"
+                      name="phone-search"
+                      data-name="Phone Search"
+                      placeholder={searchPlaceholder}
+                      type="text"
+                      id="phone-search"
+                    />
+                    <a href="#" className="button is-icon w-inline-block">
+                      <div>{searchButtonText}</div>
+                      <div className="icon-embed-arrow w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 26 13" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M20.2543 12.0044L25.3264 6.80104C25.6781 6.44018 25.6781 5.8465 25.3264 5.48565L20.2543 0.270645C19.9025 -0.0902149 19.3238 -0.0902149 18.9721 0.270645C18.6203 0.631504 18.6203 1.22518 18.9721 1.58604L22.501 5.20627H0.907755C0.40849 5.20627 0 5.62533 0 6.13752C0 6.64971 0.40849 7.06877 0.907755 7.06877H22.4896L18.9607 10.689C18.7792 10.8753 18.6997 11.1081 18.6997 11.3525C18.6997 11.597 18.7905 11.8298 18.9607 12.016C19.3238 12.3653 19.9025 12.3653 20.2543 12.0044Z" fill="currentColor"></path>
+                        </svg>
+                      </div>
+                    </a>
+                  </form>
+
+                  <div className="phone-lookup">
+                    <div className="phone-lookup_results">
+                      {/* Phone search results will be dynamically inserted here via JavaScript */}
+                    </div>
+                    <a href="#" className="text-size-tiny text-style-link">View all models</a>
+                  </div>
+
+                  <div className="form_message-success-wrapper w-form-done">
+                    <div className="form_message-success">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                  </div>
+                  <div className="form_message-error-wrapper w-form-fail">
+                    <div className="form_message-error">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="hero-image-container">
-            {heroImage.url && (
+        <div className="padding-global home-hero_image-wrapper">
+          <div className="container-large home-hero_img-container">
+            {heroImage?.url && (
               <img
                 src={heroImage.url}
+                loading="lazy"
+                sizes="(max-width: 839px) 100vw, 839px"
                 alt={heroImage.alt || ''}
-                className="hero-image"
+                className="home-hero_img"
               />
             )}
           </div>
         </div>
-
-        {/* Search bar placeholder - actual search is a separate block */}
-        <div className="hero-search-placeholder">
-          <span className="search-input-placeholder">
-            Enter phone model e.g. iPhone14
-          </span>
-          {ctaText && ctaUrl && (
-            <a
-              href={ctaUrl}
-              className="search-button"
-              target={ctaOpenInNewTab ? '_blank' : '_self'}
-              rel={ctaOpenInNewTab ? 'noopener noreferrer' : undefined}
-            >
-              <RichText.Content
-                tagName="span"
-                value={ctaText}
-              />
-            </a>
-          )}
-        </div>
-      </div>
+      </section>
     </section>
   );
 }

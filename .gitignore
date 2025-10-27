@@ -4,6 +4,7 @@ vendor/
 
 # Build output
 build/
+webflow-exported-home-page/
 
 # Logs
 *.log

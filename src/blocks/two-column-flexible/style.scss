@@ -1,0 +1,361 @@
+@import '../../shared/colors.scss';
+
+/* ===================================
+   Custom Gradient Underline Format
+   =================================== */
+.gradient-underline {
+  background-image: linear-gradient(to right, $color-primary 0%, $color-primary 100%);
+  background-size: 100% 0.3rem;
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 0.25rem);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-bottom: 0rem;
+}
+
+.gradient-underline.custom-color {
+  background-image: linear-gradient(to right, white 0%, white 100%);
+}
+
+.gradient-underline.thick {
+  background-size: 100% 5px;
+}
+
+.gradient-underline.thin {
+  padding-bottom: 0.25rem;
+  background-size: 100% 4px;
+}
+
+@media screen and (max-width: 991px) {
+  .gradient-underline {
+    background-size: 100% 0.3rem;
+    background-position: 0 calc(100% - 0.25rem);
+    padding-bottom: 0.15rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .gradient-underline {
+    background-size: 100% 0.3rem;
+    background-position: 0 calc(100% - 0.25rem);
+    padding-bottom: 0.2rem;
+  }
+}
+
+/* ===================================
+   Section Padding
+   =================================== */
+.section-padding-medium {
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
+}
+
+.section-padding-large {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+/* ===================================
+   Section Header
+   =================================== */
+.section-header-wrapper {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  margin: 0;
+}
+
+/* ===================================
+   2-Column Grid
+   =================================== */
+.two-col-block_grid {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media screen and (max-width: 991px) {
+  .two-col-block_grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem;
+  }
+}
+
+/* ===================================
+   Text Content Column
+   =================================== */
+.two-col-block_text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.two-col-block_number {
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1;
+  color: $color-primary;
+}
+
+.two-col-block_heading {
+  margin: 0;
+}
+
+.two-col-block_rich-text {
+  p {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.two-col-block_cta {
+  margin-top: 1rem;
+}
+
+.two-col-block_down-arrow {
+  margin-top: 1rem;
+
+  svg {
+    width: 20px;
+    height: 54px;
+  }
+}
+
+/* ===================================
+   Media Content Column
+   =================================== */
+.two-col-block_media-content {
+  position: relative;
+}
+
+/* Video Styles */
+.media-video {
+  position: relative;
+  width: 100%;
+
+  &.media-video-portrait {
+    aspect-ratio: 9 / 16;
+  }
+
+  &.media-video-square {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  overflow: hidden;
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    &::-webkit-media-controls {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::-webkit-media-controls {
+      opacity: 1;
+    }
+  }
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+
+  .video-play-button {
+    pointer-events: auto;
+    cursor: pointer;
+    color: $color-dark;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.video-wrapper video[controls]~.video-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Single Image Styles */
+.media-single-image {
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  &.media-single-full-height {
+    .image-wrapper {
+      height: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2rem;
+    }
+  }
+
+  &.media-single-phone {
+    .image-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &.natural-width {
+      .image-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      img {
+        position: absolute;
+      }
+    }
+  }
+}
+
+/* Double Images Styles */
+.media-double-images {
+  &.media-double-tall-overlaid {
+    .double-images-wrapper {
+      position: relative;
+    }
+
+    .double-image-first {
+      aspect-ratio: 3 / 5;
+      margin-right: 11.5rem;
+      margin-bottom: 9.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2rem;
+      }
+    }
+
+    .double-image-second {
+      position: absolute;
+      right: 0;
+      top: 11.5rem;
+      max-width: 100%;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 2rem;
+      }
+    }
+  }
+
+  &.media-double-stacked {
+    .double-images-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .double-image-first,
+    .double-image-second {
+      aspect-ratio: 1 / 1;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2rem;
+      }
+    }
+  }
+}
+
+/* ===================================
+   Responsive Adjustments
+   =================================== */
+@media screen and (max-width: 991px) {
+  .section-padding-medium {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .section-padding-large {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
+  .two-col-block_number {
+    font-size: 3rem;
+  }
+
+  .media-double-images.media-double-tall-overlaid {
+    .double-image-first {
+      margin-right: 6rem;
+      margin-bottom: 5rem;
+    }
+
+    .double-image-second {
+      top: 6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-padding-medium {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .section-padding-large {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .two-col-block_number {
+    font-size: 2.5rem;
+  }
+
+  .media-double-images.media-double-tall-overlaid {
+    .double-image-first {
+      margin-right: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .double-image-second {
+      top: 3rem;
+    }
+  }
+}

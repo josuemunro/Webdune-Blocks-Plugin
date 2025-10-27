@@ -1,8 +1,8 @@
 # 🚀 START HERE - Webdune Blocks Plugin
 
-**Last Updated**: October 21, 2025  
-**Project Status**: Foundation Complete → Ready for Block Development  
-**Current Phase**: Setting up Local environment + Building first blocks
+**Last Updated**: October 26, 2025  
+**Project Status**: Foundation Complete → Actively Building Blocks  
+**Current Phase**: Building flexible block system from Webflow designs
 
 ---
 
@@ -16,10 +16,12 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 - ✅ Helper functions ready
 - ✅ Shared styles configured
 - ✅ Local by Flywheel setup complete
-- ✅ Development workflow established
+- ✅ Development workflow established (npm start running)
 - ✅ Process Section block completed
-- 🔄 **IN PROGRESS**: Building Hero block
-- ⏳ **WAITING**: All-in-One WP Migration export (~3 hours)
+- ✅ Hero block completed
+- ✅ 2-Column Flexible block completed (custom underline format!)
+- 🔄 **IN PROGRESS**: Testing and refinement
+- 📦 **SOURCE**: Webflow export available for reference
 
 ---
 
@@ -32,8 +34,9 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 
 ### Reference Documentation
 4. **README.md** - Complete project documentation
-5. **BLOCK_INVENTORY.md** - All 16 blocks with specifications and Figma nodes
+5. **BLOCK_INVENTORY.md** - All blocks with specifications (Note: Figma nodes deprecated, using Webflow export)
 6. **wp_cursor_brief.md** - Original project brief with design system
+7. **webflow-exported-home-page/** - Source HTML/CSS/assets from Webflow
 
 ### Core Plugin Files
 7. **webdune-blocks.php** - Main plugin file (auto-registers blocks)
@@ -449,7 +452,7 @@ The fresh `sellmycell-dev` site is just for initial building/testing. The `sellm
 - **WordPress Block Editor Handbook**: https://developer.wordpress.org/block-editor/
 - **@wordpress/components**: https://developer.wordpress.org/block-editor/reference-guides/components/
 - **ACF Documentation**: https://www.advancedcustomfields.com/resources/
-- **Figma File**: Open in Figma Desktop with MCP
+- **Webflow Export**: Located in `webflow-exported-home-page/` directory
 
 ---
 

@@ -1,150 +1,189 @@
-import { useBlockProps, RichText, MediaUpload, MediaUploadCheck, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ToggleControl, Button, ColorPicker } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { useBlockProps, RichText, MediaUpload, MediaUploadCheck, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, TextControl, Button } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-  const blockProps = useBlockProps();
   const {
     heading,
     subheading,
-    backgroundImage,
     heroImage,
-    ctaText,
-    ctaUrl,
-    ctaOpenInNewTab,
+    searchPlaceholder,
+    searchButtonText,
     gradientStart,
     gradientEnd
   } = attributes;
 
+  const blockProps = useBlockProps({
+    className: 'webdune-hero-block',
+  });
+
   return (
     <>
-      {/* Sidebar Settings */}
       <InspectorControls>
         <PanelBody title={__('Hero Settings', 'webdune-blocks')} initialOpen={true}>
           <TextControl
-            label={__('CTA Button URL', 'webdune-blocks')}
-            value={ctaUrl}
-            onChange={(value) => setAttributes({ ctaUrl: value })}
-            help={__('Enter the URL for the CTA button', 'webdune-blocks')}
+            label={__('Search Placeholder', 'webdune-blocks')}
+            value={searchPlaceholder}
+            onChange={(value) => setAttributes({ searchPlaceholder: value })}
+            help={__('Placeholder text for phone search input', 'webdune-blocks')}
           />
-          <ToggleControl
-            label={__('Open in new tab', 'webdune-blocks')}
-            checked={ctaOpenInNewTab}
-            onChange={(value) => setAttributes({ ctaOpenInNewTab: value })}
+          <TextControl
+            label={__('Search Button Text', 'webdune-blocks')}
+            value={searchButtonText}
+            onChange={(value) => setAttributes({ searchButtonText: value })}
           />
         </PanelBody>
 
-        <PanelBody title={__('Background Settings', 'webdune-blocks')}>
-          <p>{__('Background Image', 'webdune-blocks')}</p>
+        <PanelBody title={__('Hero Image', 'webdune-blocks')}>
           <MediaUploadCheck>
             <MediaUpload
-              onSelect={(media) => setAttributes({ backgroundImage: media })}
+              onSelect={(media) => setAttributes({
+                heroImage: {
+                  id: media.id,
+                  url: media.url,
+                  alt: media.alt
+                }
+              })}
               allowedTypes={['image']}
-              value={backgroundImage.id}
+              value={heroImage?.id}
               render={({ open }) => (
-                <Button onClick={open} variant="secondary">
-                  {backgroundImage.url ? __('Change Background', 'webdune-blocks') : __('Select Background', 'webdune-blocks')}
-                </Button>
-              )}
-            />
-          </MediaUploadCheck>
-
-          <p>{__('Hero Image (Right Side)', 'webdune-blocks')}</p>
-          <MediaUploadCheck>
-            <MediaUpload
-              onSelect={(media) => setAttributes({ heroImage: media })}
-              allowedTypes={['image']}
-              value={heroImage.id}
-              render={({ open }) => (
-                <Button onClick={open} variant="secondary">
-                  {heroImage.url ? __('Change Hero Image', 'webdune-blocks') : __('Select Hero Image', 'webdune-blocks')}
-                </Button>
+                <div>
+                  {heroImage?.url && (
+                    <div style={{ marginBottom: '12px' }}>
+                      <img
+                        src={heroImage.url}
+                        alt={heroImage.alt || ''}
+                        style={{ maxWidth: '100%', height: 'auto' }}
+                      />
+                    </div>
+                  )}
+                  <Button onClick={open} variant="secondary">
+                    {heroImage?.url ? __('Change Image', 'webdune-blocks') : __('Select Image', 'webdune-blocks')}
+                  </Button>
+                  {heroImage?.url && (
+                    <Button
+                      onClick={() => setAttributes({ heroImage: {} })}
+                      variant="tertiary"
+                      isDestructive
+                      style={{ marginLeft: '8px' }}
+                    >
+                      {__('Remove', 'webdune-blocks')}
+                    </Button>
+                  )}
+                </div>
               )}
             />
           </MediaUploadCheck>
         </PanelBody>
 
-        <PanelBody title={__('Gradient Settings', 'webdune-blocks')}>
-          <ColorPicker
-            color={gradientStart}
-            onChange={(value) => setAttributes({ gradientStart: value })}
-            label={__('Gradient Start Color', 'webdune-blocks')}
-          />
-          <ColorPicker
-            color={gradientEnd}
-            onChange={(value) => setAttributes({ gradientEnd: value })}
-            label={__('Gradient End Color', 'webdune-blocks')}
-          />
+        <PanelBody title={__('Background Gradient', 'webdune-blocks')}>
+          <div style={{ marginBottom: '16px' }}>
+            <label>{__('Gradient Start Color', 'webdune-blocks')}</label>
+            <input
+              type="color"
+              value={gradientStart}
+              onChange={(e) => setAttributes({ gradientStart: e.target.value })}
+              style={{ width: '100%', height: '40px', marginTop: '8px' }}
+            />
+          </div>
+          <div>
+            <label>{__('Gradient End Color', 'webdune-blocks')}</label>
+            <input
+              type="color"
+              value={gradientEnd}
+              onChange={(e) => setAttributes({ gradientEnd: e.target.value })}
+              style={{ width: '100%', height: '40px', marginTop: '8px' }}
+            />
+          </div>
         </PanelBody>
       </InspectorControls>
 
-      {/* Block Content */}
-      <section {...blockProps} className="hero-section alignfull">
-        <div
-          className="hero-background"
+      <section {...blockProps}>
+        <section
+          className="section_home-hero"
           style={{
-            backgroundImage: backgroundImage.url ? `url(${backgroundImage.url})` : undefined,
-            background: `linear-gradient(180deg, ${gradientStart} 0%, ${gradientEnd} 100%)`
+            backgroundImage: `linear-gradient(${gradientStart}, ${gradientEnd})`
           }}
         >
-          <div className="hero-content">
-            <div className="hero-text">
-              <RichText
-                tagName="h1"
-                value={heading}
-                onChange={(value) => setAttributes({ heading: value })}
-                placeholder={__('Enter main heading...', 'webdune-blocks')}
-                className="hero-heading"
-                allowedFormats={['core/bold', 'core/italic']}
-              />
+          <div className="padding-global z-index-1">
+            <div className="w-layout-blockcontainer container-medium w-container">
+              <div className="home-hero_wrap">
+                <div className="home-hero_content">
+                  <RichText
+                    tagName="h1"
+                    className="text-color-white"
+                    value={heading}
+                    onChange={(value) => setAttributes({ heading: value })}
+                    placeholder={__('Enter main heading...', 'webdune-blocks')}
+                    allowedFormats={['core/bold', 'core/italic']}
+                  />
 
-              <RichText
-                tagName="p"
-                value={subheading}
-                onChange={(value) => setAttributes({ subheading: value })}
-                placeholder={__('Enter subheading...', 'webdune-blocks')}
-                className="hero-subheading"
-                allowedFormats={['core/bold', 'core/italic']}
-              />
+                  <RichText
+                    tagName="div"
+                    className="home-hero_subheading"
+                    value={subheading}
+                    onChange={(value) => setAttributes({ subheading: value })}
+                    placeholder={__('Enter subheading...', 'webdune-blocks')}
+                    allowedFormats={[]}
+                  />
+
+                  <div className="home-hero_phone-lockup-wrap">
+                    <div className="home-hero_phone-lookup">
+                      <input
+                        type="text"
+                        className="home-hero_phone-lookup-input w-input"
+                        placeholder={searchPlaceholder}
+                        disabled
+                      />
+                      <a href="#" className="button is-icon w-inline-block" onClick={(e) => e.preventDefault()}>
+                        <RichText
+                          tagName="div"
+                          value={searchButtonText}
+                          onChange={(value) => setAttributes({ searchButtonText: value })}
+                          placeholder={__('Button text...', 'webdune-blocks')}
+                          allowedFormats={[]}
+                        />
+                        <div className="icon-embed-arrow w-embed">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 26 13" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M20.2543 12.0044L25.3264 6.80104C25.6781 6.44018 25.6781 5.8465 25.3264 5.48565L20.2543 0.270645C19.9025 -0.0902149 19.3238 -0.0902149 18.9721 0.270645C18.6203 0.631504 18.6203 1.22518 18.9721 1.58604L22.501 5.20627H0.907755C0.40849 5.20627 0 5.62533 0 6.13752C0 6.64971 0.40849 7.06877 0.907755 7.06877H22.4896L18.9607 10.689C18.7792 10.8753 18.6997 11.1081 18.6997 11.3525C18.6997 11.597 18.7905 11.8298 18.9607 12.016C19.3238 12.3653 19.9025 12.3653 20.2543 12.0044Z" fill="currentColor"></path>
+                          </svg>
+                        </div>
+                      </a>
+                    </div>
+
+                    {/* Phone lookup results - hidden in editor */}
+                    <div className="phone-lookup" style={{ display: 'none' }}>
+                      <div className="phone-lookup_results">
+                        <div className="phone-lookup_item">
+                          <div className="phone-lookup_item-details">
+                            <div className="text-size-tiny">Search results appear here on frontend</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div className="hero-image-container">
-              {heroImage.url ? (
+          <div className="padding-global home-hero_image-wrapper">
+            <div className="container-large home-hero_img-container">
+              {heroImage?.url ? (
                 <img
                   src={heroImage.url}
                   alt={heroImage.alt || ''}
-                  className="hero-image"
+                  className="home-hero_img"
                 />
               ) : (
                 <div className="hero-image-placeholder">
-                  <p>{__('Select a hero image in the sidebar', 'webdune-blocks')}</p>
+                  <p>{__('Select a hero image in the sidebar →', 'webdune-blocks')}</p>
                 </div>
               )}
             </div>
           </div>
-
-          {/* Search bar placeholder - actual search is a separate block */}
-          <div className="hero-search-placeholder">
-            <span className="search-input-placeholder">
-              Enter phone model e.g. iPhone14
-            </span>
-            <a
-              href={ctaUrl || '#'}
-              className="search-button"
-              target={ctaOpenInNewTab ? '_blank' : '_self'}
-              rel={ctaOpenInNewTab ? 'noopener noreferrer' : undefined}
-            >
-              <RichText
-                tagName="span"
-                value={ctaText}
-                onChange={(value) => setAttributes({ ctaText: value })}
-                placeholder={__('Button text...', 'webdune-blocks')}
-                allowedFormats={[]}
-              />
-            </a>
-          </div>
-        </div>
+        </section>
       </section>
     </>
   );

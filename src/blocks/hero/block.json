@@ -6,12 +6,13 @@
   "title": "Hero Section",
   "category": "webdune",
   "icon": "cover-image",
-  "description": "Main hero section with heading, subheading, background image, and CTA button.",
+  "description": "Main hero section with heading, subheading, integrated phone search, and hero image.",
   "keywords": [
     "hero",
     "header",
     "banner",
-    "homepage"
+    "homepage",
+    "search"
   ],
   "supports": {
     "html": false,
@@ -34,25 +35,17 @@
       "type": "string",
       "default": "Fast. Fair. Free. As it should be."
     },
-    "backgroundImage": {
-      "type": "object",
-      "default": {}
-    },
     "heroImage": {
       "type": "object",
       "default": {}
     },
-    "ctaText": {
+    "searchPlaceholder": {
+      "type": "string",
+      "default": "Enter phone model e.g. iPhone14"
+    },
+    "searchButtonText": {
       "type": "string",
       "default": "Get quote"
-    },
-    "ctaUrl": {
-      "type": "string",
-      "default": ""
-    },
-    "ctaOpenInNewTab": {
-      "type": "boolean",
-      "default": false
     },
     "gradientStart": {
       "type": "string",

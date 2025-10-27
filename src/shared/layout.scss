@@ -13,17 +13,26 @@
 
 // Container utilities
 .container-large {
-  max-width: 1240px;
+  width: 100%;
+  max-width: 80rem; // 1280px
   margin: 0 auto;
 }
 
 .container-medium {
-  max-width: 800px;
+  width: 100%;
+  max-width: 66rem; // 1056px
   margin: 0 auto;
 }
 
 .container-small {
-  max-width: 600px;
+  width: 100%;
+  max-width: 54rem; // 864px
+  margin: 0 auto;
+}
+
+.container-xsmall {
+  width: 100%;
+  max-width: 32rem; // 512px
   margin: 0 auto;
 }
 

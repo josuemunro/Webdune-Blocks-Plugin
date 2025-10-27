@@ -1,0 +1,145 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/two-column-flexible",
+  "version": "1.0.0",
+  "title": "2-Column Flexible",
+  "category": "webdune",
+  "icon": "columns",
+  "description": "Flexible 2-column layout with extensive customization options for text and media.",
+  "keywords": [
+    "two-column",
+    "flexible",
+    "layout",
+    "section"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "padding": false,
+      "margin": false
+    }
+  },
+  "attributes": {
+    "sectionPadding": {
+      "type": "string",
+      "default": "medium"
+    },
+    "showHeader": {
+      "type": "boolean",
+      "default": false
+    },
+    "headerText": {
+      "type": "string",
+      "default": ""
+    },
+    "containerSize": {
+      "type": "string",
+      "default": "medium"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "customBackgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "gridRatioLeft": {
+      "type": "number",
+      "default": 4
+    },
+    "gridRatioRight": {
+      "type": "number",
+      "default": 5
+    },
+    "showNumber": {
+      "type": "boolean",
+      "default": false
+    },
+    "numberValue": {
+      "type": "string",
+      "default": "1"
+    },
+    "showH2": {
+      "type": "boolean",
+      "default": true
+    },
+    "h2Text": {
+      "type": "string",
+      "default": ""
+    },
+    "showRichText": {
+      "type": "boolean",
+      "default": true
+    },
+    "richTextContent": {
+      "type": "string",
+      "default": ""
+    },
+    "showCTA": {
+      "type": "boolean",
+      "default": false
+    },
+    "ctaStyle": {
+      "type": "string",
+      "default": "button"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Learn more"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "showDownArrow": {
+      "type": "boolean",
+      "default": false
+    },
+    "mediaType": {
+      "type": "string",
+      "default": "single-image"
+    },
+    "videoAspectRatio": {
+      "type": "string",
+      "default": "portrait"
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "singleImageMode": {
+      "type": "string",
+      "default": "full-height"
+    },
+    "singleImageNaturalWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "singleImage": {
+      "type": "object",
+      "default": {}
+    },
+    "doubleImageMode": {
+      "type": "string",
+      "default": "tall-overlaid"
+    },
+    "doubleImageFirst": {
+      "type": "object",
+      "default": {}
+    },
+    "doubleImageSecond": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

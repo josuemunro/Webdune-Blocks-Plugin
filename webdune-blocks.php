@@ -70,6 +70,7 @@ function webdune_blocks_register_blocks()
     // Phase 3: Content & Specialty (Priority: LOW-MEDIUM)
     'content-image-section',
     'two-column-content',
+    'two-column-flexible',
     'charity-section',
     'stats-section',
     'full-width-photo',
