@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/cta-section",
+  "version": "1.0.0",
+  "title": "CTA Section",
+  "category": "webdune",
+  "icon": "megaphone",
+  "description": "Call-to-action section with heading and up to 3 customizable buttons.",
+  "keywords": [
+    "cta",
+    "call to action",
+    "buttons",
+    "banner"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Still not sure about something?"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#FFD940"
+    },
+    "button1": {
+      "type": "object",
+      "default": {
+        "text": "See FAQs",
+        "url": "#",
+        "style": "is-white",
+        "enabled": true,
+        "openInNewTab": false
+      }
+    },
+    "button2": {
+      "type": "object",
+      "default": {
+        "text": "Chat with us",
+        "url": "#",
+        "style": "default",
+        "enabled": true,
+        "openInNewTab": false
+      }
+    },
+    "button3": {
+      "type": "object",
+      "default": {
+        "text": "",
+        "url": "#",
+        "style": "is-secondary",
+        "enabled": false,
+        "openInNewTab": false
+      }
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,21 @@
+/**
+ * CTA Section Block Editor Styles
+ */
+
+// Import shared styles
+@import '../../shared/colors.scss';
+
+.webdune-cta-section-block {
+  margin: 2rem 0;
+
+  .section_cta {
+    // Ensure editor preview looks good
+    margin: 0;
+  }
+
+  // Disable pointer events in editor for buttons
+  a {
+    pointer-events: none;
+    cursor: default;
+  }
+}

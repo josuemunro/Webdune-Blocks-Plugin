@@ -1,7 +1,7 @@
 # 🚀 START HERE - Webdune Blocks Plugin
 
-**Last Updated**: October 26, 2025  
-**Project Status**: Foundation Complete → Actively Building Blocks  
+**Last Updated**: October 28, 2025  
+**Project Status**: Foundation Complete → 56% Built  
 **Current Phase**: Building flexible block system from Webflow designs
 
 ---
@@ -12,39 +12,43 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 
 ### Current Status - October 28, 2025
 - ✅ Plugin structure created
-- ✅ Documentation complete
+- ✅ Documentation complete & streamlined
 - ✅ Helper functions ready
 - ✅ Shared styles configured (colors, typography, layout, utilities, effects)
 - ✅ Shared animations (GSAP, Lenis, parallax)
-- ✅ Local by Flywheel setup complete
 - ✅ Development workflow established
-- ✅ **5 Blocks Completed and Built**:
-  - Process Section block
-  - Hero block (Homepage with phone search)
-  - 2-Column Flexible block (custom underline format)
-  - Template Hero block (Interior pages, 2 layouts)
+- ✅ **9 Blocks Completed and Built** (56%):
   - Navigation block (liquid glass, scroll behaviors, mobile menu)
+  - Footer block (newsletter, social links, contact info)
+  - Hero block (Homepage with phone search UI)
+  - Template Hero block (Interior pages, 2 layouts)
+  - Process Section block (4-step numbered)
+  - Two-Column Flexible block (gradient underline format)
+  - CTA Section block (3 toggleable buttons)
+  - FAQ Parent block (InnerBlocks container)
+  - FAQ Item block (accordion with vanilla JS)
 - 📦 **SOURCE**: Webflow export in `sellmycell.webflow/` folder
-- 🎯 **NEXT**: Footer block, then CTA section, then content blocks
+- 🎯 **COMPLETED**: Phone Search functionality (AJAX, debounce, ACF integration)
+- 🎯 **NEXT**: Phone Slider (Swiper.js) or remaining blocks
 
 ---
 
-## 📚 Documentation Guide
+## 📚 Documentation Guide (Streamlined)
 
-### Read These First
-1. **START_HERE.md** ← You are here! Overview and quick navigation
-2. **QUICK_REFERENCE.md** - Cheat sheet for common tasks and commands
-3. **SETUP_GUIDE.md** - Detailed Local by Flywheel setup instructions
-
-### Reference Documentation
+### Essential Documents
+1. **START_HERE.md** ← You are here! Quick start and overview
+2. **PROJECT_STATUS.md** - Current progress and next priorities
+3. **BLOCK_INVENTORY.md** - All 16 blocks with specs and status
 4. **README.md** - Complete project documentation
-5. **BLOCK_INVENTORY.md** - All blocks with specifications and status
-6. **wp_cursor_brief.md** - Original project brief with design system
-7. **sellmycell.webflow/** - Source HTML/CSS/assets from Webflow export
+5. **THEME-INTEGRATION-GUIDE.md** - How to integrate blocks into theme
+
+### Source Files
+6. **sellmycell.webflow/** - Source HTML/CSS/assets from Webflow export
+7. **wp_cursor_brief.md** - Original project brief with design system
 
 ### Core Plugin Files
-7. **webdune-blocks.php** - Main plugin file (auto-registers blocks)
-8. **package.json** - Dependencies and npm scripts
+8. **webdune-blocks.php** - Main plugin file (auto-registers blocks)
+9. **package.json** - Dependencies and npm scripts
 
 ---
 
@@ -68,18 +72,25 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 5. Mobile styles are already in the export - use them!
 6. **Don't make up random CSS** - use what's in the export
 
-### Completed Blocks (Ready to Use)
-- [x] Process Section block
+### ✅ Completed Blocks (Ready to Use)
+- [x] Navigation block (liquid glass effect)
+- [x] Footer block (multi-column, newsletter)
 - [x] Hero block (Homepage)
-- [x] 2-Column Flexible block
 - [x] Template Hero block (Interior pages)
-- [x] **Navigation block** ✅ (Built & tested)
+- [x] Process Section block
+- [x] Two-Column Flexible block
+- [x] CTA Section block
+- [x] FAQ Parent block (InnerBlocks)
+- [x] FAQ Item block (accordion animation)
 
-### Next Priority
-- [ ] **Footer block** ← Next up (similar structure to nav)
-- [ ] CTA Section block
-- [ ] Phone Search block (AJAX functionality)
-- [ ] FAQ blocks (parent + child with InnerBlocks)
+### 🎯 Next Priority (7 blocks remaining)
+- [ ] **Phone Search block** ← Next up (AJAX functionality - complex)
+- [ ] Phone Slider block (Swiper.js)
+- [ ] Reviews Marquee block
+- [ ] Content Image Section
+- [ ] Charity Section
+- [ ] Stats Section
+- [ ] Full Width Photo
 
 ### When Ready for Production
 - [ ] Test all blocks together on a full page
@@ -274,16 +285,18 @@ Create 3-5 test posts:
 ### Phase 1: Foundation & Core (8 blocks)
 | Block | Status | Priority | Est. Time |
 |-------|--------|----------|-----------|
-| Navigation | 🔲 To Do | HIGH | 2-3 hrs |
-| Footer | 🔲 To Do | HIGH | 2-3 hrs |
-| Hero | 🔲 **NEXT** | HIGH | 2-3 hrs |
-| Phone Search | 🔲 To Do | HIGH | 3-4 hrs |
-| **Process Section** | ✅ **COMPLETED** | HIGH | 1-2 hrs |
-| FAQ (Parent) | 🔲 To Do | HIGH | 1-2 hrs |
+| Navigation | ✅ **COMPLETE** | HIGH | 2-3 hrs |
+| Footer | ✅ **COMPLETE** | HIGH | 2-3 hrs |
+| Hero | ✅ **COMPLETE** | HIGH | 2-3 hrs |
+| Template Hero | ✅ **COMPLETE** | HIGH | 2-3 hrs |
+| Process Section | ✅ **COMPLETE** | HIGH | 1-2 hrs |
+| Two Column Flexible | ✅ **COMPLETE** | MEDIUM | 2-3 hrs |
+| CTA Section | ✅ **COMPLETE** | MEDIUM | 1-2 hrs |
+| FAQ (Parent) | 🔲 **NEXT** | HIGH | 1-2 hrs |
 | FAQ Item | 🔲 To Do | HIGH | 1-2 hrs |
-| CTA Section | 🔲 To Do | MEDIUM | 1 hr |
+| Phone Search | 🔲 To Do | HIGH | 3-4 hrs |
 
-**Total Phase 1**: ~16-22 hours (2-3 days)
+**Phase 1 Progress**: 9/10 blocks (90%)
 
 ### Phase 2: Dynamic Content (2 blocks)
 - Phone Slider (3-4 hrs)
@@ -361,10 +374,10 @@ git push
 ## 🆘 Need Help?
 
 ### Quick Answers
-- **How do I...?** → Check QUICK_REFERENCE.md
 - **Block specs?** → Check BLOCK_INVENTORY.md
-- **Setup issues?** → Check SETUP_GUIDE.md
+- **Current progress?** → Check PROJECT_STATUS.md
 - **Design system?** → Check wp_cursor_brief.md
+- **How to integrate?** → Check THEME-INTEGRATION-GUIDE.md
 
 ### Common Commands
 ```bash

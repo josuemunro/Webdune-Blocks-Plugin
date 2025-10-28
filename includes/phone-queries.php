@@ -69,50 +69,64 @@ function webdune_search_phones($search_term = '', $limit = 3)
  */
 function webdune_get_phone_price_range($post_id)
 {
-  // Get capacity groups (ACF repeater field)
-  // Adjust field names to match your ACF setup
-  $capacities = get_field('capacity_groups', $post_id);
+  // Get all capacity prices (individual ACF text fields)
+  $capacities = array(
+    '16gb'   => get_field('16gb', $post_id),
+    '32gb'   => get_field('32gb', $post_id),
+    '64gb'   => get_field('64gb', $post_id),
+    '128gb'  => get_field('128gb', $post_id),
+    '256gb'  => get_field('256gb', $post_id),
+    '512gb'  => get_field('512gb', $post_id),
+    '1tb'    => get_field('1tb', $post_id),
+  );
 
-  if (empty($capacities)) {
+  // Filter out empty values and convert to float
+  $capacity_prices = array();
+  foreach ($capacities as $capacity => $price) {
+    if (!empty($price) && is_numeric($price)) {
+      $capacity_prices[] = floatval($price);
+    }
+  }
+
+  // If no capacities set, return 0
+  if (empty($capacity_prices)) {
     return array(
       'min' => 0,
       'max' => 0,
     );
   }
 
-  $prices = array();
+  // Get condition deductions (individual ACF text fields)
+  // These are amounts to SUBTRACT from the base capacity price
+  $conditions = array(
+    'flawless_'   => get_field('flawless_', $post_id),    // Usually 0
+    'good_'       => get_field('good_', $post_id),        // e.g. 80
+    'poor_broken' => get_field('poor_broken', $post_id),  // e.g. 450
+    'broken'      => get_field('broken', $post_id),       // e.g. 700
+  );
 
-  // Loop through each capacity
-  foreach ($capacities as $capacity) {
-    // Base price for this capacity
-    $base_price = isset($capacity['base_price']) ? floatval($capacity['base_price']) : 0;
-    $prices[] = $base_price;
-  }
-
-  // Get condition modifiers (ACF repeater field)
-  $conditions = get_field('condition_modifiers', $post_id);
-  $condition_adjustments = array();
-
-  if (!empty($conditions)) {
-    foreach ($conditions as $condition) {
-      $adjustment = isset($condition['price_adjustment']) ? floatval($condition['price_adjustment']) : 0;
-      $condition_adjustments[] = $adjustment;
+  // Filter out empty values and convert to float
+  $condition_deductions = array();
+  foreach ($conditions as $condition => $deduction) {
+    if (!empty($deduction) && is_numeric($deduction)) {
+      $condition_deductions[] = floatval($deduction);
     }
   }
 
-  // Get minimum possible price (ACF field)
-  $minimum_price = get_field('minimum_price', $post_id);
-  $minimum_price = $minimum_price ? floatval($minimum_price) : 100;
+  // Get minimum possible offer (ACF number field)
+  // Note: Field name has typo "offter" instead of "offer"
+  $minimum_offer = get_field('minimum_possible_offter', $post_id);
+  $minimum_offer = $minimum_offer ? floatval($minimum_offer) : 100;
 
-  // Calculate min and max
-  $max_price = max($prices);
-  $min_price = min($prices);
+  // Calculate MAX price: Highest capacity with best condition (Flawless = 0 deduction)
+  $max_capacity = max($capacity_prices);
+  $best_condition = !empty($condition_deductions) ? min($condition_deductions) : 0;
+  $max_price = $max_capacity - $best_condition;
 
-  // Apply worst condition modifier to get actual minimum
-  if (!empty($condition_adjustments)) {
-    $worst_adjustment = min($condition_adjustments);
-    $min_price = max($minimum_price, $min_price + $worst_adjustment);
-  }
+  // Calculate MIN price: Lowest capacity with worst condition, but not below minimum
+  $min_capacity = min($capacity_prices);
+  $worst_condition = !empty($condition_deductions) ? max($condition_deductions) : 0;
+  $min_price = max($minimum_offer, $min_capacity - $worst_condition);
 
   return array(
     'min' => intval($min_price),

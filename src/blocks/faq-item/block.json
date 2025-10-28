@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/faq-item",
+  "version": "1.0.0",
+  "title": "FAQ Item",
+  "category": "webdune",
+  "description": "Individual FAQ accordion item",
+  "keywords": [
+    "faq",
+    "accordion",
+    "question",
+    "answer"
+  ],
+  "parent": [
+    "webdune/faq"
+  ],
+  "textdomain": "webdune-blocks",
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "attributes": {
+    "question": {
+      "type": "string",
+      "default": "Your question here"
+    },
+    "answer": {
+      "type": "string",
+      "default": "Your answer here"
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

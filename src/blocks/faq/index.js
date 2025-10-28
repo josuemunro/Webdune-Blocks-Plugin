@@ -2,14 +2,14 @@ import { registerBlockType } from '@wordpress/blocks';
 import { registerFormatType } from '@wordpress/rich-text';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import { toggleFormat } from '@wordpress/rich-text';
-
+import { __ } from '@wordpress/i18n';
+import Edit from './edit';
+import Save from './save';
 import './style.scss';
 
-import Edit from './edit';
-import save from './save';
-import metadata from './block.json';
+console.log('🚀 FAQ Parent block loading...');
 
-// Register the gradient underline format for this block
+// Register the gradient underline format for FAQ headings
 registerFormatType('webdune/gradient-underline', {
   title: 'Gradient Underline',
   tagName: 'span',
@@ -32,8 +32,10 @@ registerFormatType('webdune/gradient-underline', {
   },
 });
 
-registerBlockType(metadata.name, {
+registerBlockType('webdune/faq', {
   edit: Edit,
-  save,
+  save: Save,
 });
+
+console.log('✅ FAQ Parent block registered!');
 

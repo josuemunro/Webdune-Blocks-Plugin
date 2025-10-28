@@ -390,14 +390,14 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 | Priority | Block Name | Status | Source | Dependencies |
 |----------|------------|--------|---------|--------------|
 | HIGH | Navigation | ✅ **COMPLETE** | Webflow export | GSAP, Lenis |
-| HIGH | Footer | 🔲 To Do | Webflow export | GSAP, Lenis |
+| HIGH | Footer | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | Hero (Homepage) | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | Template Hero (Interior) | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | Phone Search | 🔲 To Do | Webflow export | PHP query logic |
 | HIGH | Process Section | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | FAQ (Parent) | 🔲 To Do | Webflow export | InnerBlocks |
 | HIGH | FAQ Item (Child) | 🔲 To Do | Webflow export | Vanilla JS |
-| MEDIUM | CTA Section | 🔲 To Do | Webflow export | None |
+| MEDIUM | CTA Section | ✅ **COMPLETE** | Webflow export | None |
 | MEDIUM | Phone Slider | 🔲 To Do | Webflow export | PHP, Swiper.js |
 | MEDIUM | Reviews Marquee | 🔲 To Do | Webflow export | Swiper.js |
 | LOW-MED | Content Image | 🔲 To Do | Webflow export | None |
@@ -485,9 +485,9 @@ Any special considerations, dependencies, or gotchas
 
 **Last Updated**: October 28, 2025  
 **Total Blocks**: 16  
-**Completed**: 5 (Process Section, Hero, Template Hero, Two Column Flexible, Navigation)  
+**Completed**: 9 (Navigation, Footer, Hero, Template Hero, Process Section, Two Column Flexible, CTA Section, FAQ Parent, FAQ Item)  
 **In Progress**: 0  
-**To Do**: 11
+**To Do**: 7
 
 ---
 

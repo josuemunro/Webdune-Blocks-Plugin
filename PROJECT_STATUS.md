@@ -8,28 +8,40 @@
 
 ## 📊 Current Progress
 
-**Blocks Completed**: 5 / 16 (31%)
+**Blocks Completed**: 9 / 16 (56%)
 
 ### ✅ Completed & Built (Ready to Use)
 
-1. **Process Section Block** (`webdune/process-section`)
-   - 4-step numbered process
-   - Side image
-   - Optional decorative line
+1. **Navigation Block** (`webdune/navigation`)
+   - Liquid glass effect (backdrop blur)
+   - GSAP scroll behaviors (hide/show, background change)
+   - Lenis smooth scrolling site-wide
+   - Mobile hamburger menu
+   - Editable logo & menu items
+   - Account icon toggle
+   - SVG glass distortion filter
+
+2. **Footer Block** (`webdune/footer`)
+   - Multi-column responsive layout
+   - Logo & tagline
+   - Quick links (editable array)
+   - Contact information (hours, email, phone, address)
+   - Newsletter signup form
+   - Social media links (Instagram, TikTok, etc.)
    - Fully responsive
 
-2. **Hero Block** (`webdune/hero`)
+3. **Hero Block** (`webdune/hero`)
    - Homepage hero with gradient background
-   - Phone search integration (UI only, backend pending)
+   - **✅ Phone Search Functionality Complete:**
+     - Live AJAX search with 300ms debounce
+     - Real-time results dropdown (max 3 items)
+     - ACF integration for pricing (capacities, conditions, minimum offer)
+     - Keyboard support (Enter to redirect)
+     - Click outside to close
+     - Loading, error, and no-results states
+     - Redirects to `/select-model/?phone=[search]`
    - Image cutout on right
    - Fully responsive
-
-3. **Two-Column Flexible Block** (`webdune/two-column-flexible`)
-   - Highly customizable 2-column layout
-   - Single/double image modes
-   - Video support
-   - Custom underline text format
-   - 20+ configuration options
 
 4. **Template Hero Block** (`webdune/template-hero`)
    - For interior pages (How it Works, About, etc.)
@@ -38,14 +50,41 @@
    - Optional down arrow
    - Fully responsive
 
-5. **Navigation Block** (`webdune/navigation`)
-   - Liquid glass effect (backdrop blur)
-   - GSAP scroll behaviors (hide/show, background change)
-   - Lenis smooth scrolling site-wide
-   - Mobile hamburger menu
-   - Editable logo & menu items
-   - Account icon toggle
-   - SVG glass distortion filter
+5. **Process Section Block** (`webdune/process-section`)
+   - 4-step numbered process
+   - Side image
+   - Optional decorative line
+   - Fully responsive
+
+6. **Two-Column Flexible Block** (`webdune/two-column-flexible`)
+   - Highly customizable 2-column layout
+   - Single/double image modes
+   - Video support
+   - Gradient underline text format
+   - 20+ configuration options
+
+7. **CTA Section Block** (`webdune/cta-section`)
+   - Customizable background color
+   - H2 heading with gradient underline support
+   - Up to 3 toggleable buttons
+   - 3 button styles (Primary, White, Secondary)
+   - Fully responsive (stacks on mobile)
+
+8. **FAQ Block (Parent)** (`webdune/faq`)
+   - InnerBlocks container for FAQ items
+   - Editable section heading
+   - Optional CTA button
+   - Uses InnerBlocks pattern for flexibility
+   - Fully responsive
+
+9. **FAQ Item Block (Child)** (`webdune/faq-item`)
+   - Clickable question pill
+   - Expandable answer area
+   - Smooth accordion animation (vanilla JS)
+   - Plus/minus icon toggle
+   - Default open toggle
+   - Keyboard accessible
+   - Fully responsive
 
 ---
 
@@ -56,7 +95,7 @@
 - ✅ `typography.scss` - Font system (Helvetica World)
 - ✅ `layout.scss` - Container sizes, padding
 - ✅ `theme-overrides.scss` - Webflow overrides
-- ✅ `utilities.scss` - Hide classes, spacing, pointer events
+- ✅ `utilities.scss` - Hide classes, spacing, gradient underline format
 - ✅ `effects.scss` - Liquid glass nav effect
 
 ### Shared JavaScript
@@ -81,35 +120,15 @@
 
 ### High Priority (Foundation Blocks)
 
-**1. Footer Block** 
-- Similar structure to Navigation
-- Newsletter signup form
-- Social icons
-- Contact info
-- Multi-column layout
-- Estimated: 2-3 hours
+**✅ 1. Phone Search Block** (COMPLETED)
+- ✅ AJAX search functionality
+- ✅ Query WordPress posts (phones)
+- ✅ ACF field integration
+- ✅ Dropdown results with loading/error states
+- ✅ Price range display
+- ✅ Debounced input (300ms)
+- ✅ Keyboard navigation & redirects
 
-**2. CTA Section Block**
-- Reusable call-to-action
-- Multiple background options
-- Decorative line toggle
-- Button with URL
-- Estimated: 1-2 hours
-
-**3. Phone Search Block** (Complex)
-- AJAX search functionality
-- Query WordPress posts (phones)
-- ACF field integration
-- Dropdown results
-- Price range display
-- Estimated: 3-4 hours
-
-**4. FAQ Blocks** (Parent + Child)
-- Parent container with InnerBlocks
-- Child accordion items
-- Vanilla JS animations
-- Plus/minus icons
-- Estimated: 2-3 hours
 
 ---
 
@@ -119,6 +138,10 @@
 webdune-blocks/
 ├── src/
 │   ├── blocks/
+│   │   ├── cta-section/               ✅ Complete
+│   │   ├── faq/                       ✅ Complete
+│   │   ├── faq-item/                  ✅ Complete
+│   │   ├── footer/                    ✅ Complete
 │   │   ├── hero/                      ✅ Complete
 │   │   ├── navigation/                ✅ Complete
 │   │   ├── process-section/           ✅ Complete
@@ -219,7 +242,7 @@ wp block list          # List registered blocks
 All built blocks are functioning as expected.
 
 ### Future Considerations
-1. **Phone Search**: Needs ACF integration and AJAX backend
+1. **✅ Phone Search**: COMPLETED - ACF integration and AJAX backend working
 2. **Reviews Marquee**: May need Google Reviews API integration
 3. **Phone Slider**: Requires Swiper.js setup
 4. **Parallax**: Elements need `[data-speed]` attribute
@@ -301,7 +324,8 @@ Add remaining content blocks (stats, charity, reviews, etc.).
 
 **Last Build**: October 28, 2025  
 **Build Status**: ✅ Successful  
-**Ready for**: Footer block development
+**✅ Completed**: Phone Search functionality  
+**Ready for**: Phone Slider, Reviews Marquee, or other remaining blocks
 
 ---
 

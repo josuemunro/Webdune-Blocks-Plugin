@@ -1,5 +1,11 @@
 // Webdune Blocks Layout Utilities
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 // Global padding utility
 .padding-global {
   padding-left: 5%;

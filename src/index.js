@@ -4,5 +4,9 @@ import './blocks/hero';
 import './blocks/two-column-flexible';
 import './blocks/template-hero';
 import './blocks/navigation';
+import './blocks/footer';
+import './blocks/cta-section';
+import './blocks/faq';
+import './blocks/faq-item';
 
 

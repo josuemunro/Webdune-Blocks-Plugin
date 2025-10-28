@@ -1,0 +1,117 @@
+/**
+ * CTA Section Block Styles
+ */
+
+// Import shared styles
+@import '../../shared/colors.scss';
+
+.webdune-cta-section-block {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+// CTA Section
+.section_cta {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  text-align: center;
+}
+
+.cta_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.cta_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+// Button Styles (from Webflow)
+.button {
+  border: 2px solid $color-primary;
+  background-color: $color-primary;
+  color: $color-dark;
+  text-align: center;
+  border-radius: 100px;
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: color .2s, background-color .2s, border-color .2s;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-brick;
+    background-color: $color-brick;
+    color: $color-white;
+  }
+}
+
+// White Button (custom style)
+.button.is-white {
+  background-color: $color-white;
+  border-color: $color-white;
+  color: $color-dark;
+
+  &:hover {
+    background-color: $color-light;
+    border-color: $color-light;
+  }
+}
+
+// Secondary Button (dark)
+.button.is-secondary {
+  background-color: $color-dark;
+  color: $color-white;
+  border-color: $color-dark;
+  border-style: solid;
+
+  &:hover {
+    background-color: $color-brick;
+    border-color: $color-brick;
+    color: $color-white;
+  }
+}
+
+// ====================================
+// MOBILE LANDSCAPE (≤767px)
+// ====================================
+@media screen and (max-width: 767px) {
+  .section_cta {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+
+  .cta_buttons {
+    flex-direction: column;
+    width: 100%;
+
+    .button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}
+
+// ====================================
+// MOBILE PORTRAIT (≤479px)
+// ====================================
+@media screen and (max-width: 479px) {
+  .section_cta {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+
+  .button {
+    font-size: 1rem;
+    padding: 0.875rem 1rem;
+  }
+}

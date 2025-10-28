@@ -248,6 +248,48 @@ require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/phone-queries.php';
 require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/block-helpers.php';
 
 /**
+ * AJAX handler for phone search
+ * Searches phone posts and returns results with price ranges
+ */
+function webdune_ajax_search_phones()
+{
+  // Verify nonce for security
+  check_ajax_referer('webdune_phone_search', 'nonce');
+
+  // Get search term
+  $search_term = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : '';
+
+  // Get limit (default 3)
+  $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 3;
+
+  // Search phones using helper function
+  $results = webdune_search_phones($search_term, $limit);
+
+  // Return JSON response
+  wp_send_json_success($results);
+}
+add_action('wp_ajax_search_phones', 'webdune_ajax_search_phones');
+add_action('wp_ajax_nopriv_search_phones', 'webdune_ajax_search_phones');
+
+/**
+ * Enqueue phone search AJAX variables
+ * Makes AJAX URL and nonce available to JavaScript
+ */
+function webdune_enqueue_ajax_vars()
+{
+  // Localize to the hero block's view script
+  wp_localize_script(
+    'webdune-hero-view-script',
+    'webdunePhoneSearch',
+    array(
+      'ajaxUrl' => admin_url('admin-ajax.php'),
+      'nonce'   => wp_create_nonce('webdune_phone_search'),
+    )
+  );
+}
+add_action('wp_enqueue_scripts', 'webdune_enqueue_ajax_vars');
+
+/**
  * Plugin activation
  */
 function webdune_blocks_activate()

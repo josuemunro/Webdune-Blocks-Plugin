@@ -1,0 +1,115 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/footer",
+  "version": "1.0.0",
+  "title": "Footer",
+  "category": "webdune",
+  "icon": "editor-table",
+  "description": "Site footer with logo, quick links, contact info, newsletter signup, and social media links.",
+  "keywords": [
+    "footer",
+    "site footer",
+    "links",
+    "contact"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "logo": {
+      "type": "object",
+      "default": {}
+    },
+    "tagline": {
+      "type": "string",
+      "default": "SellMyCell is 100% NZ owned & operated"
+    },
+    "quickLinks": {
+      "type": "array",
+      "default": [
+        {
+          "text": "Sell",
+          "url": "#"
+        },
+        {
+          "text": "How it works",
+          "url": "#"
+        },
+        {
+          "text": "Shipping",
+          "url": "#"
+        },
+        {
+          "text": "Device grading explained",
+          "url": "#"
+        },
+        {
+          "text": "Business & bulk sales",
+          "url": "#"
+        },
+        {
+          "text": "FAQS",
+          "url": "#"
+        },
+        {
+          "text": "About",
+          "url": "#"
+        },
+        {
+          "text": "Account login",
+          "url": "#"
+        }
+      ]
+    },
+    "officeHours": {
+      "type": "string",
+      "default": "9am - 5pm Mon - Fri"
+    },
+    "email": {
+      "type": "string",
+      "default": "hello@sellmycell.co.nz"
+    },
+    "phone": {
+      "type": "string",
+      "default": "0800 735 235"
+    },
+    "address": {
+      "type": "string",
+      "default": "PO Box 1533<br>Nelson 7040"
+    },
+    "newsletterHeading": {
+      "type": "string",
+      "default": "Subscribe"
+    },
+    "newsletterText": {
+      "type": "string",
+      "default": "Join our newsletter to stay up to date."
+    },
+    "showNewsletter": {
+      "type": "boolean",
+      "default": true
+    },
+    "socialLinks": {
+      "type": "array",
+      "default": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/sellmycellnz/"
+        },
+        {
+          "platform": "tiktok",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -43,16 +43,8 @@ export default function Save({ attributes }) {
                   />
                 )}
 
-                <div className="home-hero_phone-lockup-wrap w-form">
-                  <form
-                    id="wf-form-Home-hero-phone-lookup"
-                    name="wf-form-Home-hero-phone-lookup"
-                    data-name="Home hero phone lookup"
-                    method="get"
-                    className="home-hero_phone-lookup"
-                    data-wf-page-id="68f9aab9d5bffd1726ea4995"
-                    data-wf-element-id="9f50d013-d3f2-90f2-ccd7-ef7550657864"
-                  >
+                <div className="home-hero_phone-lockup-wrap">
+                  <div className="home-hero_phone-lookup">
                     <input
                       className="home-hero_phone-lookup-input w-input"
                       maxLength="256"
@@ -70,24 +62,13 @@ export default function Save({ attributes }) {
                         </svg>
                       </div>
                     </a>
-                  </form>
+                  </div>
 
                   <div className="phone-lookup">
                     <div className="phone-lookup_results">
                       {/* Phone search results will be dynamically inserted here via JavaScript */}
                     </div>
                     <a href="#" className="text-size-tiny text-style-link">View all models</a>
-                  </div>
-
-                  <div className="form_message-success-wrapper w-form-done">
-                    <div className="form_message-success">
-                      <div>Thank you! Your submission has been received!</div>
-                    </div>
-                  </div>
-                  <div className="form_message-error-wrapper w-form-fail">
-                    <div className="form_message-error">
-                      <div>Oops! Something went wrong while submitting the form.</div>
-                    </div>
                   </div>
                 </div>
               </div>

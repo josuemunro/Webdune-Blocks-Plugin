@@ -1,10 +1,13 @@
+/**
+ * Registers the CTA Section Block
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import { registerFormatType } from '@wordpress/rich-text';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import { toggleFormat } from '@wordpress/rich-text';
 
 import './style.scss';
-
+import './editor.scss';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';

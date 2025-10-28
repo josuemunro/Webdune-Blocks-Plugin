@@ -1,0 +1,47 @@
+/**
+ * Footer Block Editor Styles
+ */
+
+// Import shared styles
+@import '../../shared/colors.scss';
+
+.webdune-footer-block {
+  margin: 2rem 0;
+
+  .footer2_component {
+    // Ensure editor preview looks good
+    margin: 0;
+  }
+
+  // Disable pointer events in editor for links
+  a {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  // Disabled form elements in editor
+  input[disabled],
+  button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Better visual feedback in editor
+  .footer2_link,
+  .footer2_social-link {
+    opacity: 0.8;
+  }
+}
+
+// Inspector panel styling
+.components-panel__body {
+
+  // Style for link item containers in inspector
+  .footer-link-item {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    background: #f9f9f9;
+  }
+}
