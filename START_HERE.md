@@ -17,11 +17,12 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 - ✅ Shared styles configured
 - ✅ Local by Flywheel setup complete
 - ✅ Development workflow established (npm start running)
-- ✅ Process Section block completed
-- ✅ Hero block completed
-- ✅ 2-Column Flexible block completed (custom underline format!)
-- 🔄 **IN PROGRESS**: Testing and refinement
-- 📦 **SOURCE**: Webflow export available for reference
+- ✅ **Process Section block** - Completed
+- ✅ **Hero block** (Homepage) - Completed
+- ✅ **2-Column Flexible block** - Completed (custom underline format!)
+- ✅ **Template Hero block** (Interior pages) - Completed
+- 🔄 **IN PROGRESS**: Building Navigation block
+- 📦 **SOURCE**: Webflow export in `sellmycell.webflow/` folder
 
 ---
 
@@ -34,9 +35,9 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 
 ### Reference Documentation
 4. **README.md** - Complete project documentation
-5. **BLOCK_INVENTORY.md** - All blocks with specifications (Note: Figma nodes deprecated, using Webflow export)
+5. **BLOCK_INVENTORY.md** - All blocks with specifications and status
 6. **wp_cursor_brief.md** - Original project brief with design system
-7. **webflow-exported-home-page/** - Source HTML/CSS/assets from Webflow
+7. **sellmycell.webflow/** - Source HTML/CSS/assets from Webflow export
 
 ### Core Plugin Files
 7. **webdune-blocks.php** - Main plugin file (auto-registers blocks)
@@ -44,21 +45,35 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 
 ---
 
-## 🎯 Current Goals
+## 🎯 Current Goals & Workflow
 
-### Immediate (Today)
-- [x] Create Local by Flywheel site: `sellmycell-dev`
-- [ ] Install required WordPress plugins
-- [ ] Copy plugin folder to `wp-content/plugins/`
-- [ ] Run `npm install` in plugin folder
-- [ ] Activate plugin in WordPress
-- [ ] Build first block (Process Section - easiest start)
+### ✅ Development Workflow Established
+
+**Source of Truth**: `sellmycell.webflow/` folder contains:
+- `index.html` - Full homepage with all sections
+- `how-it-works.html` - Interior page example
+- `css/sellmycell.webflow.css` - All compiled styles
+- `js/webflow.js` - Webflow interactions
+- Custom styles in `<div class="custom-styles">` (nav liquid glass, underlines, etc.)
+- Parallax/scroll scripts at end of HTML
+
+**Block Building Process**:
+1. Locate the section in `index.html` (each section = potential block)
+2. Copy exact HTML structure
+3. Extract relevant CSS from `sellmycell.webflow.css`
+4. Use existing shared styles (typography, colors, layout)
+5. Mobile styles are already in the export - use them!
+6. **Don't make up random CSS** - use what's in the export
 
 ### This Week
-- [ ] Complete Phase 1 foundation blocks (8 blocks)
-- [ ] Set up shared components
-- [ ] Test responsive design
-- [ ] Document any issues/learnings
+- [x] Process Section block
+- [x] Hero block (Homepage)
+- [x] 2-Column Flexible block
+- [x] Template Hero block (Interior pages)
+- [ ] **Navigation block** ← Next
+- [ ] Footer block
+- [ ] CTA Section block
+- [ ] Test all blocks together on a full page
 
 ---
 

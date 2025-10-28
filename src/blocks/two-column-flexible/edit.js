@@ -5,7 +5,8 @@ import {
   MediaUpload,
   MediaUploadCheck,
   InspectorControls,
-  URLInput
+  URLInput,
+  InnerBlocks
 } from '@wordpress/block-editor';
 import {
   PanelBody,
@@ -20,6 +21,18 @@ import {
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
+  // Migrate old h2Text to h3Text (backward compatibility)
+  React.useEffect(() => {
+    if (attributes.h2Text && !attributes.h3Text) {
+      setAttributes({
+        h3Text: attributes.h2Text,
+        showH3: attributes.showH2,
+        h2Text: '',
+        showH2: false
+      });
+    }
+  }, []);
+
   const {
     sectionPadding,
     showHeader,
@@ -31,10 +44,9 @@ export default function Edit({ attributes, setAttributes }) {
     gridRatioRight,
     showNumber,
     numberValue,
-    showH2,
-    h2Text,
+    showH3,
+    h3Text,
     showRichText,
-    richTextContent,
     showCTA,
     ctaStyle,
     ctaText,
@@ -158,13 +170,15 @@ export default function Edit({ attributes, setAttributes }) {
               value={numberValue}
               onChange={(value) => setAttributes({ numberValue: value })}
               help={__('Period will be added automatically', 'webdune-blocks')}
+              __next40pxDefaultSize
+              __nextHasNoMarginBottom
             />
           )}
 
           <ToggleControl
-            label={__('Show H2', 'webdune-blocks')}
-            checked={showH2}
-            onChange={(value) => setAttributes({ showH2: value })}
+            label={__('Show H3', 'webdune-blocks')}
+            checked={showH3}
+            onChange={(value) => setAttributes({ showH3: value })}
           />
 
           <ToggleControl
@@ -193,6 +207,8 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('CTA Text', 'webdune-blocks')}
                 value={ctaText}
                 onChange={(value) => setAttributes({ ctaText: value })}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
             </>
           )}
@@ -232,6 +248,8 @@ export default function Edit({ attributes, setAttributes }) {
                 value={videoUrl}
                 onChange={(value) => setAttributes({ videoUrl: value })}
                 help={__('Enter video URL (MP4, WebM, etc.)', 'webdune-blocks')}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
             </>
           )}
@@ -304,26 +322,32 @@ export default function Edit({ attributes, setAttributes }) {
                     </div>
                   )}
 
-                  {showH2 && (
+                  {showH3 && (
                     <RichText
-                      tagName="h2"
+                      tagName="h3"
                       className="two-col-block_heading"
-                      value={h2Text}
-                      onChange={(value) => setAttributes({ h2Text: value })}
+                      value={h3Text}
+                      onChange={(value) => setAttributes({ h3Text: value })}
                       placeholder={__('Enter heading...', 'webdune-blocks')}
                       allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
                     />
                   )}
 
                   {showRichText && (
-                    <RichText
-                      tagName="div"
-                      className="two-col-block_rich-text"
-                      value={richTextContent}
-                      onChange={(value) => setAttributes({ richTextContent: value })}
-                      placeholder={__('Enter text content...', 'webdune-blocks')}
-                      allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
-                    />
+                    <div className="two-col-block_rich-text">
+                      <InnerBlocks
+                        allowedBlocks={[
+                          'core/paragraph',
+                          'core/list',
+                          'core/heading'
+                        ]}
+                        template={[
+                          ['core/paragraph', { placeholder: 'Add text, lists, or headings...' }]
+                        ]}
+                        templateLock={false}
+                        renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+                      />
+                    </div>
                   )}
 
                   {showCTA && (
@@ -332,6 +356,8 @@ export default function Edit({ attributes, setAttributes }) {
                         label={__('CTA Text', 'webdune-blocks')}
                         value={ctaText}
                         onChange={(value) => setAttributes({ ctaText: value })}
+                        __next40pxDefaultSize
+                        __nextHasNoMarginBottom
                       />
                       <URLInput
                         label={__('CTA Link', 'webdune-blocks')}
@@ -341,7 +367,7 @@ export default function Edit({ attributes, setAttributes }) {
                       <a
                         href="#"
                         onClick={(e) => e.preventDefault()}
-                        className={ctaStyle === 'button' ? 'button' : 'text-style-link'}
+                        className={ctaStyle === 'button' ? 'button' : 'underline-cta'}
                       >
                         {ctaText || 'Click here'}
                       </a>

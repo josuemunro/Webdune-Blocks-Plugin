@@ -1,0 +1,261 @@
+// Webdune Blocks Typography Styles
+// Based on SellMyCell Webflow design
+
+@import './colors.scss';
+
+/* ===================================
+   Responsive HTML Font Sizing
+   =================================== */
+html {
+  font-size: calc(0.625rem + 0.41666666666666663vw);
+}
+
+@media screen and (max-width: 1920px) {
+  html {
+    font-size: calc(0.625rem + 0.41666666666666674vw);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+  }
+}
+
+@media screen and (max-width: 479px) {
+  html {
+    font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+  }
+}
+
+/* ===================================
+   Font Face - Helvetica World
+   =================================== */
+// @font-face declarations should be added to theme or plugin
+// See instructions in webdune-blocks.php for implementation
+
+/* ===================================
+   Base Typography
+   =================================== */
+body {
+  font-family: 'Helvetica World', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $color-dark;
+  font-weight: 400;
+}
+
+/* ===================================
+   Headings
+   =================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica World', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 1.1;
+  letter-spacing: -0.1rem;
+
+  @media (max-width: 991px) {
+    font-size: 3.25rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 479px) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 3.75rem;
+  line-height: 1;
+  letter-spacing: -0.09rem;
+
+  @media (max-width: 991px) {
+    font-size: 2.75rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 2.25rem;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400; // Bold for H3
+  line-height: 1.25;
+  letter-spacing: -0.03rem;
+
+  @media (max-width: 991px) {
+    font-size: 1.75rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.5rem;
+  }
+}
+
+h4 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+h5 {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+h6 {
+  font-size: 1.07rem;
+  line-height: 1.4;
+}
+
+/* ===================================
+   Paragraphs & Text
+   =================================== */
+p {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 1.33rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.2rem;
+  }
+}
+
+/* ===================================
+   Lists
+   =================================== */
+ul,
+ol {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+
+  @media (max-width: 991px) {
+    font-size: 1.33rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.2rem;
+  }
+}
+
+li {
+  margin-bottom: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* ===================================
+   Links
+   =================================== */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.text-style-link {
+  font-size: 1rem;
+  text-decoration: underline;
+  color: $color-dark;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* ===================================
+   Buttons
+   =================================== */
+.button {
+  border: 2px solid $color-primary;
+  background-color: $color-primary;
+  color: $color-dark;
+  text-align: center;
+  border-radius: 100px;
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: color .2s, background-color .2s, border-color .2s;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-brick;
+    background-color: $color-white;
+    color: $color-brick;
+  }
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-color-white {
+  color: $color-white;
+}
+
+.text-color-dark {
+  color: $color-dark;
+}
+
+.text-color-primary {
+  color: $color-primary;
+}
+
+strong,
+.text-weight-bold {
+  font-weight: 700;
+}
+
+.text-size-tiny {
+  font-size: 0.8rem;
+}
+
+.text-size-small {
+  font-size: 0.93rem;
+}
+
+.text-size-large {
+  font-size: 1.6rem;
+
+  @media (max-width: 767px) {
+    font-size: 1.33rem;
+  }
+}

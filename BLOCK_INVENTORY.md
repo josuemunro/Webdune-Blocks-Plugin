@@ -387,24 +387,24 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 
 ## 📝 Block Development Status
 
-| Priority | Block Name | Status | Figma Node | Dependencies |
-|----------|------------|--------|------------|--------------|
-| HIGH | Navigation | 🔲 To Do | 52:2217, 120:1697 | None |
-| HIGH | Footer | 🔲 To Do | 52:2135, 123:1047 | None |
-| HIGH | Hero (Main) | 🔲 To Do | 170:924 | None |
-| HIGH | Phone Search | 🔲 To Do | 170:963, 170:927 | PHP query logic |
-| HIGH | Process Section | 🔲 To Do | 22:9 | None |
-| HIGH | FAQ (Parent) | 🔲 To Do | 26:77 | InnerBlocks |
-| HIGH | FAQ Item (Child) | 🔲 To Do | 26:118, 26:132 | Vanilla JS |
-| MEDIUM | CTA Section | 🔲 To Do | Multiple | None |
-| MEDIUM | Phone Slider | 🔲 To Do | 23:293 | PHP, Swiper.js |
-| MEDIUM | Reviews Marquee | 🔲 To Do | 26:260 | Swiper.js, Google API? |
-| LOW-MED | Content Image | 🔲 To Do | 26:28 | None |
-| LOW-MED | Two Column | 🔲 To Do | 26:159 | None |
-| LOW | Charity Section | 🔲 To Do | 26:198 | None |
-| LOW | Stats Section | 🔲 To Do | 26:214 | None |
-| LOW | Full Width Photo | 🔲 To Do | 26:278 | None |
-| LOW-MED | Hero Simple | 🔲 To Do | 70:401 | None |
+| Priority | Block Name | Status | Source | Dependencies |
+|----------|------------|--------|---------|--------------|
+| HIGH | Navigation | 🔄 **IN PROGRESS** | Webflow export | GSAP, Lenis |
+| HIGH | Footer | 🔲 To Do | Webflow export | GSAP, Lenis |
+| HIGH | Hero (Homepage) | ✅ **COMPLETE** | Webflow export | None |
+| HIGH | Template Hero (Interior) | ✅ **COMPLETE** | Webflow export | None |
+| HIGH | Phone Search | 🔲 To Do | Webflow export | PHP query logic |
+| HIGH | Process Section | ✅ **COMPLETE** | Webflow export | None |
+| HIGH | FAQ (Parent) | 🔲 To Do | Webflow export | InnerBlocks |
+| HIGH | FAQ Item (Child) | 🔲 To Do | Webflow export | Vanilla JS |
+| MEDIUM | CTA Section | 🔲 To Do | Webflow export | None |
+| MEDIUM | Phone Slider | 🔲 To Do | Webflow export | PHP, Swiper.js |
+| MEDIUM | Reviews Marquee | 🔲 To Do | Webflow export | Swiper.js |
+| LOW-MED | Content Image | 🔲 To Do | Webflow export | None |
+| LOW-MED | Two Column Flexible | ✅ **COMPLETE** | Webflow export | None |
+| LOW | Charity Section | 🔲 To Do | Webflow export | None |
+| LOW | Stats Section | 🔲 To Do | Webflow export | None |
+| LOW | Full Width Photo | 🔲 To Do | Webflow export | None |
 
 ---
 
@@ -483,9 +483,20 @@ Any special considerations, dependencies, or gotchas
 
 ---
 
-**Last Updated**: October 21, 2025  
+**Last Updated**: October 28, 2025  
 **Total Blocks**: 16  
-**Completed**: 0  
-**In Progress**: 0  
-**To Do**: 16
+**Completed**: 4 (Process Section, Hero, Template Hero, Two Column Flexible)  
+**In Progress**: 1 (Navigation)  
+**To Do**: 11
+
+---
+
+## 📖 Workflow & Source
+
+**All blocks are built from**: `sellmycell.webflow/` Webflow export
+- HTML structure from `index.html` or page-specific HTML files
+- CSS from `sellmycell.webflow.css`
+- Custom styles from inline `<style>` tags in `<div class="custom-styles">`
+- Scripts from bottom of HTML (GSAP, Lenis, parallax, nav behavior)
+- Mobile styles included in export - use them!
 

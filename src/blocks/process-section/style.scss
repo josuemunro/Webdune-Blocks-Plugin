@@ -42,7 +42,7 @@
       line-height: 64px;
       color: $color-dark;
       margin: 0;
-      letter-spacing: -1.5px;
+      letter-spacing: -0.09rem;
 
       @media (max-width: 768px) {
         font-size: 48px;
@@ -130,11 +130,6 @@
       font-size: 18px;
       line-height: 18px;
       transition: all 0.3s ease;
-
-      &:hover {
-        background-color: darken($color-primary, 10%);
-        transform: translateY(-2px);
-      }
     }
   }
 

@@ -26,6 +26,7 @@ define('WEBDUNE_BLOCKS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WEBDUNE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WEBDUNE_BLOCKS_BUILD_DIR', WEBDUNE_BLOCKS_PLUGIN_DIR . 'build/');
 define('WEBDUNE_BLOCKS_BUILD_URL', WEBDUNE_BLOCKS_PLUGIN_URL . 'build/');
+define('WEBDUNE_BLOCKS_ASSETS_URL', WEBDUNE_BLOCKS_PLUGIN_URL . 'assets/');
 
 /**
  * Register custom block category
@@ -75,6 +76,7 @@ function webdune_blocks_register_blocks()
     'stats-section',
     'full-width-photo',
     'hero-simple',
+    'template-hero',
   );
 
   // Register each block
@@ -90,26 +92,48 @@ function webdune_blocks_register_blocks()
 add_action('init', 'webdune_blocks_register_blocks');
 
 /**
- * Enqueue shared styles globally
+ * Enqueue fonts globally
+ * These fonts apply to both editor and frontend
+ */
+function webdune_blocks_enqueue_fonts()
+{
+  $font_css = WEBDUNE_BLOCKS_ASSETS_URL . 'fonts/helvetica-world.css';
+  $font_css_path = WEBDUNE_BLOCKS_PLUGIN_DIR . 'assets/fonts/helvetica-world.css';
+
+  if (file_exists($font_css_path)) {
+    wp_enqueue_style(
+      'webdune-fonts',
+      $font_css,
+      array(),
+      filemtime($font_css_path)
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_fonts', 5); // Priority 5 to load early
+add_action('admin_enqueue_scripts', 'webdune_blocks_enqueue_fonts', 5);
+
+/**
+ * Enqueue shared global styles
  * These styles apply to both editor and frontend
+ * Includes: typography, layout, colors, theme overrides
  */
 function webdune_blocks_enqueue_shared_styles()
 {
-  $shared_css = WEBDUNE_BLOCKS_BUILD_URL . 'shared/layout.css';
-  $shared_css_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/layout.css';
+  $shared_css = WEBDUNE_BLOCKS_BUILD_URL . 'shared/global-styles.css';
+  $shared_css_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/global-styles.css';
 
   // Only enqueue if the file exists
   if (file_exists($shared_css_path)) {
     wp_enqueue_style(
-      'webdune-shared-styles',
+      'webdune-global-styles',
       $shared_css,
-      array(),
+      array('webdune-fonts'), // Depend on fonts so they load first
       filemtime($shared_css_path)
     );
   }
 }
-add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles');
-add_action('admin_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles');
+add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles', 10);
+add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_shared_styles', 10);
 
 /**
  * Enqueue Swiper.js for sliders

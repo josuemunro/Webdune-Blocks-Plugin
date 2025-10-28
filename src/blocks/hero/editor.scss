@@ -115,11 +115,6 @@
   .button.is-icon {
     cursor: pointer;
     transition: all 0.2s;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
   }
 
   // Editor-only: Add padding to container to prevent overlap with WordPress UI
@@ -178,12 +173,12 @@
 
 // Special handling for full-width alignment
 .wp-block[data-align="full"] .webdune-hero-block {
-  width: 100vw;
+  // width: 100vw;
   position: relative;
   left: 50%;
   right: 50%;
-  margin-left: -50vw !important;
-  margin-right: -50vw !important;
+  // margin-left: -50vw !important;
+  // margin-right: -50vw !important;
 }
 
 // Improve block toolbar positioning

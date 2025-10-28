@@ -4,7 +4,7 @@ vendor/
 
 # Build output
 build/
-webflow-exported-home-page/
+sellmycell.webflow/
 
 # Logs
 *.log

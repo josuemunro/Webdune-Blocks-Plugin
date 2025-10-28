@@ -59,11 +59,12 @@
    Section Header
    =================================== */
 .section-header-wrapper {
-  margin-bottom: 3rem;
+  margin-bottom: 7.5rem;
 }
 
 .section-header {
   margin: 0;
+  text-align: center;
 }
 
 /* ===================================
@@ -71,7 +72,7 @@
    =================================== */
 .two-col-block_grid {
   display: grid;
-  gap: 2rem;
+  gap: 8rem;
   align-items: start;
 }
 
@@ -88,24 +89,40 @@
 .two-col-block_text-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
 .two-col-block_number {
-  font-size: 4rem;
-  font-weight: bold;
+  font-size: 4.5rem;
+  font-weight: 400;
   line-height: 1;
-  color: $color-primary;
+  color: $color-dark;
 }
 
 .two-col-block_heading {
   margin: 0;
+  color: #3C3C3C;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.045rem;
 }
 
 .two-col-block_rich-text {
-  p {
-    margin-bottom: 1rem;
+  // InnerBlocks will use core block styling for paragraphs and lists
+  // Override if needed
 
+  p {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul,
+  ol {
     &:last-child {
       margin-bottom: 0;
     }
@@ -116,12 +133,30 @@
   margin-top: 1rem;
 }
 
+.underline-cta {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2;
+  letter-spacing: -0.015rem;
+  border-bottom: 3px solid $color-primary;
+  transition: border-bottom-color 0.2s ease;
+
+  &:hover {
+    border-bottom-color: $color-brick;
+  }
+}
+
 .two-col-block_down-arrow {
   margin-top: 1rem;
 
   svg {
     width: 20px;
     height: 54px;
+    color: $color-primary;
+
+    path {
+      fill: currentColor;
+    }
   }
 }
 
@@ -259,6 +294,7 @@
       aspect-ratio: 3 / 5;
       margin-right: 11.5rem;
       margin-bottom: 9.5rem;
+      max-width: 22rem;
 
       img {
         width: 100%;
@@ -269,8 +305,9 @@
     }
 
     .double-image-second {
+      width: 17rem;
       position: absolute;
-      right: 0;
+      left: 16rem;
       top: 11.5rem;
       max-width: 100%;
 
@@ -287,10 +324,12 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      width: 100%;
     }
 
     .double-image-first,
     .double-image-second {
+      width: 100%;
       aspect-ratio: 1 / 1;
 
       img {
@@ -318,7 +357,7 @@
   }
 
   .two-col-block_number {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 
   .media-double-images.media-double-tall-overlaid {
@@ -330,6 +369,10 @@
     .double-image-second {
       top: 6rem;
     }
+  }
+
+  .two-col-block_heading {
+    font-size: 2.25rem;
   }
 }
 
@@ -344,8 +387,12 @@
     padding-bottom: 5rem;
   }
 
+  .two-col-block_heading {
+    font-size: 1.75rem;
+  }
+
   .two-col-block_number {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
   }
 
   .media-double-images.media-double-tall-overlaid {

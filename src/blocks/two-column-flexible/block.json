@@ -65,9 +65,17 @@
       "type": "string",
       "default": "1"
     },
-    "showH2": {
+    "showH3": {
       "type": "boolean",
       "default": true
+    },
+    "h3Text": {
+      "type": "string",
+      "default": ""
+    },
+    "showH2": {
+      "type": "boolean",
+      "default": false
     },
     "h2Text": {
       "type": "string",
@@ -76,10 +84,6 @@
     "showRichText": {
       "type": "boolean",
       "default": true
-    },
-    "richTextContent": {
-      "type": "string",
-      "default": ""
     },
     "showCTA": {
       "type": "boolean",

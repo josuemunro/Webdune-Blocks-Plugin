@@ -86,4 +86,15 @@
   .components-button {
     margin-top: 0.5rem;
   }
+
+  // InnerBlocks styling in editor
+  .two-col-block_rich-text {
+    .block-editor-inner-blocks {
+      margin-top: 0.5rem;
+    }
+
+    .block-list-appender {
+      margin-top: 1rem;
+    }
+  }
 }

@@ -45,14 +45,21 @@ Toggles a large decorative number. Automatically adds a period after the number.
 
 **Example**: Input "1" → Displays "1."
 
-#### Show H2
+#### Show H3
 Main heading for the text column. Supports:
 - Bold
 - Italic
 - **Gradient Underline** (custom format)
 
+**Note**: Uses H3 for proper semantic structure when section has an H2 header above.
+
 #### Show Rich Text
-Body content area with full formatting support.
+Body content area with full block support. Users can add:
+- Paragraphs
+- Lists (ordered and unordered)
+- Headings
+
+Supports all standard formatting: bold, italic, links, and the custom gradient underline.
 
 #### Show CTA
 Call-to-action button or link.

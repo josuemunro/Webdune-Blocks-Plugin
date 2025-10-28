@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/template-hero",
+  "version": "1.0.0",
+  "title": "Template Hero",
+  "category": "webdune",
+  "icon": "cover-image",
+  "description": "Interior page hero with heading, text, and image. Choose between image+phone or wide image layout.",
+  "keywords": [
+    "hero",
+    "template",
+    "banner",
+    "header"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "layoutType": {
+      "type": "string",
+      "default": "image-phone"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#597AA1"
+    },
+    "heading": {
+      "type": "string",
+      "default": "How it works"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "Skip the faff of TradeMe and Marketplace. We'll cover the postage, and you'll have money in the bank before you know it."
+    },
+    "mainImage": {
+      "type": "object",
+      "default": {}
+    },
+    "phoneImage": {
+      "type": "object",
+      "default": {}
+    },
+    "showDownArrow": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

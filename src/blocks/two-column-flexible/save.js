@@ -1,4 +1,4 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {
   const {
@@ -12,10 +12,11 @@ export default function Save({ attributes }) {
     gridRatioRight,
     showNumber,
     numberValue,
-    showH2,
-    h2Text,
+    showH3,
+    h3Text,
+    showH2, // Legacy - for backward compatibility
+    h2Text, // Legacy - for backward compatibility
     showRichText,
-    richTextContent,
     showCTA,
     ctaStyle,
     ctaText,
@@ -85,7 +86,15 @@ export default function Save({ attributes }) {
                   </div>
                 )}
 
-                {showH2 && h2Text && (
+                {/* Render H3 (new) or H2 (legacy for backward compatibility) */}
+                {showH3 && h3Text && (
+                  <RichText.Content
+                    tagName="h3"
+                    className="two-col-block_heading"
+                    value={h3Text}
+                  />
+                )}
+                {showH2 && h2Text && !h3Text && (
                   <RichText.Content
                     tagName="h2"
                     className="two-col-block_heading"
@@ -93,19 +102,17 @@ export default function Save({ attributes }) {
                   />
                 )}
 
-                {showRichText && richTextContent && (
-                  <RichText.Content
-                    tagName="div"
-                    className="two-col-block_rich-text"
-                    value={richTextContent}
-                  />
+                {showRichText && (
+                  <div className="two-col-block_rich-text">
+                    <InnerBlocks.Content />
+                  </div>
                 )}
 
                 {showCTA && ctaText && (
                   <div className="two-col-block_cta">
                     <a
                       href={ctaUrl || '#'}
-                      className={ctaStyle === 'button' ? 'button' : 'text-style-link'}
+                      className={ctaStyle === 'button' ? 'button' : 'underline-cta'}
                     >
                       {ctaText}
                     </a>

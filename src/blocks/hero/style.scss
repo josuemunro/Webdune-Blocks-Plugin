@@ -87,11 +87,6 @@
   display: flex;
 }
 
-.button:hover {
-  background-color: #e6c233;
-  transform: translateY(-2px);
-}
-
 // W-inline-block utility
 .w-inline-block {
   max-width: 100%;
@@ -246,11 +241,6 @@
   display: flex;
   text-decoration: none;
   color: inherit;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
 }
 
 .phone-lookup_item-details {
