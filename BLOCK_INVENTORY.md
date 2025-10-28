@@ -389,7 +389,7 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 
 | Priority | Block Name | Status | Source | Dependencies |
 |----------|------------|--------|---------|--------------|
-| HIGH | Navigation | 🔄 **IN PROGRESS** | Webflow export | GSAP, Lenis |
+| HIGH | Navigation | ✅ **COMPLETE** | Webflow export | GSAP, Lenis |
 | HIGH | Footer | 🔲 To Do | Webflow export | GSAP, Lenis |
 | HIGH | Hero (Homepage) | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | Template Hero (Interior) | ✅ **COMPLETE** | Webflow export | None |
@@ -485,8 +485,8 @@ Any special considerations, dependencies, or gotchas
 
 **Last Updated**: October 28, 2025  
 **Total Blocks**: 16  
-**Completed**: 4 (Process Section, Hero, Template Hero, Two Column Flexible)  
-**In Progress**: 1 (Navigation)  
+**Completed**: 5 (Process Section, Hero, Template Hero, Two Column Flexible, Navigation)  
+**In Progress**: 0  
 **To Do**: 11
 
 ---

@@ -1,0 +1,57 @@
+// Utility Classes
+// From Webflow custom-styles
+
+/* Visibility utilities */
+.hide {
+  display: none !important;
+}
+
+@media screen and (max-width: 991px) {
+
+  .hide,
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hide-mobile-landscape {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 479px) {
+
+  .hide-mobile,
+  .hide-mobile-portrait {
+    display: none !important;
+  }
+}
+
+/* Spacing utilities */
+.margin-0 {
+  margin: 0rem !important;
+}
+
+.padding-0 {
+  padding: 0rem !important;
+}
+
+.spacing-clean {
+  padding: 0rem !important;
+  margin: 0rem !important;
+}
+
+/* Pointer events */
+.pointer-events-off {
+  pointer-events: none;
+}
+
+.pointer-events-on {
+  pointer-events: auto;
+}
+
+/* Display utilities */
+.display-inlineflex {
+  display: inline-flex;
+}

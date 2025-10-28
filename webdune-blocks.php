@@ -136,6 +136,60 @@ add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles', 10);
 add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_shared_styles', 10);
 
 /**
+ * Enqueue GSAP and animation scripts
+ * For smooth scrolling, parallax, and nav behaviors
+ */
+function webdune_blocks_enqueue_animations()
+{
+  // Only on frontend
+  if (is_admin()) {
+    return;
+  }
+
+  // GSAP from CDN
+  wp_enqueue_script(
+    'gsap',
+    'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+    array(),
+    '3.12.2',
+    true
+  );
+
+  wp_enqueue_script(
+    'gsap-scrolltrigger',
+    'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
+    array('gsap'),
+    '3.12.2',
+    true
+  );
+
+  // Lenis smooth scroll
+  wp_enqueue_script(
+    'lenis',
+    'https://unpkg.com/lenis@1.3.11/dist/lenis.min.js',
+    array(),
+    '1.3.11',
+    true
+  );
+
+  // Our custom animations (parallax, nav behaviors, etc.)
+  // This is built by webpack from src/shared/animations.js
+  $animations_js = WEBDUNE_BLOCKS_BUILD_URL . 'shared/global-styles.js';
+  $animations_js_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/global-styles.js';
+
+  if (file_exists($animations_js_path)) {
+    wp_enqueue_script(
+      'webdune-animations',
+      $animations_js,
+      array('gsap', 'gsap-scrolltrigger', 'lenis'),
+      filemtime($animations_js_path),
+      true
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_animations');
+
+/**
  * Enqueue Swiper.js for sliders
  * Only loads when needed (performance optimization)
  */

@@ -1,0 +1,46 @@
+// Liquid Glass Nav Effect
+// From Webflow custom-styles
+// Used by navigation block
+
+/* Liquid Glass Card Effect */
+.navbar14_container {
+  position: relative;
+
+  /* Tint and inner shadow layer */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: 1.75rem; // 28px
+    background-color: rgba(255, 255, 255, 0);
+    pointer-events: none;
+  }
+
+  /* Backdrop blur and distortion layer */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 1.75rem; // 28px
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    filter: url(#glass-distortion);
+    -webkit-filter: url(#glass-distortion);
+    isolation: isolate;
+    pointer-events: none;
+  }
+}
+
+// SVG filter for glass distortion
+// This should be included in the nav block output
+.glass-nav-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  svg {
+    position: absolute;
+  }
+}

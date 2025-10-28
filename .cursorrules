@@ -1,0 +1,68 @@
+# Webdune Blocks Plugin - Cursor Rules
+
+## Project Context
+Custom Gutenberg blocks plugin for SellMyCell to replace WP Bakery page builder.
+
+## Source of Truth
+- HTML/CSS: `sellmycell.webflow/` folder (Webflow export)
+- Use exact HTML structure and CSS from export
+- Mobile styles are already in the export - use them
+
+## Documentation Priority
+1. START_HERE.md - Always start here for project overview
+2. PROJECT_STATUS.md - Current state and progress
+3. NEXT_STEPS.md - What to build next
+4. AI_AGENT_HANDOFF.md - Handoff guide for new agents
+5. BLOCK_INVENTORY.md - All blocks specifications
+
+## Development Rules
+
+### Do's
+- Use exact HTML/CSS from Webflow export
+- Follow existing block patterns in src/blocks/
+- Import shared styles: `@import '../../shared/colors.scss'`
+- Test all 4 breakpoints (desktop, tablet, mobile-landscape, mobile-portrait)
+- Run `npm run build` after changes
+- Check browser console for errors
+
+### Don'ts
+- Don't make up CSS - use Webflow export
+- Don't skip mobile styles
+- Don't use inline styles
+- Don't modify block registration array in webdune-blocks.php (auto-registers)
+
+## Block Structure
+Every block follows this pattern:
+```
+src/blocks/[name]/
+├── block.json
+├── index.js
+├── edit.js
+├── save.js
+├── style.scss
+├── editor.scss (optional)
+└── view.js (optional)
+```
+
+## Design System
+- Colors: Use variables from `src/shared/colors.scss`
+- Typography: Helvetica World (already loaded)
+- Containers: .container-small / .container-medium / .container-large
+- Section wrapper: `<section> > .padding-global > .container-*`
+
+## GSAP/Animations
+- Already loaded globally via src/shared/animations.js
+- Parallax auto-works on [data-speed] elements
+- Nav behaviors auto-apply to .navbar14_component
+
+## Common Commands
+```bash
+npm start          # Development (auto-rebuild)
+npm run build      # Production build
+wp cache flush     # Clear WordPress cache
+wp block list      # List registered blocks
+```
+
+## Next Priority
+Footer block (see NEXT_STEPS.md for detailed guide)
+

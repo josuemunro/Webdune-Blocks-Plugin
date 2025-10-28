@@ -1,0 +1,266 @@
+// Navigation Block Styles
+// From Webflow export
+@import '../../shared/colors.scss';
+
+.webdune-navigation-block {
+  width: 100%;
+
+  // Main nav component
+  .navbar14_component {
+    color: $color-white;
+    background-color: transparent;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  // Nav container with liquid glass effect
+  .navbar14_container {
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.2); // #fff3
+    border-radius: 1.25rem; // 20px
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    display: flex;
+    position: relative;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    min-height: 4.5rem;
+    box-sizing: border-box;
+
+    // Liquid glass effect from effects.scss is applied via ::before and ::after
+  }
+
+  // Logo and menu wrapper
+  .nav_logo-menu-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar14_logo-link {
+    padding-left: 0;
+    text-decoration: none;
+  }
+
+  .navbar14_logo {
+    height: 3rem; // 48px
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  // Account and menu button wrapper
+  .nav_account-menu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  // Main navigation menu
+  .navbar14_menu {
+    align-items: center;
+    display: flex;
+    position: static;
+  }
+
+  .navbar14_menu-link-wrapper,
+  .navbar14_menu-links {
+    display: flex;
+    gap: 0;
+  }
+
+  .navbar14_link {
+    padding: 0.5rem 2rem;
+    transition: color 0.2s;
+    text-decoration: none;
+    color: inherit;
+    white-space: nowrap;
+
+    &:hover {
+      color: $color-primary; // Yellow
+    }
+
+    &.w--current {
+      color: $color-dark;
+    }
+  }
+
+  // Button wrapper (desktop account icon)
+  .navbar14_button-wrapper {
+    grid-column-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: 2rem;
+
+    &.mobile {
+      display: none; // Hidden on desktop
+    }
+  }
+
+  // Account link
+  .nav_account-link {
+    transition: color 0.2s;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: $color-primary; // Yellow
+    }
+  }
+
+  // Icon embed
+  .icon-embed-small {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Mobile menu button
+  .navbar14_menu-button {
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none; // Hidden on desktop
+  }
+
+  // Menu icon (hamburger)
+  .menu-icon2 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .menu-icon2_line-top,
+  .menu-icon2_line-middle,
+  .menu-icon2_line-bottom {
+    background-color: $color-white;
+    width: 24px;
+    height: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-icon2_line-middle {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .menu-icon1_line-middle-inner {
+    background-color: $color-white;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Responsive: Tablet
+  @media screen and (max-width: 991px) {
+
+    .navbar14_container {
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar14_menu {
+      background-color: transparent;
+      justify-content: center;
+      width: 100%;
+      display: none; // Hidden by default, shown via JS
+
+      &.w--open {
+        display: flex;
+      }
+    }
+
+    .navbar14_menu-link-wrapper {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .navbar14_menu-links {
+      flex-direction: column;
+    }
+
+    .navbar14_link {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .navbar14_button-wrapper {
+      width: 100%;
+      justify-content: center;
+
+      &.mobile {
+        display: flex; // Show mobile account icon
+      }
+    }
+
+    .navbar14_menu-button {
+      display: block; // Show hamburger menu
+    }
+
+    .nav_logo-menu-wrapper {
+      width: 100%;
+    }
+  }
+
+  // Responsive: Mobile Landscape
+  @media screen and (max-width: 767px) {
+
+    .navbar14_container {
+      padding: 0.75rem 1rem;
+    }
+
+    .navbar14_logo {
+      height: 2.5rem; // 40px
+    }
+  }
+
+  // Responsive: Mobile Portrait
+  @media screen and (max-width: 479px) {
+    .navbar14_container {
+      border-radius: 1rem;
+      padding: 0.625rem 0.875rem;
+    }
+
+    .navbar14_logo {
+      height: 2.25rem; // 36px
+    }
+
+    .menu-icon2 {
+      width: 40px;
+      height: 40px;
+    }
+
+    .icon-embed-small {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}

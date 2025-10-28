@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/navigation",
+  "version": "1.0.0",
+  "title": "Navigation",
+  "category": "webdune",
+  "icon": "menu",
+  "description": "Site navigation with logo, menu links, and account icon. Features liquid glass effect and scroll behaviors.",
+  "keywords": [
+    "navigation",
+    "nav",
+    "menu",
+    "header"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "logo": {
+      "type": "object",
+      "default": {}
+    },
+    "menuItems": {
+      "type": "array",
+      "default": [
+        {
+          "text": "Sell",
+          "url": "#",
+          "openInNewTab": false
+        },
+        {
+          "text": "How it works",
+          "url": "#",
+          "openInNewTab": false
+        },
+        {
+          "text": "About",
+          "url": "#",
+          "openInNewTab": false
+        },
+        {
+          "text": "Tips",
+          "url": "#",
+          "openInNewTab": false
+        }
+      ]
+    },
+    "accountUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "showAccountIcon": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

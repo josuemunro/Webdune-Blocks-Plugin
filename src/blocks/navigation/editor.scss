@@ -1,0 +1,56 @@
+// Navigation Block Editor Styles
+@import '../../shared/colors.scss';
+
+.webdune-navigation-block {
+
+  // Logo placeholder
+  .navbar14_logo-placeholder {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    min-width: 120px;
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+      margin: 0;
+    }
+  }
+
+  // Editor-specific: Make links non-functional
+  .navbar14_link,
+  .navbar14_logo-link,
+  .nav_account-link {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  // Editor-specific: Prevent menu button interaction
+  .navbar14_menu-button {
+    pointer-events: none;
+  }
+
+  // Always show menu in editor (even on mobile sizes)
+  .navbar14_menu {
+    display: flex !important;
+  }
+}
+
+// Inspector controls custom styling
+.components-panel__body {
+
+  // Menu item panels
+  .menu-item-panel {
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    padding: 12px;
+  }
+
+  // URL input in inspector
+  .components-url-input {
+    width: 100%;
+  }
+}
