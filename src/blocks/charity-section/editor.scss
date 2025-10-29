@@ -1,0 +1,58 @@
+@import '../../shared/colors';
+@import '../../shared/layout';
+
+.wp-block-webdune-charity-section-block {
+  .section_charity {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 50px 20px;
+    text-align: center;
+
+    .charity_content {
+      position: relative;
+      z-index: 2;
+      color: $color-white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+
+      h2,
+      p,
+      a {
+        color: inherit;
+      }
+
+      h2 {
+        margin: 0;
+      }
+    }
+
+    .charity_logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .charity_img {
+      object-fit: contain;
+
+      &.height-fixed {
+        height: 100px;
+        width: auto;
+      }
+
+      &.width-fixed {
+        width: 120px;
+        height: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+@import '../../shared/colors';
+@import '../../shared/layout';
+@import '../../shared/typography';
+@import '../../shared/utilities';
+
+.wp-block-webdune-charity-section {
+  .section_charity {
+    background-color: $color-dark;
+    color: $color-white;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    position: relative;
+    overflow: hidden;
+
+    @media screen and (max-width: 767px) {
+      padding-top: 7.5rem;
+      padding-bottom: 7.5rem;
+    }
+  }
+
+  .charity_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 4rem;
+
+    h2 {
+      color: $color-white;
+    }
+
+    p {
+      color: $color-white;
+    }
+
+    // Responsive width
+    @media screen and (max-width: 991px) {
+      width: 40rem;
+      max-width: 100%;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+
+  .charity_logos {
+    grid-column-gap: 4rem;
+    grid-row-gap: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    @media screen and (max-width: 767px) {
+      grid-row-gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .charity_img {
+    object-fit: contain;
+    display: block; // Ensure image displays properly
+
+    &.height-fixed {
+      height: 11.25rem;
+      width: auto;
+
+      @media screen and (max-width: 767px) {
+        height: 8rem;
+      }
+    }
+
+    &.width-fixed {
+      width: 14rem;
+      height: auto;
+
+      @media screen and (max-width: 767px) {
+        width: 10rem;
+      }
+    }
+  }
+
+  .text-color-white {
+    color: $color-white;
+  }
+
+  .text-color-yellow {
+    color: $color-primary;
+  }
+}

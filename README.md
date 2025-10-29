@@ -18,28 +18,30 @@ This plugin creates a suite of custom WordPress blocks specifically designed for
 
 ## 📦 Included Blocks
 
-**Progress: 7/16 blocks complete (44%)**
+**Progress: 14/14 core blocks complete (100%)** ✅
 
-### ✅ Complete (7 blocks)
-- Navigation (liquid glass effect, scroll behaviors)
-- Footer (newsletter, social, contact info)
-- Hero (Homepage with search UI)
-- Template Hero (Interior pages, 2 layouts)
-- Process Section (4-step numbered)
-- Two Column Flexible (gradient underline format)
-- CTA Section (3 toggleable buttons)
+### ✅ Phase 1 Complete (14 blocks)
+- **Navigation** - Liquid glass effect, scroll behaviors, mobile menu
+- **Footer** - Newsletter, social links, contact info
+- **Hero** - Homepage with integrated phone search (AJAX) - *needs live testing*
+- **Template Hero** - Interior pages, 2 layouts
+- **Process Section** - 4-step numbered walkthrough
+- **Two Column Flexible** - Gradient underline format, 20+ options
+- **CTA Section** - 3 toggleable buttons, multiple styles
+- **FAQ Parent** - InnerBlocks container
+- **FAQ Item** - Accordion with vanilla JS animation
+- **Phone Slider** - Swiper.js carousel, dynamic PHP - *needs live testing*
+- **Reviews Marquee** - Infinite scroll, manual entries - *Phase 2: Google My Business API*
+- **Content Image Section** - Background image with overlay
+- **Charity Section** - Logo grid, colored text
+- **Stats Section** - GSAP count-up animations
 
-### 🔲 To Do (9 blocks remaining)
-- FAQ (Parent + Child) ← Next priority
-- Phone Search (AJAX) ← High priority
-- Phone Slider (Swiper.js)
-- Reviews Marquee (infinite scroll)
-- Content Image Section
-- Charity Section
-- Stats Section
-- Full Width Photo
+### 📋 Future Blocks (Pending Webflow Export)
+- Blog-related blocks
+- FAQs page with Table of Contents
+- About Us page blocks
 
-**Total: 16 custom blocks**
+**Total Core Blocks: 14**
 
 See [BLOCK_INVENTORY.md](BLOCK_INVENTORY.md) for detailed block specifications.
 
@@ -80,7 +82,7 @@ See [BLOCK_INVENTORY.md](BLOCK_INVENTORY.md) for detailed block specifications.
    - Click "+" to add a block
    - Find blocks under "Webdune Blocks" category
 
-See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed setup instructions.
+See [START_HERE.md](START_HERE.md) for detailed project overview and setup instructions.
 
 ## 🛠️ Development
 
@@ -112,8 +114,10 @@ webdune-blocks/
 ├── webdune-blocks.php      # Main plugin file
 ├── package.json            # Dependencies & scripts
 ├── README.md               # This file
-├── SETUP_GUIDE.md         # Detailed setup guide
-├── BLOCK_INVENTORY.md     # Block specifications
+├── START_HERE.md          # Project overview & quick start
+├── PROJECT_STATUS.md      # Current progress & next steps
+├── BLOCK_INVENTORY.md     # Detailed block specifications
+├── THEME-INTEGRATION-GUIDE.md  # Integration instructions
 │
 ├── src/                    # Source files
 │   ├── blocks/            # Individual blocks
@@ -168,11 +172,24 @@ webdune-blocks/
 
 ## 🎨 Design System
 
-### Colors
-- **Primary**: `#FFD940` (Yellow)
-- **Dark**: `#3C3C3C` (Dark gray)
-- **Light**: `#F5F5F7` (Light gray)
-- **White**: `#FFFFFF`
+### Colors (SASS Variables)
+
+**IMPORTANT**: Always use SASS variables from `src/shared/colors.scss`, NOT Webflow CSS variables.
+
+```scss
+// Available SASS Variables
+$color-primary: #FFD940;  // Yellow
+$color-dark: #3C3C3C;     // Dark gray
+$color-light: #F5F5F7;    // Light gray
+$color-white: #FFFFFF;    // White
+$color-black: #000000;    // Black
+$color-brick: #cb6833;    // Brick/Orange
+```
+
+**Migration from Webflow:**
+- `var(--white)` → `$color-white`
+- `var(--brick)` → `$color-brick`
+- `var(--dark)` → `$color-dark`
 
 ### Typography
 - **Font**: Helvetica World (fallback: Helvetica Neue, Arial)
@@ -197,21 +214,33 @@ Blocks are registered automatically in `webdune-blocks.php` by scanning the `bui
 Global layout utilities and color variables are loaded on all pages via `src/shared/layout.scss` and `src/shared/colors.scss`.
 
 ### Dynamic Blocks
-Some blocks (like Phone Slider) use PHP render callbacks instead of `save.js` for dynamic content that needs to query the database.
+Some blocks use PHP render callbacks instead of `save.js` for dynamic content:
+- **Phone Slider** - Queries phone posts dynamically
+- **Hero** - Integrated AJAX phone search functionality
 
 ### Asset Loading
-- Swiper.js loads conditionally only when slider blocks are present
-- Block-specific assets are enqueued automatically by WordPress
+- **Swiper.js** - Loads conditionally only when slider/marquee blocks are present
+- **GSAP & Lenis** - For navigation animations and smooth scrolling
+- **Block-specific assets** - Enqueued automatically by WordPress
+- **AJAX endpoints** - For phone search functionality with caching
 
 ## 📱 Phone Data Integration
 
-The plugin integrates with WordPress posts representing phone models. Each phone has:
+The plugin integrates with WordPress posts representing phone models via ACF fields:
 
-- **Capacity Groups**: Different storage sizes with base prices (16GB, 32GB, etc.)
-- **Condition Modifiers**: Price adjustments for phone condition (Flawless, Good, Poor, Broken)
-- **Minimum Price**: Floor price regardless of condition
+### ACF Fields Structure
+- **Capacity Fields** (individual text fields): `16gb`, `32gb`, `64gb`, `128gb`, `256gb`, `512gb`, `1tb`
+- **Condition Deductions** (text fields): `flawless_`, `good_`, `poor_broken`, `broken`
+- **Minimum Offer**: `minimum_possible_offter` (number field)
 
-See `includes/phone-queries.php` for query functions.
+### Phone Search Features
+- **Live AJAX search** with 300ms debounce
+- **Real-time results** dropdown with max 3 items
+- **Price range display** calculated from ACF data
+- **Keyboard navigation** and redirect support
+- Fully integrated into Hero block
+
+See `includes/phone-queries.php` for query functions and `PHONE_SEARCH_IMPLEMENTATION.md` for details.
 
 ## 🧪 Testing
 
@@ -324,30 +353,43 @@ See [SETUP_GUIDE.md](SETUP_GUIDE.md) → Troubleshooting section
 ## 📊 Project Status
 
 - **Version**: 1.0.0
-- **Status**: In Development
-- **Blocks Complete**: 0/16
-- **Last Updated**: October 21, 2025
+- **Status**: Ready for Live Site Testing
+- **Core Blocks Complete**: 14/14 ✅
+- **Last Updated**: October 29, 2025
 
 ## 🎯 Roadmap
 
-### Phase 1 (Weeks 1-2)
-- [ ] Setup & Foundation
-- [ ] Navigation & Footer
-- [ ] Hero Block
-- [ ] Phone Search
-- [ ] Process Section
-- [ ] FAQ Blocks
+### Phase 1: Core Blocks ✅ COMPLETE
+- [x] Setup & Foundation
+- [x] Navigation & Footer
+- [x] Hero Block with Phone Search
+- [x] Template Hero
+- [x] Process Section
+- [x] FAQ Blocks (Parent + Item)
+- [x] Phone Slider
+- [x] Reviews Marquee
+- [x] CTA Section
+- [x] Two Column Flexible
+- [x] Content Image Section
+- [x] Charity Section
+- [x] Stats Section
 
-### Phase 2 (Week 3)
-- [ ] Phone Slider
-- [ ] Reviews Marquee
-- [ ] CTA Section
+### Phase 2: Deployment & Testing (Current)
+- [ ] Deploy to live site
+- [ ] Test phone search with real data
+- [ ] Test phone slider with real posts
+- [ ] Performance optimization
+- [ ] Mobile testing
 
-### Phase 3 (Week 4)
-- [ ] Content blocks
-- [ ] Polish & optimization
-- [ ] Documentation
-- [ ] Deployment
+### Phase 3: Future Blocks (Pending Webflow Export)
+- [ ] Blog blocks
+- [ ] FAQs page with ToC
+- [ ] About Us blocks
+
+### Phase 4: Enhancements
+- [ ] Google My Business API for Reviews
+- [ ] Advanced animations
+- [ ] Performance optimizations
 
 ---
 

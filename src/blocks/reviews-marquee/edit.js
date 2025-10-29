@@ -7,9 +7,17 @@ import {
   Button,
   IconButton,
 } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
 
-export default function Edit({ attributes, setAttributes }) {
-  const { heading, googleRating, reviewCount, reviews, autoplaySpeed } = attributes;
+export default function Edit({ attributes, setAttributes, clientId }) {
+  const { heading, googleRating, reviewCount, reviews, autoplaySpeed, blockId } = attributes;
+
+  // Generate unique block ID on mount if not set
+  useEffect(() => {
+    if (!blockId) {
+      setAttributes({ blockId: `reviews-marquee-${clientId}` });
+    }
+  }, []);
 
   const blockProps = useBlockProps({
     className: 'webdune-reviews-marquee-editor',

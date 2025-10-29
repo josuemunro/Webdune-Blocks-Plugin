@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/charity-section",
+  "version": "1.0.0",
+  "title": "Charity Section",
+  "category": "webdune",
+  "icon": "heart",
+  "description": "A charity section with heading, colored text, optional CTA button, and charity logos.",
+  "keywords": [
+    "charity",
+    "section",
+    "logos",
+    "donation",
+    "cta"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "#3C3C3C"
+    },
+    "heading": {
+      "type": "string",
+      "source": "html",
+      "selector": "h2",
+      "default": "For every phone we buy, we donate $5 to charity. You can even give your full payout to a cause you care about."
+    },
+    "headingHighlightColor": {
+      "type": "string",
+      "default": "#FFD940"
+    },
+    "content": {
+      "type": "string",
+      "source": "html",
+      "selector": "p",
+      "default": ""
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "About us"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "buttonOpenInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "charityLogos": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,56 @@
+// Import shared styles
+@import '../../shared/colors.scss';
+
+// Editor-specific styles
+.webdune-content-image-section-block {
+  .section_content-image {
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Make the editor more usable
+  .content-image_content {
+    max-width: 100%;
+    padding: 2rem;
+
+    h2,
+    p {
+      cursor: text;
+    }
+
+    .button {
+      pointer-events: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+    }
+  }
+
+  // Background overlay in editor
+  .section-bg-overlay {
+    pointer-events: none;
+  }
+
+  // Add a placeholder when no background image
+  .section_content-image:not([style*="background-image: url"]) {
+    background-color: $color-light;
+    border: 2px dashed $color-dark;
+
+    &::before {
+      content: 'Upload a background image in the sidebar →';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: $color-dark;
+      font-size: 0.875rem;
+      opacity: 0.6;
+      z-index: 3;
+      white-space: nowrap;
+    }
+  }
+}

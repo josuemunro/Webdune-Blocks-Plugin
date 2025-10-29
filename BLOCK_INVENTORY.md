@@ -227,7 +227,7 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 - Show Google Rating Card (Toggle - true)
 - Google Rating (Number - 5.0)
 - Google Review Count (Number - 276)
-- Reviews (Array or pull from Google Reviews plugin)
+- Reviews (Manual entry array)
   - Each review: stars, text, author name, author image, date
 - Animation Speed (Number - default: 60 seconds)
 - Pause on Hover (Toggle - true)
@@ -237,11 +237,19 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 - Infinite marquee scroll animation
 - Google rating badge
 - Review cards with stars, text, author
-- Uses Swiper.js for mobile
+- Manual review entry via block inspector
+- Profile photo upload per review
+- Swiper.js powered
 
-**Integration**: 
-- **Phase 1**: Hard-coded reviews from Figma
-- **Phase 2**: Pull from Google Reviews plugin or API
+**Current Status**: ✅ **PHASE 1 COMPLETE** - Manual review entry  
+
+**Phase 2 Enhancement** (Future):
+- Google My Business API Integration
+- Auto-pull reviews from Google Business Profile
+- Auto-update review content on schedule
+- Aggregate rating calculation
+- Review moderation/filtering options
+- Fallback to manual reviews if API unavailable
 
 **Priority**: MEDIUM - Homepage social proof
 
@@ -387,24 +395,51 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 
 ## 📝 Block Development Status
 
-| Priority | Block Name | Status | Source | Dependencies |
-|----------|------------|--------|---------|--------------|
-| HIGH | Navigation | ✅ **COMPLETE** | Webflow export | GSAP, Lenis |
-| HIGH | Footer | ✅ **COMPLETE** | Webflow export | None |
-| HIGH | Hero (Homepage) | ✅ **COMPLETE** | Webflow export | None |
-| HIGH | Template Hero (Interior) | ✅ **COMPLETE** | Webflow export | None |
-| HIGH | Phone Search | ✅ **COMPLETE** | Webflow export | PHP query logic |
-| HIGH | Process Section | ✅ **COMPLETE** | Webflow export | None |
-| HIGH | FAQ (Parent) | ✅ **COMPLETE** | Webflow export | InnerBlocks |
-| HIGH | FAQ Item (Child) | ✅ **COMPLETE** | Webflow export | Vanilla JS |
-| MEDIUM | CTA Section | ✅ **COMPLETE** | Webflow export | None |
-| MEDIUM | Phone Slider | ✅ **COMPLETE** | Webflow export | PHP, Swiper.js |
-| MEDIUM | Reviews Marquee | ✅ **COMPLETE** | Webflow export | Swiper.js |
-| LOW-MED | Content Image | 🔲 To Do | Webflow export | None |
-| LOW-MED | Two Column Flexible | ✅ **COMPLETE** | Webflow export | None |
-| LOW | Charity Section | 🔲 To Do | Webflow export | None |
-| LOW | Stats Section | 🔲 To Do | Webflow export | None |
-| LOW | Full Width Photo | 🔲 To Do | Webflow export | None |
+### Core Blocks (Phase 1) - ✅ COMPLETE
+
+| Priority | Block Name | Status | Source | Dependencies | Notes |
+|----------|------------|--------|---------|--------------|-------|
+| HIGH | Navigation | ✅ **COMPLETE** | Webflow export | GSAP, Lenis | Liquid glass effect |
+| HIGH | Footer | ✅ **COMPLETE** | Webflow export | None | Multi-column layout |
+| HIGH | Hero (Homepage) | ✅ **COMPLETE** | Webflow export | AJAX, ACF | Needs live testing |
+| HIGH | Template Hero (Interior) | ✅ **COMPLETE** | Webflow export | None | 2 layout variants |
+| HIGH | Phone Search | ✅ **COMPLETE** | Webflow export | PHP queries | Integrated in Hero |
+| HIGH | Process Section | ✅ **COMPLETE** | Webflow export | None | 4-step numbered |
+| HIGH | FAQ (Parent) | ✅ **COMPLETE** | Webflow export | InnerBlocks | Container block |
+| HIGH | FAQ Item (Child) | ✅ **COMPLETE** | Webflow export | Vanilla JS | Accordion animation |
+| MEDIUM | CTA Section | ✅ **COMPLETE** | Webflow export | None | 3 button styles |
+| MEDIUM | Phone Slider | ✅ **COMPLETE** | Webflow export | PHP, Swiper.js | Needs live testing |
+| MEDIUM | Reviews Marquee | ✅ **COMPLETE** | Webflow export | Swiper.js | Phase 2: GMB API |
+| MED-LOW | Content Image | ✅ **COMPLETE** | Webflow export | None | Background + overlay |
+| MED-LOW | Two Column Flexible | ✅ **COMPLETE** | Webflow export | None | 20+ options |
+| LOW | Charity Section | ✅ **COMPLETE** | Webflow export | None | Logo grid |
+| LOW | Stats Section | ✅ **COMPLETE** | Webflow export | GSAP ScrollTrigger | Count-up animation |
+
+**Total Core Blocks**: 14 / 14 (100% Complete)
+
+### Removed/Redundant Blocks
+
+| Block Name | Status | Reason |
+|------------|--------|--------|
+| Full Width Photo | ❌ **NOT NEEDED** | Use Content Image Section with content disabled |
+| Hero Simple | ❌ **NOT NEEDED** | Template Hero covers all interior page needs |
+
+### Future Blocks (Pending Webflow Export)
+
+| Block Name | Status | Priority | Notes |
+|------------|--------|----------|-------|
+| Blog Grid/List | 📋 **PLANNED** | HIGH | Waiting for Webflow export |
+| Blog Sidebar | 📋 **PLANNED** | MEDIUM | Specifications needed |
+| FAQs with ToC | 📋 **PLANNED** | MEDIUM | Table of contents functionality |
+| About Us Blocks | 📋 **PLANNED** | LOW | Team, timeline, values sections |
+
+### Phase 2 Enhancements
+
+| Enhancement | Block | Priority | Status |
+|------------|-------|----------|--------|
+| Google My Business API | Reviews Marquee | HIGH | 📋 **PLANNED** |
+| Advanced Animations | Multiple | LOW | 📋 **PLANNED** |
+| Performance Optimization | All | MEDIUM | 📋 **PLANNED** |
 
 ---
 
@@ -483,11 +518,11 @@ Any special considerations, dependencies, or gotchas
 
 ---
 
-**Last Updated**: October 28, 2025  
-**Total Blocks**: 16  
-**Completed**: 9 (Navigation, Footer, Hero, Template Hero, Process Section, Two Column Flexible, CTA Section, FAQ Parent, FAQ Item)  
-**In Progress**: 0  
-**To Do**: 7
+**Last Updated**: October 29, 2025  
+**Core Blocks**: 14 / 14 (100% Complete) ✅  
+**Status**: Ready for live site deployment and testing  
+**Future Blocks**: 4+ (pending Webflow export)  
+**Phase 2**: Google My Business API integration for Reviews Marquee
 
 ---
 

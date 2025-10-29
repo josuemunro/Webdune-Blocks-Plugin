@@ -55,3 +55,38 @@
 .display-inlineflex {
   display: inline-flex;
 }
+
+/* Custom Underline Format Styles */
+.gradient-underline {
+  /* Background gradient positioned below the text baseline */
+  background-image: linear-gradient(to right, #FFD940 0%, #FFD940 100%);
+  background-size: 100% 0.3rem;
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 0.25rem);
+  /* Allow the underline to wrap across multiple lines */
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  /* Add space below text so underline doesn't touch descenders */
+  padding-bottom: 0rem;
+}
+
+/* Optional: Customize the underline color and thickness */
+.gradient-underline.custom-color {
+  background-image: linear-gradient(to right, white 0%, white 100%);
+}
+
+.gradient-underline.thick {
+  background-size: 100% 5px;
+}
+
+.gradient-underline.thin {
+  padding-bottom: 0.25rem;
+  background-size: 100% 4px;
+}
+
+@media screen and (max-width: 991px) {
+  .gradient-underline {
+    background-size: 100% 0.3rem;
+    background-position: 0 calc(100% - 0.25rem);
+  }
+}

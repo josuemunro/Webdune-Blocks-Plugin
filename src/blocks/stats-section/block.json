@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/stats-section",
+  "version": "1.0.0",
+  "title": "Stats Section",
+  "category": "webdune",
+  "icon": "chart-bar",
+  "description": "A statistics section with animated counting numbers in a 3-column layout.",
+  "keywords": [
+    "stats",
+    "statistics",
+    "numbers",
+    "impact",
+    "count"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "source": "html",
+      "selector": "h2",
+      "default": "Your phone. Real impact."
+    },
+    "showHeadingUnderline": {
+      "type": "boolean",
+      "default": true
+    },
+    "stats": {
+      "type": "array",
+      "default": [
+        {
+          "number": "5,510",
+          "label": "Phones saved from landfill",
+          "showLabelUnderline": true
+        },
+        {
+          "number": "$1,697,167",
+          "label": "Earned by customers like you",
+          "showLabelUnderline": true
+        },
+        {
+          "number": "$26,000",
+          "label": "Donated to charity",
+          "showLabelUnderline": true
+        }
+      ]
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

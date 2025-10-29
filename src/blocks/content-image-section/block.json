@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/content-image-section",
+  "version": "1.0.0",
+  "title": "Content Image Section",
+  "category": "webdune",
+  "icon": "format-image",
+  "description": "Full-width section with background image, overlay, centered text content and optional CTA button.",
+  "keywords": [
+    "content",
+    "image",
+    "background",
+    "overlay",
+    "hero"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "What began as a passion project is now our family business, helping thousands of Kiwis trade old phones for cash."
+    },
+    "content": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImage": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "id": null,
+        "alt": ""
+      }
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "#3c3c3c"
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 60
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "About us"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "buttonEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "buttonOpenInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "enableParallax": {
+      "type": "boolean",
+      "default": true
+    },
+    "showContent": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
