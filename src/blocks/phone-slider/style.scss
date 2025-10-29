@@ -1,0 +1,226 @@
+/**
+ * Phone Slider Block Styles
+ * Ported from Webflow export - sellmycell.webflow.css
+ */
+
+@import '../../shared/colors.scss';
+
+// Section
+.section_home-phones {
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+// Header
+.home-phones_header {
+  width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+// Slider Container
+.home-phones_slider {
+  justify-content: center;
+  align-items: center;
+  padding-top: 7rem;
+  padding-bottom: 9rem;
+  display: flex;
+  position: relative;
+}
+
+// Swiper Wrapper
+.phones-slider.swiper-wrapper {
+  display: flex;
+}
+
+// Phone Slide
+.phone-slide.swiper-slide {
+  grid-column-gap: 1.75rem;
+  grid-row-gap: 1.75rem;
+  -webkit-user-select: none;
+  user-select: none;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  display: flex;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
+}
+
+.phone-slide_img {
+  height: 22.5rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.phone-slide_content {
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
+  text-align: center;
+  flex-flow: column;
+  display: flex;
+
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+}
+
+// Navigation Arrows
+.padding-global.phones-slider_arrows-wrapper {
+  z-index: 3;
+  pointer-events: none;
+  width: 100%;
+  margin-bottom: 6.5rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.container-large.phones-slider_container {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.phones-slider_arrow {
+  background-color: var(--yellow);
+  pointer-events: all;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  text-decoration: none;
+  color: var(--dark-grey);
+
+  &:hover {
+    background-color: var(--brick);
+    color: var(--white);
+  }
+
+  &:active {
+    background-color: #a35429;
+  }
+
+  // Swiper disabled state
+  &.swiper-button-disabled {
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.icon-slider-arrow {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  min-width: 1rem;
+  height: 1.75rem;
+  display: flex;
+}
+
+// Bottom Content
+.home-phones_bottom-content {
+  grid-column-gap: 3rem;
+  grid-row-gap: 3rem;
+  -webkit-user-select: none;
+  user-select: none;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+// Gradient underline for heading
+.gradient-underline {
+  background-image: linear-gradient(to right, $color-primary 0%, $color-primary 100%);
+  background-size: 100% 0.3rem;
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 0.25rem);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-bottom: 0rem;
+}
+
+// Responsive breakpoints
+@media screen and (max-width: 991px) {
+  .home-phones_header {
+    width: 36rem;
+  }
+
+  .phones-slider_arrow {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section_home-phones {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .home-phones_header {
+    width: 28rem;
+  }
+
+  .home-phones_slider {
+    padding-bottom: 7rem;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .phone-slide.swiper-slide,
+  .phones-slider.swiper-wrapper {
+    width: 100%;
+  }
+
+  .padding-global.phones-slider_arrows-wrapper {
+    margin-bottom: 4rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .section_home-phones {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .home-phones_header {
+    width: 100%;
+  }
+
+  .home-phones_slider {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .phones-slider_arrow {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .phone-slide_img {
+    height: 18rem;
+  }
+
+  .home-phones_bottom-content {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+}

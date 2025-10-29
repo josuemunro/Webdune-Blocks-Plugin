@@ -1,0 +1,45 @@
+// Editor styles for Phone Slider block
+
+.webdune-phone-slider-editor {
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+
+  .phone-slider-heading-editor {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 4px;
+  }
+
+  .phone-slider-preview {
+    margin-top: 2rem;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-slider-empty,
+  .phone-slider-error,
+  .phone-slider-loading {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+
+    p {
+      margin: 0;
+      color: #666;
+    }
+  }
+
+  .phone-slider-error p {
+    color: #d32f2f;
+  }
+
+  .phone-slider-loading p {
+    color: #1976d2;
+  }
+}

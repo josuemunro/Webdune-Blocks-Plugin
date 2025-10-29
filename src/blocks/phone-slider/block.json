@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/phone-slider",
+  "version": "1.0.0",
+  "title": "Phone Slider",
+  "category": "webdune",
+  "icon": "slides",
+  "description": "Horizontal slider of phone models with prices using Swiper.js",
+  "keywords": [
+    "phone",
+    "slider",
+    "carousel",
+    "swiper"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Your phone could be <span class=\"gradient-underline\">worth more</span> than you think."
+    },
+    "postSelectionMethod": {
+      "type": "string",
+      "default": "latest",
+      "enum": [
+        "latest",
+        "manual",
+        "category"
+      ]
+    },
+    "selectedPosts": {
+      "type": "array",
+      "default": []
+    },
+    "selectedCategory": {
+      "type": "number",
+      "default": 0
+    },
+    "numberOfPosts": {
+      "type": "number",
+      "default": 8
+    },
+    "showArrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoplaySpeed": {
+      "type": "number",
+      "default": 3000
+    },
+    "bottomText": {
+      "type": "string",
+      "default": "We provide instant quotes on 80+ models - Apple, Samsung, Oppo, Sony, Google and Huawei. If yours isn't listed, just ask and we'll sort a custom quote."
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Find your model"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/select-model"
+    },
+    "buttonOpenInNewTab": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

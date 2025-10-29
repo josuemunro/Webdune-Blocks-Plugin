@@ -393,13 +393,13 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 | HIGH | Footer | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | Hero (Homepage) | ✅ **COMPLETE** | Webflow export | None |
 | HIGH | Template Hero (Interior) | ✅ **COMPLETE** | Webflow export | None |
-| HIGH | Phone Search | 🔲 To Do | Webflow export | PHP query logic |
+| HIGH | Phone Search | ✅ **COMPLETE** | Webflow export | PHP query logic |
 | HIGH | Process Section | ✅ **COMPLETE** | Webflow export | None |
-| HIGH | FAQ (Parent) | 🔲 To Do | Webflow export | InnerBlocks |
-| HIGH | FAQ Item (Child) | 🔲 To Do | Webflow export | Vanilla JS |
+| HIGH | FAQ (Parent) | ✅ **COMPLETE** | Webflow export | InnerBlocks |
+| HIGH | FAQ Item (Child) | ✅ **COMPLETE** | Webflow export | Vanilla JS |
 | MEDIUM | CTA Section | ✅ **COMPLETE** | Webflow export | None |
-| MEDIUM | Phone Slider | 🔲 To Do | Webflow export | PHP, Swiper.js |
-| MEDIUM | Reviews Marquee | 🔲 To Do | Webflow export | Swiper.js |
+| MEDIUM | Phone Slider | ✅ **COMPLETE** | Webflow export | PHP, Swiper.js |
+| MEDIUM | Reviews Marquee | ✅ **COMPLETE** | Webflow export | Swiper.js |
 | LOW-MED | Content Image | 🔲 To Do | Webflow export | None |
 | LOW-MED | Two Column Flexible | ✅ **COMPLETE** | Webflow export | None |
 | LOW | Charity Section | 🔲 To Do | Webflow export | None |

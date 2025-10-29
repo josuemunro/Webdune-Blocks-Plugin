@@ -8,5 +8,7 @@ import './blocks/footer';
 import './blocks/cta-section';
 import './blocks/faq';
 import './blocks/faq-item';
+import './blocks/phone-slider';
+import './blocks/reviews-marquee';
 
 

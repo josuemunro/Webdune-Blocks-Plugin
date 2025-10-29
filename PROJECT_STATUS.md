@@ -8,7 +8,7 @@
 
 ## 📊 Current Progress
 
-**Blocks Completed**: 9 / 16 (56%)
+**Blocks Completed**: 11 / 16 (68.75%)
 
 ### ✅ Completed & Built (Ready to Use)
 
@@ -84,6 +84,33 @@
    - Plus/minus icon toggle
    - Default open toggle
    - Keyboard accessible
+   - Fully responsive
+
+10. **Phone Slider Block** (`webdune/phone-slider`)
+   - Swiper.js horizontal slider
+   - Dynamic PHP rendering of phone posts
+   - Displays phone image, name, max price
+   - Post selection: Latest, By Category, Manual
+   - Previous/Next navigation arrows
+   - Optional autoplay
+   - Configurable number of posts (3-20)
+   - Bottom text section with CTA button
+   - Desktop: Shows 3-4 phones, centered
+   - Mobile: Shows 1 phone at a time
+   - Fully responsive
+
+11. **Reviews Marquee Block** (`webdune/reviews-marquee`)
+   - Infinite scrolling marquee animation
+   - Two offset rows (desktop) / single row (mobile)
+   - Manual review entry via attributes
+   - 5-star display with gold stars
+   - Google rating badge (rating + review count)
+   - Review cards: stars, text, author, photo, date
+   - Configurable autoplay speed
+   - Add/remove reviews in sidebar
+   - Profile photo upload per review
+   - Beautiful yellow background
+   - Swiper.js powered
    - Fully responsive
 
 ---

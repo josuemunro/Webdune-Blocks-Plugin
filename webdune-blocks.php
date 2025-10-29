@@ -290,6 +290,34 @@ function webdune_enqueue_ajax_vars()
 add_action('wp_enqueue_scripts', 'webdune_enqueue_ajax_vars');
 
 /**
+ * Enqueue Swiper.js for phone slider
+ * Required for phone slider and reviews marquee blocks
+ */
+function webdune_enqueue_swiper()
+{
+  // Check if page has phone slider or reviews block
+  if (has_block('webdune/phone-slider') || has_block('webdune/reviews-marquee')) {
+    // Enqueue Swiper CSS
+    wp_enqueue_style(
+      'swiper-css',
+      'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css',
+      array(),
+      '12.0.0'
+    );
+
+    // Enqueue Swiper JS
+    wp_enqueue_script(
+      'swiper-js',
+      'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js',
+      array(),
+      '12.0.0',
+      true
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'webdune_enqueue_swiper');
+
+/**
  * Plugin activation
  */
 function webdune_blocks_activate()

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/reviews-marquee",
+  "version": "1.0.0",
+  "title": "Reviews Marquee",
+  "category": "webdune",
+  "icon": "star-filled",
+  "description": "Infinite scrolling reviews marquee with Google rating badge",
+  "keywords": [
+    "reviews",
+    "marquee",
+    "testimonials",
+    "google"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "<span class=\"gradient-underline custom-color\">Loved</span> by people like you."
+    },
+    "googleRating": {
+      "type": "string",
+      "default": "5.0"
+    },
+    "reviewCount": {
+      "type": "string",
+      "default": "276"
+    },
+    "reviews": {
+      "type": "array",
+      "default": [
+        {
+          "id": 1,
+          "text": "Great place to do business, I just received payments for 2 phones I have sent in, instructions in courier bag were easy to navigate. Would definitely recommend this place to do business with again 😊",
+          "author": "Jorden Te Huia",
+          "date": "a month ago",
+          "photo": ""
+        },
+        {
+          "id": 2,
+          "text": "Smooth process from start to finish. Great communication and quick payment!",
+          "author": "Sarah Johnson",
+          "date": "2 weeks ago",
+          "photo": ""
+        },
+        {
+          "id": 3,
+          "text": "Best price I could find for my old phone. Highly recommend!",
+          "author": "Mike Chen",
+          "date": "3 weeks ago",
+          "photo": ""
+        }
+      ]
+    },
+    "autoplaySpeed": {
+      "type": "number",
+      "default": 60000
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

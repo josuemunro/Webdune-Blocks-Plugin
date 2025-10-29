@@ -17,7 +17,7 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
 - ✅ Shared styles configured (colors, typography, layout, utilities, effects)
 - ✅ Shared animations (GSAP, Lenis, parallax)
 - ✅ Development workflow established
-- ✅ **9 Blocks Completed and Built** (56%):
+- ✅ **11 Blocks Completed and Built** (68.75%):
   - Navigation block (liquid glass, scroll behaviors, mobile menu)
   - Footer block (newsletter, social links, contact info)
   - Hero block (Homepage with phone search UI)
@@ -27,6 +27,8 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
   - CTA Section block (3 toggleable buttons)
   - FAQ Parent block (InnerBlocks container)
   - FAQ Item block (accordion with vanilla JS)
+  - Phone Slider block (Swiper.js, dynamic PHP)
+  - Reviews Marquee block (infinite scroll, manual entries)
 - 📦 **SOURCE**: Webflow export in `sellmycell.webflow/` folder
 - 🎯 **COMPLETED**: Phone Search functionality (AJAX, debounce, ACF integration)
 - 🎯 **NEXT**: Phone Slider (Swiper.js) or remaining blocks
