@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ajaxUrl = webdunePhoneSearch?.ajaxUrl || '/wp-admin/admin-ajax.php';
     const nonce = webdunePhoneSearch?.nonce || '';
 
-    const url = `${ajaxUrl}?action=search_phones&search=${encodeURIComponent(searchTerm)}&limit=3&nonce=${nonce}`;
+    const url = `${ajaxUrl}?action=search_phones&search=${encodeURIComponent(searchTerm)}&limit=15&nonce=${nonce}`;
 
     fetch(url)
       .then(response => response.json())

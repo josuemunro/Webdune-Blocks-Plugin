@@ -24,12 +24,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   });
 
   const addReview = () => {
+    // Generate a simple unique ID that matches the default format
+    const maxId = reviews.length > 0 ? Math.max(...reviews.map(r => r.id || 0)) : 0;
     const newReview = {
-      id: reviews.length + 1,
+      id: maxId + 1, // Sequential ID matching default format
       text: 'Enter review text...',
       author: 'Customer Name',
       date: 'a month ago',
-      photo: '',
+      photo: '', // Empty string instead of null
     };
     setAttributes({ reviews: [...reviews, newReview] });
   };

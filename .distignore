@@ -1,0 +1,35 @@
+# Exclude development files from plugin distribution
+# wp-scripts will include everything EXCEPT what's listed here
+
+# Development
+.git
+.gitignore
+.distignore
+node_modules
+src
+webpack.config.js
+package.json
+package-lock.json
+
+# Documentation (keep only README.md)
+START_HERE.md
+PROJECT_STATUS.md
+BLOCK_INVENTORY.md
+DEPLOYMENT_GUIDE.md
+THEME-INTEGRATION-GUIDE.md
+PHONE_SEARCH_IMPLEMENTATION.md
+PHONE_SLIDER_IMPLEMENTATION.md
+REVIEWS_MARQUEE_IMPLEMENTATION.md
+wp_cursor_brief.md
+
+# Editor/IDE
+.vscode
+.idea
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts that will be regenerated
+*.log

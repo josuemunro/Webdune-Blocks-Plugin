@@ -37,3 +37,7 @@ yarn.lock
 .env.local
 .env.*.local
 
+# Plugin ZIP files (created by npm run plugin-zip)
+*.zip
+webdune-blocks.zip
+

@@ -24,7 +24,7 @@ export default function Save({ attributes }) {
             />
             <div className="reviews_tag">
               <img
-                src={`${window.location.origin}/wp-content/plugins/webdune-blocks/sellmycell.webflow/images/Google-Logo.svg`}
+                src="/wp-content/plugins/webdune-blocks/sellmycell.webflow/images/Google-Logo.svg"
                 loading="lazy"
                 alt="Google"
                 className="reviews_google-logo"
@@ -53,19 +53,19 @@ export default function Save({ attributes }) {
                   <p>{review.text}</p>
                 </div>
                 <div className="reviews_profile-wrap">
-                  {review.photo ? (
+                  {review.photo && review.photo !== '' ? (
                     <img
                       src={review.photo}
                       loading="lazy"
-                      alt={review.author}
+                      alt={review.author || 'Reviewer'}
                       className="reviews_profile-img"
                     />
                   ) : (
                     <div className="reviews_profile-img-placeholder"></div>
                   )}
                   <div className="reviews_profile-content">
-                    <div className="reviews_profile-name">{review.author}</div>
-                    <div className="reviews_profile-date">{review.date}</div>
+                    <div className="reviews_profile-name">{review.author || 'Anonymous'}</div>
+                    <div className="reviews_profile-date">{review.date || 'Recently'}</div>
                   </div>
                 </div>
               </div>
@@ -87,19 +87,19 @@ export default function Save({ attributes }) {
                   <p>{review.text}</p>
                 </div>
                 <div className="reviews_profile-wrap">
-                  {review.photo ? (
+                  {review.photo && review.photo !== '' ? (
                     <img
                       src={review.photo}
                       loading="lazy"
-                      alt={review.author}
+                      alt={review.author || 'Reviewer'}
                       className="reviews_profile-img"
                     />
                   ) : (
                     <div className="reviews_profile-img-placeholder"></div>
                   )}
                   <div className="reviews_profile-content">
-                    <div className="reviews_profile-name">{review.author}</div>
-                    <div className="reviews_profile-date">{review.date}</div>
+                    <div className="reviews_profile-name">{review.author || 'Anonymous'}</div>
+                    <div className="reviews_profile-date">{review.date || 'Recently'}</div>
                   </div>
                 </div>
               </div>

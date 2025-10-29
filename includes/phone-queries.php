@@ -30,8 +30,10 @@ function webdune_search_phones($search_term = '', $limit = 3)
   }
 
   // Query arguments
+  // ⚠️ IMPORTANT: Update 'post_type' to match what your site uses!
+  // Check: WordPress Admin → Posts → check the URL for "post_type=XXXXX"
   $args = array(
-    'post_type'      => 'post', // Change to 'phone' if using custom post type
+    'post_type'      => 'post', // Common: 'post', 'phone', 'phones', 'product'
     'posts_per_page' => $limit,
     's'              => $search_term,
     'post_status'    => 'publish',
@@ -69,6 +71,14 @@ function webdune_search_phones($search_term = '', $limit = 3)
  */
 function webdune_get_phone_price_range($post_id)
 {
+  // Return default values if ACF is not active
+  if (!function_exists('get_field')) {
+    return array(
+      'min' => 0,
+      'max' => 0,
+    );
+  }
+
   // Get all capacity prices (individual ACF text fields)
   $capacities = array(
     '16gb'   => get_field('16gb', $post_id),

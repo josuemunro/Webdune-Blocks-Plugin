@@ -24,10 +24,10 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      <section className="section_charity" style={sectionStyle}>
+      <section className="section_home-charity" style={sectionStyle}>
         <div className="padding-global z-index-1">
           <div className="container-small">
-            <div className="charity_content">
+            <div className="home-charity_content">
               <RichText.Content
                 tagName="h2"
                 className="heading-style-h2 text-color-white text-align-center"
@@ -47,7 +47,7 @@ export default function save({ attributes }) {
               )}
             </div>
             {charityLogos && charityLogos.length > 0 && (
-              <div className="charity_logos">
+              <div className="home-charity_logos">
                 {charityLogos.map((logo, index) => {
                   if (!logo || !logo.url) return null;
                   return (
@@ -56,7 +56,7 @@ export default function save({ attributes }) {
                       src={logo.url}
                       alt={logo.alt || ''}
                       loading="lazy"
-                      className={`charity_img ${logo.sizeClass || 'height-fixed'}`}
+                      className={`home-charity_img ${logo.sizeClass || 'height-fixed'}`}
                     />
                   );
                 })}

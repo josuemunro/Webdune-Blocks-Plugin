@@ -38,7 +38,32 @@
     min-height: 4.5rem;
     box-sizing: border-box;
 
-    // Liquid glass effect from effects.scss is applied via ::before and ::after
+    // Liquid glass effect - noise texture layer
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      border-radius: 28px;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    // Backdrop blur and distortion layer
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: 28px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      filter: url(#glass-distortion);
+      -webkit-filter: url(#glass-distortion);
+      pointer-events: none;
+    }
   }
 
   // Logo and menu wrapper

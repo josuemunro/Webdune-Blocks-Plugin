@@ -4,7 +4,7 @@
  * Plugin Name:       Webdune Blocks
  * Plugin URI:        https://webdune.com
  * Description:       Custom Gutenberg blocks for SellMyCell - providing true inline editing and modern WordPress functionality.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Webdune
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('WEBDUNE_BLOCKS_VERSION', '1.0.0');
+define('WEBDUNE_BLOCKS_VERSION', '1.0.1');
 define('WEBDUNE_BLOCKS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WEBDUNE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WEBDUNE_BLOCKS_BUILD_DIR', WEBDUNE_BLOCKS_PLUGIN_DIR . 'build/');
@@ -54,29 +54,29 @@ function webdune_blocks_register_blocks()
 {
   // Array of block names to register
   $blocks = array(
-    // Phase 1: Foundation & Core (Priority: HIGH)
+    // Core Navigation & Layout
     'navigation',
     'footer',
+
+    // Heroes
     'hero',
-    'phone-search',
+    'template-hero',
+
+    // Content Sections
     'process-section',
-    'faq',
-    'faq-item',
-
-    // Phase 2: Dynamic Content (Priority: MEDIUM)
     'cta-section',
-    'phone-slider',
-    'reviews-marquee',
-
-    // Phase 3: Content & Specialty (Priority: LOW-MEDIUM)
     'content-image-section',
-    'two-column-content',
     'two-column-flexible',
     'charity-section',
     'stats-section',
-    'full-width-photo',
-    'hero-simple',
-    'template-hero',
+
+    // Dynamic Content
+    'phone-slider',
+    'reviews-marquee',
+
+    // FAQ
+    'faq',
+    'faq-item',
   );
 
   // Register each block
@@ -290,32 +290,31 @@ function webdune_enqueue_ajax_vars()
 add_action('wp_enqueue_scripts', 'webdune_enqueue_ajax_vars');
 
 /**
- * Enqueue Swiper.js for phone slider
- * Required for phone slider and reviews marquee blocks
+ * Check if required plugins are active
+ * Displays admin notice if ACF is not active
  */
-function webdune_enqueue_swiper()
+function webdune_blocks_check_dependencies()
 {
-  // Check if page has phone slider or reviews block
-  if (has_block('webdune/phone-slider') || has_block('webdune/reviews-marquee')) {
-    // Enqueue Swiper CSS
-    wp_enqueue_style(
-      'swiper-css',
-      'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css',
-      array(),
-      '12.0.0'
-    );
-
-    // Enqueue Swiper JS
-    wp_enqueue_script(
-      'swiper-js',
-      'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js',
-      array(),
-      '12.0.0',
-      true
-    );
+  if (!function_exists('get_field')) {
+    add_action('admin_notices', 'webdune_blocks_acf_missing_notice');
   }
 }
-add_action('wp_enqueue_scripts', 'webdune_enqueue_swiper');
+add_action('plugins_loaded', 'webdune_blocks_check_dependencies');
+
+/**
+ * Display admin notice when ACF is missing
+ */
+function webdune_blocks_acf_missing_notice()
+{
+?>
+  <div class="notice notice-warning">
+    <p>
+      <strong>Webdune Blocks:</strong> Advanced Custom Fields (ACF) plugin is recommended for full functionality.
+      Phone pricing features will not work without ACF.
+    </p>
+  </div>
+<?php
+}
 
 /**
  * Plugin activation

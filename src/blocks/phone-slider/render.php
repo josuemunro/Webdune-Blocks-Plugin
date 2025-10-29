@@ -26,22 +26,23 @@ $button_open_in_new_tab = isset($attributes['buttonOpenInNewTab']) ? $attributes
 
 // Build query args based on selection method
 $query_args = array(
-  'post_type' => 'post', // Change to 'phone' if you have a custom post type
+  'post_type' => 'post',
   'posts_per_page' => $number_of_posts,
   'post_status' => 'publish',
+  'ignore_sticky_posts' => true,
 );
 
 switch ($post_selection_method) {
   case 'manual':
-    if (!empty($selected_posts)) {
-      $query_args['post__in'] = $selected_posts;
+    if (!empty($selected_posts) && is_array($selected_posts)) {
+      $query_args['post__in'] = array_map('intval', $selected_posts);
       $query_args['orderby'] = 'post__in';
     }
     break;
 
   case 'category':
     if ($selected_category > 0) {
-      $query_args['cat'] = $selected_category;
+      $query_args['cat'] = intval($selected_category);
     }
     break;
 
@@ -55,8 +56,20 @@ switch ($post_selection_method) {
 // Query phones
 $phones_query = new WP_Query($query_args);
 
+// DEBUG: Log query details to browser console
+$debug_info = array(
+  'selection_method' => $post_selection_method,
+  'query_args' => $query_args,
+  'found_posts' => $phones_query->found_posts,
+  'post_count' => $phones_query->post_count,
+  'sql_query' => $phones_query->request,
+);
+
 // Generate unique ID for this instance
 $block_id = 'phone-slider-' . uniqid();
+
+// Debug: Log that render.php is being called
+error_log('Phone Slider render.php called - Selection Method: ' . $post_selection_method . ', Posts found: ' . $phones_query->found_posts);
 
 // Start output buffering
 ob_start();
@@ -70,6 +83,25 @@ ob_start();
       </div>
     </div>
   </div>
+
+  <!-- Phone Slider Debug -->
+  <script>
+    (function() {
+      console.group('📱 Phone Slider Debug - <?php echo esc_js($block_id); ?>');
+      console.log('Selection Method:', <?php echo json_encode($post_selection_method); ?>);
+      console.log('Query Args:', <?php echo json_encode($query_args); ?>);
+      console.log('Found Posts:', <?php echo intval($phones_query->found_posts); ?>);
+      console.log('Post Count:', <?php echo intval($phones_query->post_count); ?>);
+      <?php if ($post_selection_method === 'category' && $selected_category > 0) : ?>
+        console.log('Selected Category:', <?php echo intval($selected_category); ?>);
+      <?php endif; ?>
+      <?php if ($post_selection_method === 'manual' && !empty($selected_posts)) : ?>
+        console.log('Selected Posts:', <?php echo json_encode($selected_posts); ?>);
+      <?php endif; ?>
+      console.log('Has Posts:', <?php echo $phones_query->have_posts() ? 'YES' : 'NO'; ?>);
+      console.groupEnd();
+    })();
+  </script>
 
   <?php if ($phones_query->have_posts()) : ?>
     <div class="home-phones_slider <?php echo esc_attr($block_id); ?>">
@@ -142,7 +174,37 @@ ob_start();
   <?php else : ?>
     <div class="padding-global">
       <div class="container-small">
-        <p class="text-align-center">No phones found. Please add some phone posts to display in the slider.</p>
+        <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="margin-top: 0; color: #856404;">⚠️ Phone Slider Debug Info</h3>
+          <p><strong>No phones found!</strong> Check browser console (F12) for detailed debug information.</p>
+          <ul style="text-align: left; margin: 10px 0;">
+            <li><strong>Selection Method:</strong> <?php echo esc_html($post_selection_method); ?></li>
+            <li><strong>Posts Per Page:</strong> <?php echo intval($number_of_posts); ?></li>
+            <li><strong>Query Found:</strong> <?php echo intval($phones_query->found_posts); ?> posts</li>
+            <?php if ($post_selection_method === 'category' && $selected_category > 0) : ?>
+              <li><strong>Category ID:</strong> <?php echo intval($selected_category); ?>
+                <?php
+                $cat = get_category($selected_category);
+                if ($cat) {
+                  echo ' (' . esc_html($cat->name) . ' - ' . intval($cat->count) . ' posts)';
+                } else {
+                  echo ' <span style="color: red;">(Category not found!)</span>';
+                }
+                ?>
+              </li>
+            <?php endif; ?>
+            <?php if ($post_selection_method === 'manual' && !empty($selected_posts)) : ?>
+              <li><strong>Selected Post IDs:</strong> <?php echo esc_html(implode(', ', $selected_posts)); ?></li>
+            <?php endif; ?>
+          </ul>
+          <p style="margin-bottom: 0;"><strong>Possible causes:</strong></p>
+          <ul style="text-align: left; margin: 5px 0 0 0;">
+            <li>No published posts exist</li>
+            <li>Selected category has no posts</li>
+            <li>Selected posts don't exist or aren't published</li>
+            <li>Posts exist but query is filtering them out</li>
+          </ul>
+        </div>
       </div>
     </div>
   <?php endif; ?>

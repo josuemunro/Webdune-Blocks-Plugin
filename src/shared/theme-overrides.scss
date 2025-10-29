@@ -6,6 +6,29 @@
 @import './layout';
 @import './typography';
 
+/* ===================================
+   Editor: Remove Default Width Constraints
+   =================================== */
+
+// Remove the 840px max-width that WordPress applies to blocks in the editor
+.editor-styles-wrapper {
+
+  // Allow our full-width blocks to actually be full width in the editor
+  [class*="wp-block-webdune"] {
+    max-width: none !important;
+
+    &.alignfull {
+      max-width: none !important;
+      width: 100% !important;
+    }
+  }
+
+  // Remove the default block spacing that makes editing awkward
+  .wp-block {
+    max-width: none !important;
+  }
+}
+
 // Remove padding and width constraints from blocks marked as alignfull
 .wp-site-blocks {
 

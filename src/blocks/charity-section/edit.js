@@ -176,10 +176,10 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <section className="section_charity" style={sectionStyle}>
+        <section className="section_home-charity" style={sectionStyle}>
           <div className="padding-global z-index-1">
             <div className="container-small">
-              <div className="charity_content">
+              <div className="home-charity_content">
                 <RichText
                   tagName="h2"
                   className="heading-style-h2 text-color-white text-align-center"
@@ -203,7 +203,7 @@ export default function Edit({ attributes, setAttributes }) {
                   </a>
                 )}
               </div>
-              <div className="charity_logos">
+              <div className="home-charity_logos">
                 {charityLogos.length === 0 && (
                   <p style={{ textAlign: 'center', color: '#999', fontStyle: 'italic' }}>
                     {__('Add charity logos in the sidebar →', 'webdune-blocks')}
@@ -215,7 +215,7 @@ export default function Edit({ attributes, setAttributes }) {
                       key={index}
                       src={logo.url}
                       alt={logo.alt}
-                      className={`charity_img ${logo.sizeClass}`}
+                      className={`home-charity_img ${logo.sizeClass}`}
                     />
                   )
                 ))}

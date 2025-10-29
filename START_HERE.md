@@ -398,6 +398,38 @@ npm start
 5. Test on frontend
 6. Repeat
 
+### Deployment Workflow
+
+**Before deploying to live site:**
+
+1. **Bump Version Number** (for significant changes)
+   ```php
+   // Edit webdune-blocks.php
+   * Version: 1.0.1  ← Increment this
+   
+   // Also update the constant
+   define('WEBDUNE_BLOCKS_VERSION', '1.0.1');
+   ```
+
+2. **Build & Create ZIP**
+   ```bash
+   npm run plugin-zip
+   ```
+
+3. **Tag in Git** (optional but recommended)
+   ```bash
+   git add .
+   git commit -m "feat: add phone slider debugging"
+   git tag -a v1.0.1 -m "Version 1.0.1: Phone slider debug improvements"
+   git push origin main --tags
+   ```
+
+4. **Upload to Live Site**
+   - Deactivate & delete old plugin
+   - Upload `webdune-blocks.zip`
+   - Activate new version
+   - Test functionality
+
 ### Evening Wrap-up
 ```bash
 # Commit progress

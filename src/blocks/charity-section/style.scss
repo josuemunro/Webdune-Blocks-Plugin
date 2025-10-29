@@ -4,7 +4,7 @@
 @import '../../shared/utilities';
 
 .wp-block-webdune-charity-section {
-  .section_charity {
+  .section_home-charity {
     background-color: $color-dark;
     color: $color-white;
     padding-top: 10rem;
@@ -18,7 +18,7 @@
     }
   }
 
-  .charity_content {
+  .home-charity_content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +48,7 @@
     }
   }
 
-  .charity_logos {
+  .home-charity_logos {
     grid-column-gap: 4rem;
     grid-row-gap: 4rem;
     display: flex;
@@ -63,7 +63,7 @@
     }
   }
 
-  .charity_img {
+  .home-charity_img {
     object-fit: contain;
     display: block; // Ensure image displays properly
 
@@ -87,10 +87,10 @@
   }
 
   .text-color-white {
-    color: $color-white;
+    color: $color-white !important;
   }
 
   .text-color-yellow {
-    color: $color-primary;
+    color: $color-primary !important;
   }
 }
