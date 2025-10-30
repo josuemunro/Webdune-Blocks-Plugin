@@ -175,12 +175,10 @@ html:not(.wp-admin) {
      Links
      =================================== */
   a {
-    color: inherit;
     text-decoration: none;
   }
 
   .text-style-link {
-    font-size: 1rem;
     text-decoration: underline;
 
     &:hover {
@@ -259,4 +257,14 @@ strong,
   @media (max-width: 767px) {
     font-size: 1.33rem;
   }
+}
+
+.text-size-xlarge {
+  letter-spacing: -.015rem;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.text-align-center {
+  text-align: center;
 }

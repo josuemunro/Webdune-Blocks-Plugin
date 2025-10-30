@@ -4,7 +4,7 @@
  * Plugin Name:       Webdune Blocks
  * Plugin URI:        https://webdune.com
  * Description:       Custom Gutenberg blocks for SellMyCell - providing true inline editing and modern WordPress functionality.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Webdune
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('WEBDUNE_BLOCKS_VERSION', '1.0.1');
+define('WEBDUNE_BLOCKS_VERSION', '1.1.0');
 define('WEBDUNE_BLOCKS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WEBDUNE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WEBDUNE_BLOCKS_BUILD_DIR', WEBDUNE_BLOCKS_PLUGIN_DIR . 'build/');
@@ -113,16 +113,19 @@ add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_fonts', 5); // Priority
 add_action('admin_enqueue_scripts', 'webdune_blocks_enqueue_fonts', 5);
 
 /**
- * Enqueue shared global styles
+ * Enqueue shared global styles and scripts
  * These styles apply to both editor and frontend
- * Includes: typography, layout, colors, theme overrides
+ * Includes: typography, layout, colors, theme overrides, custom formats
  */
 function webdune_blocks_enqueue_shared_styles()
 {
   $shared_css = WEBDUNE_BLOCKS_BUILD_URL . 'shared/global-styles.css';
   $shared_css_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/global-styles.css';
+  $shared_js = WEBDUNE_BLOCKS_BUILD_URL . 'shared/global-styles.js';
+  $shared_js_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/global-styles.js';
+  $shared_asset_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/global-styles.asset.php';
 
-  // Only enqueue if the file exists
+  // Enqueue CSS if it exists
   if (file_exists($shared_css_path)) {
     wp_enqueue_style(
       'webdune-global-styles',
@@ -131,12 +134,32 @@ function webdune_blocks_enqueue_shared_styles()
       filemtime($shared_css_path)
     );
   }
+
+  // Enqueue JS (includes custom format registrations and animations) if it exists
+  if (file_exists($shared_js_path)) {
+    $asset_file = file_exists($shared_asset_path) ? require($shared_asset_path) : array('dependencies' => array(), 'version' => WEBDUNE_BLOCKS_VERSION);
+
+    // On frontend, add GSAP/Lenis dependencies for animations
+    // On editor, use default dependencies for formats only
+    $dependencies = $asset_file['dependencies'];
+    if (!is_admin()) {
+      $dependencies = array_merge($dependencies, array('gsap', 'gsap-scrolltrigger', 'lenis'));
+    }
+
+    wp_enqueue_script(
+      'webdune-global-scripts',
+      $shared_js,
+      $dependencies,
+      $asset_file['version'],
+      true
+    );
+  }
 }
-add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles', 10);
+add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles', 15); // Priority 15 to load after animations
 add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_shared_styles', 10);
 
 /**
- * Enqueue GSAP and animation scripts
+ * Enqueue GSAP and animation libraries from CDN
  * For smooth scrolling, parallax, and nav behaviors
  */
 function webdune_blocks_enqueue_animations()
@@ -172,22 +195,10 @@ function webdune_blocks_enqueue_animations()
     true
   );
 
-  // Our custom animations (parallax, nav behaviors, etc.)
-  // This is built by webpack from src/shared/animations.js
-  $animations_js = WEBDUNE_BLOCKS_BUILD_URL . 'shared/global-styles.js';
-  $animations_js_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/global-styles.js';
-
-  if (file_exists($animations_js_path)) {
-    wp_enqueue_script(
-      'webdune-animations',
-      $animations_js,
-      array('gsap', 'gsap-scrolltrigger', 'lenis'),
-      filemtime($animations_js_path),
-      true
-    );
-  }
+  // Note: Our custom animations (parallax, nav behaviors, etc.) are loaded
+  // via global-styles.js with proper dependencies. See webdune_blocks_enqueue_shared_styles()
 }
-add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_animations');
+add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_animations', 10);
 
 /**
  * Enqueue Swiper.js for sliders
@@ -351,3 +362,26 @@ function webdune_blocks_load_textdomain()
   );
 }
 add_action('plugins_loaded', 'webdune_blocks_load_textdomain');
+
+/**
+ * Add max_price field to REST API
+ * Exposes phone pricing data to the phone slider block
+ */
+function webdune_blocks_register_rest_fields()
+{
+  register_rest_field(
+    'post',
+    'max_price',
+    array(
+      'get_callback' => function ($post) {
+        $price_range = webdune_get_phone_price_range($post['id']);
+        return $price_range['max'];
+      },
+      'schema' => array(
+        'description' => __('Maximum price for this phone', 'webdune-blocks'),
+        'type' => 'integer',
+      ),
+    )
+  );
+}
+add_action('rest_api_init', 'webdune_blocks_register_rest_fields');

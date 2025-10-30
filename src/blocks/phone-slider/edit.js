@@ -6,9 +6,9 @@ import {
   RangeControl,
   ToggleControl,
   TextControl,
+  Placeholder,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import ServerSideRender from '@wordpress/server-side-render';
 
 export default function Edit({ attributes, setAttributes }) {
   const {
@@ -139,26 +139,35 @@ export default function Edit({ attributes, setAttributes }) {
           />
         </div>
 
-        <div className="phone-slider-preview">
-          <ServerSideRender
-            block="webdune/phone-slider"
-            attributes={attributes}
-            EmptyResponsePlaceholder={() => (
-              <div className="phone-slider-empty">
-                <p>{__('No phones found. Add some phone posts to see them here.', 'webdune-blocks')}</p>
-              </div>
-            )}
-            ErrorResponsePlaceholder={() => (
-              <div className="phone-slider-error">
-                <p>{__('Error loading phone slider. Please check your settings.', 'webdune-blocks')}</p>
-              </div>
-            )}
-            LoadingResponsePlaceholder={() => (
-              <div className="phone-slider-loading">
-                <p>{__('Loading phones...', 'webdune-blocks')}</p>
-              </div>
-            )}
-          />
+        <Placeholder
+          icon="slides"
+          label={__('Phone Slider', 'webdune-blocks')}
+          instructions={__(
+            'Phone slider will load dynamically on the frontend. Configure settings in the sidebar.',
+            'webdune-blocks'
+          )}
+        >
+          <div style={{ padding: '20px', textAlign: 'left' }}>
+            <p><strong>{__('Settings:', 'webdune-blocks')}</strong></p>
+            <ul style={{ marginLeft: '20px' }}>
+              <li>{__('Method:', 'webdune-blocks')} <strong>{postSelectionMethod}</strong></li>
+              <li>{__('Posts:', 'webdune-blocks')} <strong>{numberOfPosts}</strong></li>
+              {postSelectionMethod === 'category' && selectedCategory > 0 && (
+                <li>{__('Category ID:', 'webdune-blocks')} <strong>{selectedCategory}</strong></li>
+              )}
+              {postSelectionMethod === 'manual' && selectedPosts.length > 0 && (
+                <li>{__('Selected:', 'webdune-blocks')} <strong>{selectedPosts.length} posts</strong></li>
+              )}
+            </ul>
+            <p style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>
+              {__('💡 Phones will be queried and displayed on the frontend via JavaScript', 'webdune-blocks')}
+            </p>
+          </div>
+        </Placeholder>
+
+        <div style={{ marginTop: '20px', padding: '15px', background: '#f0f0f0', borderRadius: '4px' }}>
+          <p><strong>{__('Bottom Text:', 'webdune-blocks')}</strong> {bottomText}</p>
+          <p><strong>{__('Button:', 'webdune-blocks')}</strong> {buttonText} → {buttonUrl}</p>
         </div>
       </div>
     </>

@@ -12,10 +12,25 @@ import { useEffect } from '@wordpress/element';
 export default function Edit({ attributes, setAttributes, clientId }) {
   const { heading, googleRating, reviewCount, reviews, autoplaySpeed, blockId } = attributes;
 
-  // Generate unique block ID on mount if not set
+  // Generate unique block ID on mount if not set & clean review data
   useEffect(() => {
     if (!blockId) {
       setAttributes({ blockId: `reviews-marquee-${clientId}` });
+    }
+
+    // Sanitize reviews array to ensure no null/undefined values
+    const cleanedReviews = reviews.map(review => ({
+      id: typeof review.id === 'number' ? review.id : 0,
+      text: review.text || '',
+      author: review.author || '',
+      date: review.date || '',
+      photo: review.photo || '',
+    }));
+
+    // Only update if data was actually cleaned
+    if (JSON.stringify(cleanedReviews) !== JSON.stringify(reviews)) {
+      console.log('🧹 Cleaned reviews data on load');
+      setAttributes({ reviews: cleanedReviews });
     }
   }, []);
 
@@ -24,6 +39,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   });
 
   const addReview = () => {
+    // Limit to 10 reviews max to prevent database issues
+    if (reviews.length >= 10) {
+      alert('Maximum 10 reviews allowed. Please remove a review before adding a new one.');
+      return;
+    }
+    
     // Generate a simple unique ID that matches the default format
     const maxId = reviews.length > 0 ? Math.max(...reviews.map(r => r.id || 0)) : 0;
     const newReview = {
@@ -38,12 +59,38 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
   const updateReview = (index, field, value) => {
     const updatedReviews = [...reviews];
-    updatedReviews[index] = { ...updatedReviews[index], [field]: value };
+    
+    // Limit review text to 300 characters to prevent database issues
+    if (field === 'text' && value && value.length > 300) {
+      value = value.substring(0, 300);
+    }
+    
+    // Limit author name to 50 characters
+    if (field === 'author' && value && value.length > 50) {
+      value = value.substring(0, 50);
+    }
+    
+    updatedReviews[index] = {
+      ...updatedReviews[index],
+      [field]: value,
+      // Ensure photo is always a string, never null or undefined
+      photo: field === 'photo' ? (value || '') : (updatedReviews[index].photo || ''),
+    };
     setAttributes({ reviews: updatedReviews });
   };
 
   const removeReview = (index) => {
-    const updatedReviews = reviews.filter((_, i) => i !== index);
+    const updatedReviews = reviews
+      .filter((_, i) => i !== index)
+      .map(review => ({
+        ...review,
+        // Ensure all fields are properly set
+        id: review.id || 0,
+        text: review.text || '',
+        author: review.author || '',
+        date: review.date || '',
+        photo: review.photo || '',
+      }));
     setAttributes({ reviews: updatedReviews });
   };
 
@@ -77,6 +124,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         </PanelBody>
 
         <PanelBody title={__('Reviews', 'webdune-blocks')} initialOpen={false}>
+          <p style={{ fontSize: '12px', color: '#d63638', marginBottom: '12px', fontWeight: '600' }}>
+            ⚠️ {__('Limited to 10 reviews max and 300 chars per review to prevent database save errors on live sites.', 'webdune-blocks')}
+          </p>
           {reviews.map((review, index) => (
             <div key={review.id} style={{ marginBottom: '20px', padding: '15px', background: '#f5f5f5', borderRadius: '4px' }}>
               <div style={{ marginBottom: '10px', fontWeight: 'bold' }}>Review #{index + 1}</div>
@@ -85,13 +135,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 label={__('Author Name', 'webdune-blocks')}
                 value={review.author}
                 onChange={(value) => updateReview(index, 'author', value)}
+                help={__('Max 50 characters', 'webdune-blocks')}
               />
 
               <TextControl
                 label={__('Review Text', 'webdune-blocks')}
                 value={review.text}
                 onChange={(value) => updateReview(index, 'text', value)}
-                help={__('The review content', 'webdune-blocks')}
+                help={`${review.text.length}/300 characters`}
               />
 
               <TextControl
@@ -129,8 +180,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </div>
           ))}
 
-          <Button isPrimary onClick={addReview}>
-            {__('+ Add Review', 'webdune-blocks')}
+          <Button 
+            isPrimary 
+            onClick={addReview}
+            disabled={reviews.length >= 10}
+          >
+            {reviews.length >= 10 
+              ? __('Maximum 10 reviews reached', 'webdune-blocks')
+              : __(`+ Add Review (${reviews.length}/10)`, 'webdune-blocks')
+            }
           </Button>
         </PanelBody>
       </InspectorControls>

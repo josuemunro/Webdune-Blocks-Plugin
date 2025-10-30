@@ -154,7 +154,7 @@ export default function Edit({ attributes, setAttributes }) {
 
                     {/* Phone lookup results - hidden in editor */}
                     <div className="phone-lookup" style={{ display: 'none' }}>
-                      <div className="phone-lookup_results">
+                      <div className="phone-lookup_results" data-lenis-prevent>
                         <div className="phone-lookup_item">
                           <div className="phone-lookup_item-details">
                             <div className="text-size-tiny">Search results appear here on frontend</div>

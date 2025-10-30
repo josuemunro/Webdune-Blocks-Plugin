@@ -18,6 +18,11 @@
   color: $color-white;
   padding-top: 7.5rem;
   padding-bottom: 10rem;
+
+  a {
+    color: $color-white;
+    font-weight: 400;
+  }
 }
 
 // Top Wrapper (Grid)
@@ -68,10 +73,15 @@
 .footer2_link {
   text-decoration: none;
   transition: color 0.3s ease;
+  color: $color-white;
 
   &:hover {
     color: $color-primary;
   }
+}
+
+footer.text-style-link:hover {
+  color: $color-primary;
 }
 
 // Office Hours & Contact Info
@@ -121,14 +131,14 @@
   background-color: transparent;
   color: #000;
   -webkit-text-stroke-color: black;
-  border: 1px #000;
+  border: none !important;
   margin-bottom: 0;
-  padding: 0;
+  padding: 0 !important;
   font-size: 1rem;
   line-height: 1.6;
 
   &:focus {
-    border-color: $color-dark;
+    border: none !important;
     outline: none;
   }
 

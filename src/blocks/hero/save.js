@@ -55,7 +55,7 @@ export default function Save({ attributes }) {
                       id="phone-search"
                     />
                     <a href="#" className="button is-icon w-inline-block">
-                      <div>{searchButtonText}</div>
+                      <div className="hide-on-mobile">{searchButtonText}</div>
                       <div className="icon-embed-arrow w-embed">
                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 26 13" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
                           <path d="M20.2543 12.0044L25.3264 6.80104C25.6781 6.44018 25.6781 5.8465 25.3264 5.48565L20.2543 0.270645C19.9025 -0.0902149 19.3238 -0.0902149 18.9721 0.270645C18.6203 0.631504 18.6203 1.22518 18.9721 1.58604L22.501 5.20627H0.907755C0.40849 5.20627 0 5.62533 0 6.13752C0 6.64971 0.40849 7.06877 0.907755 7.06877H22.4896L18.9607 10.689C18.7792 10.8753 18.6997 11.1081 18.6997 11.3525C18.6997 11.597 18.7905 11.8298 18.9607 12.016C19.3238 12.3653 19.9025 12.3653 20.2543 12.0044Z" fill="currentColor"></path>
@@ -65,7 +65,7 @@ export default function Save({ attributes }) {
                   </div>
 
                   <div className="phone-lookup">
-                    <div className="phone-lookup_results">
+                    <div className="phone-lookup_results" data-lenis-prevent>
                       {/* Phone search results will be dynamically inserted here via JavaScript */}
                     </div>
                     <a href="#" className="text-size-tiny text-style-link">View all models</a>

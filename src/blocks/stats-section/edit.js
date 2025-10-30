@@ -56,7 +56,7 @@ export default function Edit({ attributes, setAttributes }) {
 
         <PanelBody title={__('Statistics', 'webdune-blocks')} initialOpen={true}>
           <p style={{ fontSize: '12px', color: '#666', marginBottom: '16px' }}>
-            {__('Add up to 3 statistics. Numbers will animate counting up on scroll.', 'webdune-blocks')}
+            {__('Add up to 3 statistics. Numbers will animate counting up on scroll. Edit labels directly on the canvas.', 'webdune-blocks')}
           </p>
           {stats.map((stat, index) => (
             <div key={index} style={{ marginBottom: '20px', padding: '12px', border: '1px solid #ddd', borderRadius: '4px' }}>
@@ -68,25 +68,11 @@ export default function Edit({ attributes, setAttributes }) {
                 onChange={(value) => updateStat(index, 'number', value)}
                 style={{ marginBottom: '8px' }}
               />
-              <div style={{ marginBottom: '8px' }}>
-                <label style={{ display: 'block', marginBottom: '4px', fontWeight: '600' }}>
-                  {__('Label', 'webdune-blocks')}
-                </label>
-                <p style={{ fontSize: '12px', color: '#666', marginTop: '0', marginBottom: '8px' }}>
-                  {__('Use the thin underline format button for gradient underlines on labels', 'webdune-blocks')}
-                </p>
-                <div style={{ border: '1px solid #ddd', borderRadius: '4px', padding: '8px', background: '#fff' }}>
-                  <RichText
-                    tagName="div"
-                    value={stat.label}
-                    onChange={(value) => updateStat(index, 'label', value)}
-                    placeholder={__('Enter label...', 'webdune-blocks')}
-                    allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline-thin']}
-                  />
-                </div>
-              </div>
+              <p style={{ fontSize: '12px', color: '#2271b1', marginTop: '8px', marginBottom: '0' }}>
+                💡 {__('Edit the label text on the canvas and use the thin underline button for gradient underlines', 'webdune-blocks')}
+              </p>
               {stats.length > 1 && (
-                <Button onClick={() => removeStat(index)} className="button is-link is-destructive" isSmall>
+                <Button onClick={() => removeStat(index)} className="button is-link is-destructive" isSmall style={{ marginTop: '12px' }}>
                   {__('Remove Stat', 'webdune-blocks')}
                 </Button>
               )}
@@ -119,10 +105,13 @@ export default function Edit({ attributes, setAttributes }) {
                       <div className="stats_stat" data-target={stat.number}>
                         {stat.number}
                       </div>
-                      <RichText.Content
+                      <RichText
                         tagName="div"
                         className="stats_label"
                         value={stat.label}
+                        onChange={(value) => updateStat(index, 'label', value)}
+                        placeholder={__('Enter label...', 'webdune-blocks')}
+                        allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline-thin']}
                       />
                     </div>
                   ))}

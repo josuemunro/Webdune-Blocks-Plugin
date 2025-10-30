@@ -23,13 +23,18 @@
       margin-bottom: 2rem;
 
       h2,
-      p,
-      a {
+      p {
         color: inherit;
       }
 
       h2 {
         margin: 0;
+
+        // Charity highlight format in editor
+        .charity-highlight {
+          color: $color-primary;
+          font-weight: bold;
+        }
       }
     }
 

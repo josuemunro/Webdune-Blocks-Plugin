@@ -71,6 +71,10 @@
   gap: 32px;
 }
 
+.margin-bottom.margin-xsmall {
+  margin-bottom: 1rem;
+}
+
 // Override WordPress theme constraints for full-width blocks
 .wp-block-group.alignfull,
 .wp-block-group[class*="alignfull"],

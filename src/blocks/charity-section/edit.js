@@ -47,7 +47,15 @@ export default function Edit({ attributes, setAttributes }) {
 
   // Add a logo
   const addLogo = () => {
-    const newLogos = [...charityLogos, { id: 0, url: '', alt: '', sizeClass: 'height-fixed' }];
+    if (charityLogos.length >= 4) {
+      return; // Max 4 logos
+    }
+    const newLogos = [...charityLogos, { 
+      id: 0, 
+      url: '', 
+      alt: '', 
+      sizeClass: 'height-fixed' 
+    }];
     setAttributes({ charityLogos: newLogos });
   };
 
@@ -116,9 +124,14 @@ export default function Edit({ attributes, setAttributes }) {
               <MediaUploadCheck>
                 <MediaUpload
                   onSelect={(media) => {
-                    updateLogo(index, 'id', media.id);
-                    updateLogo(index, 'url', media.url);
-                    updateLogo(index, 'alt', media.alt || '');
+                    const newLogos = [...charityLogos];
+                    newLogos[index] = {
+                      ...newLogos[index],
+                      id: media.id,
+                      url: media.url,
+                      alt: media.alt || '',
+                    };
+                    setAttributes({ charityLogos: newLogos });
                   }}
                   value={logo.id}
                   allowedTypes={['image']}
@@ -186,7 +199,7 @@ export default function Edit({ attributes, setAttributes }) {
                   value={heading}
                   onChange={(value) => setAttributes({ heading: value })}
                   placeholder={__('Enter heading...', 'webdune-blocks')}
-                  allowedFormats={['core/bold', 'core/italic']}
+                  allowedFormats={['core/bold', 'core/italic', 'webdune/charity-highlight']}
                 />
                 {content && (
                   <RichText

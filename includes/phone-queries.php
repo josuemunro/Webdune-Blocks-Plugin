@@ -91,9 +91,10 @@ function webdune_get_phone_price_range($post_id)
   );
 
   // Filter out empty values and convert to float
+  // Note: Use !== '' instead of !empty() because empty(0) returns true
   $capacity_prices = array();
   foreach ($capacities as $capacity => $price) {
-    if (!empty($price) && is_numeric($price)) {
+    if ($price !== '' && $price !== null && is_numeric($price)) {
       $capacity_prices[] = floatval($price);
     }
   }
@@ -116,9 +117,10 @@ function webdune_get_phone_price_range($post_id)
   );
 
   // Filter out empty values and convert to float
+  // Note: Use !== '' instead of !empty() because empty(0) returns true
   $condition_deductions = array();
   foreach ($conditions as $condition => $deduction) {
-    if (!empty($deduction) && is_numeric($deduction)) {
+    if ($deduction !== '' && $deduction !== null && is_numeric($deduction)) {
       $condition_deductions[] = floatval($deduction);
     }
   }

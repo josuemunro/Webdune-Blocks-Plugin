@@ -79,14 +79,24 @@
   background-size: 100% 5px;
 }
 
-.gradient-underline.thin {
-  padding-bottom: 0.25rem;
+.gradient-underline-thin {
+  /* Thin variant for stats labels */
+  background-image: linear-gradient(to right, #FFD940 0%, #FFD940 100%);
   background-size: 100% 4px;
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 0.25rem);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-bottom: 0.25rem;
 }
 
 @media screen and (max-width: 991px) {
   .gradient-underline {
     background-size: 100% 0.3rem;
     background-position: 0 calc(100% - 0.25rem);
+  }
+  
+  .gradient-underline-thin {
+    background-size: 100% 3px;
   }
 }

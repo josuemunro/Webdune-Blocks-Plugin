@@ -7,7 +7,7 @@
 /**
  * Initialize Lenis smooth scroll
  */
-export function initSmoothScroll() {
+function initSmoothScroll() {
   if (typeof Lenis === 'undefined') {
     console.warn('Lenis not loaded');
     return null;
@@ -26,7 +26,7 @@ export function initSmoothScroll() {
 /**
  * Initialize parallax effect for elements with [data-speed]
  */
-export function initParallax(lenis) {
+function initParallax(lenis) {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     console.warn('GSAP or ScrollTrigger not loaded');
     return;
@@ -68,7 +68,7 @@ export function initParallax(lenis) {
  * - Background color change on scroll
  * - Hide nav on scroll down, show on scroll up
  */
-export function initNavScrollBehavior(lenis) {
+function initNavScrollBehavior(lenis) {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     console.warn('GSAP or ScrollTrigger not loaded');
     return;
@@ -145,12 +145,20 @@ export function initNavScrollBehavior(lenis) {
 
 /**
  * Auto-initialize all animations on page load
+ * Only run on frontend, not in the editor
  */
 if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    const lenis = initSmoothScroll();
-    initParallax(lenis);
-    initNavScrollBehavior(lenis);
-  });
+  // Check if we're ACTUALLY in the block editor (not just if the module exists)
+  // The editor has a specific body class we can check for
+  const isEditor = document.body.classList.contains('block-editor-page') || 
+                   document.body.classList.contains('wp-admin');
+  
+  if (!isEditor) {
+    window.addEventListener('DOMContentLoaded', () => {
+      const lenis = initSmoothScroll();
+      initParallax(lenis);
+      initNavScrollBehavior(lenis);
+    });
+  }
 }
 

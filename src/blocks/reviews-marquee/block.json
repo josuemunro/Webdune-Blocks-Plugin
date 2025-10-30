@@ -23,7 +23,7 @@
   "attributes": {
     "heading": {
       "type": "string",
-      "default": "<span class=\"gradient-underline custom-color\">Loved</span> by people like you."
+      "default": "Loved by people like you."
     },
     "googleRating": {
       "type": "string",
@@ -35,29 +35,7 @@
     },
     "reviews": {
       "type": "array",
-      "default": [
-        {
-          "id": 1,
-          "text": "Great place to do business, I just received payments for 2 phones I have sent in, instructions in courier bag were easy to navigate. Would definitely recommend this place to do business with again 😊",
-          "author": "Jorden Te Huia",
-          "date": "a month ago",
-          "photo": ""
-        },
-        {
-          "id": 2,
-          "text": "Smooth process from start to finish. Great communication and quick payment!",
-          "author": "Sarah Johnson",
-          "date": "2 weeks ago",
-          "photo": ""
-        },
-        {
-          "id": 3,
-          "text": "Best price I could find for my old phone. Highly recommend!",
-          "author": "Mike Chen",
-          "date": "3 weeks ago",
-          "photo": ""
-        }
-      ]
+      "default": []
     },
     "autoplaySpeed": {
       "type": "number",

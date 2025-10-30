@@ -4,6 +4,7 @@ export default function save({ attributes }) {
   const {
     backgroundColor,
     heading,
+    headingHighlightColor,
     content,
     buttonText,
     buttonUrl,
@@ -17,6 +18,7 @@ export default function save({ attributes }) {
 
   const sectionStyle = {
     backgroundColor: backgroundColor,
+    '--charity-highlight-color': headingHighlightColor || '#FFD940',
   };
 
   const buttonTarget = buttonOpenInNewTab ? '_blank' : undefined;
@@ -48,9 +50,9 @@ export default function save({ attributes }) {
             </div>
             {charityLogos && charityLogos.length > 0 && (
               <div className="home-charity_logos">
-                {charityLogos.map((logo, index) => {
-                  if (!logo || !logo.url) return null;
-                  return (
+                {charityLogos
+                  .filter(logo => logo && logo.url && logo.url.trim() !== '')
+                  .map((logo, index) => (
                     <img
                       key={index}
                       src={logo.url}
@@ -58,8 +60,8 @@ export default function save({ attributes }) {
                       loading="lazy"
                       className={`home-charity_img ${logo.sizeClass || 'height-fixed'}`}
                     />
-                  );
-                })}
+                  ))
+                }
               </div>
             )}
           </div>

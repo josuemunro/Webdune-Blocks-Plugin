@@ -3,6 +3,8 @@
  * These styles only apply in the WordPress block editor
  */
 
+@import '../../shared/colors';
+
 .webdune-hero-block {
   margin: 0 !important;
   padding: 0 !important;
@@ -141,7 +143,7 @@
       font-size: 0.875rem;
       font-style: italic;
       margin-bottom: 1rem;
-      color: var(--dark-grey, #3c3c3c);
+      color: $color-dark;
     }
   }
 

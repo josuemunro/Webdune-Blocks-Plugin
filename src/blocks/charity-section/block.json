@@ -56,7 +56,10 @@
     },
     "charityLogos": {
       "type": "array",
-      "default": []
+      "default": [],
+      "items": {
+        "type": "object"
+      }
     }
   },
   "textdomain": "webdune-blocks",

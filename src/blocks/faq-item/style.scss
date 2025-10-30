@@ -12,7 +12,7 @@
 .faq5_question {
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
-  background-color: var(--light-grey-bg);
+  background-color: $color-light;
   cursor: pointer;
   border-radius: 100px;
   justify-content: center;
@@ -27,13 +27,13 @@
   }
 
   &:focus {
-    outline: 2px solid var(--yellow);
+    outline: 2px solid $color-primary;
     outline-offset: 2px;
   }
 }
 
 .faq5_icon-wrapper {
-  border: 1px solid var(--yellow);
+  border: 1px solid $color-primary;
   border-radius: 100%;
   justify-content: center;
   align-self: flex-start;
@@ -47,7 +47,7 @@
   .icon-embed-small {
     width: 1.5rem;
     height: 1.5rem;
-    color: var(--yellow);
+    color: $color-primary;
   }
 }
 
@@ -73,7 +73,7 @@
 }
 
 .faq_answer-inner {
-  background-color: var(--light-grey-bg);
+  background-color: $color-light;
   border-radius: 3rem;
   width: 27.5rem;
   max-width: 100%;

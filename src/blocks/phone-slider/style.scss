@@ -82,7 +82,6 @@
   width: 100%;
   margin-bottom: 6.5rem;
   position: absolute;
-  bottom: 0;
 }
 
 .container-large.phones-slider_container {
@@ -92,7 +91,7 @@
 }
 
 .phones-slider_arrow {
-  background-color: var(--yellow);
+  background-color: $color-primary;
   pointer-events: all;
   border-radius: 100%;
   justify-content: center;
@@ -102,15 +101,15 @@
   display: flex;
   transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
   text-decoration: none;
-  color: var(--dark-grey);
+  color: $color-dark;
 
   &:hover {
-    background-color: var(--brick);
-    color: var(--white);
+    background-color: $color-brick;
+    color: $color-white;
   }
 
   &:active {
-    background-color: #a35429;
+    background-color: $color-brick;
   }
 
   // Swiper disabled state
