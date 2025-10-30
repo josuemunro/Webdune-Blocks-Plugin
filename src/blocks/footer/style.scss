@@ -132,7 +132,7 @@ footer.text-style-link:hover {
   color: #000;
   -webkit-text-stroke-color: black;
   border: none !important;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
   padding: 0 !important;
   font-size: 1rem;
   line-height: 1.6;
@@ -281,18 +281,12 @@ footer.text-style-link:hover {
   }
 
   .footer2_form {
-    grid-template-columns: 1fr;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 1rem;
-
     input {
-      margin-bottom: 0.5rem;
-      padding: 0.5rem;
+      margin-bottom: 0;
+      padding: 0;
     }
 
     .button {
-      width: 100%;
       justify-content: center;
     }
   }

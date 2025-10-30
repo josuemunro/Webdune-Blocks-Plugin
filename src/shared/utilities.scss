@@ -68,6 +68,12 @@
   -webkit-box-decoration-break: clone;
   /* Add space below text so underline doesn't touch descenders */
   padding-bottom: 0rem;
+
+  @media screen and (max-width: 767px) {
+    background-size: 100% 0.3rem;
+    background-position: 0 calc(100% - 0.25rem);
+    padding-bottom: 0.2rem;
+  }
 }
 
 /* Optional: Customize the underline color and thickness */
@@ -95,7 +101,7 @@
     background-size: 100% 0.3rem;
     background-position: 0 calc(100% - 0.25rem);
   }
-  
+
   .gradient-underline-thin {
     background-size: 100% 3px;
   }

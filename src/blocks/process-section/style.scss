@@ -25,6 +25,10 @@
     h2 {
       text-align: center;
     }
+
+    @media screen and (max-width: 767px) {
+      gap: 0rem;
+    }
   }
 
   .home-process_grid {
@@ -51,6 +55,7 @@
       justify-content: flex-start;
       align-items: center;
       display: flex;
+      order: 999;
     }
 
     @media screen and (max-width: 479px) {
@@ -68,6 +73,7 @@
       width: 100%;
       position: relative;
       top: 15%;
+      right: 15%;
     }
   }
 

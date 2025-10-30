@@ -56,7 +56,7 @@ function initReviewsMarquee() {
       // Parse JSON data - emojis are safely handled
       const data = JSON.parse(dataScript.textContent);
       const { blockId, reviews, autoplaySpeed } = data;
-      
+
       // Validate reviews data
       if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
         console.warn(`⚠️ No reviews found for block: ${blockId || 'unknown'}`);
@@ -90,9 +90,10 @@ function initReviewsMarquee() {
       // Top Row Swiper (Desktop - scrolls left)
       new Swiper(topSlider, {
         slidesPerView: 'auto',
-        spaceBetween: 16,
+        spaceBetween: 32,
+        centeredSlides: true,
         loop: true,
-        speed: autoplaySpeed || 60000,
+        speed: autoplaySpeed || 7000,
         autoplay: {
           delay: 0,
           disableOnInteraction: false,
@@ -100,19 +101,34 @@ function initReviewsMarquee() {
         },
         freeMode: true,
         freeModeMomentum: false,
-        allowTouchMove: false, // Disable dragging
+        allowTouchMove: true, // Disable dragging
       });
 
       // Bottom Row Swiper (scrolls right, mobile uses this)
       new Swiper(bottomSlider, {
-        slidesPerView: 'auto',
-        spaceBetween: 16,
+        slidesPerView: 1,
+        spaceBetween: 32,
+        centeredSlides: true,
         loop: true,
-        speed: autoplaySpeed || 60000,
+        speed: 300,
         autoplay: {
           delay: 0,
           disableOnInteraction: false,
           reverseDirection: true, // Opposite direction
+          enabled: false,
+        },
+
+        breakpoints: {
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 'auto',
+            speed: autoplaySpeed || 7000,
+            autoplay: {
+              enabled: true,
+              delay: 0,
+              reverseDirection: true,
+            },
+          },
         },
         freeMode: true,
         freeModeMomentum: false,
@@ -127,7 +143,7 @@ function initReviewsMarquee() {
       console.log(`✅ Reviews marquee initialized: ${blockId}`);
     } catch (error) {
       console.error(`❌ Error initializing reviews marquee:`, error);
-      
+
       // Check if it's a JSON parse error (could be emoji-related)
       if (error instanceof SyntaxError) {
         console.error('💡 This may be caused by special characters or emojis in review text. The block has been updated to handle this.');

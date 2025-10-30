@@ -86,19 +86,19 @@ export default function Save({ attributes }) {
                   </div>
                 )}
 
-                {/* Render H3 (new) or H2 (legacy for backward compatibility) */}
+                {/* Render H2 or H3 based on user selection */}
+                {showH2 && h2Text && (
+                  <RichText.Content
+                    tagName="h2"
+                    className="two-col-block_heading"
+                    value={h2Text}
+                  />
+                )}
                 {showH3 && h3Text && (
                   <RichText.Content
                     tagName="h3"
                     className="two-col-block_heading"
                     value={h3Text}
-                  />
-                )}
-                {showH2 && h2Text && !h3Text && (
-                  <RichText.Content
-                    tagName="h2"
-                    className="two-col-block_heading"
-                    value={h2Text}
                   />
                 )}
 

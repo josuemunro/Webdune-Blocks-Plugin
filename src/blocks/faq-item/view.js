@@ -60,6 +60,20 @@ document.addEventListener('DOMContentLoaded', function () {
         answer.removeEventListener('transitionend', handler);
       });
     }
+
+    // Recalculate Lenis scroll and ScrollTrigger positions after height change
+    // Wait for the transition to complete
+    setTimeout(() => {
+      // Refresh ScrollTrigger (works with Lenis)
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+      
+      // Also trigger Lenis resize if available
+      if (window.lenis) {
+        window.lenis.resize();
+      }
+    }, 350); // Match the CSS transition duration (0.3s + small buffer)
   }
 });
 

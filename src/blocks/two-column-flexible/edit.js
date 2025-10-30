@@ -46,6 +46,8 @@ export default function Edit({ attributes, setAttributes }) {
     numberValue,
     showH3,
     h3Text,
+    showH2,
+    h2Text,
     showRichText,
     showCTA,
     ctaStyle,
@@ -175,10 +177,23 @@ export default function Edit({ attributes, setAttributes }) {
             />
           )}
 
-          <ToggleControl
-            label={__('Show H3', 'webdune-blocks')}
-            checked={showH3}
-            onChange={(value) => setAttributes({ showH3: value })}
+          <SelectControl
+            label={__('Heading Level', 'webdune-blocks')}
+            value={showH2 ? 'h2' : (showH3 ? 'h3' : 'none')}
+            options={[
+              { label: 'None', value: 'none' },
+              { label: 'H2 (Large)', value: 'h2' },
+              { label: 'H3 (Default)', value: 'h3' }
+            ]}
+            onChange={(value) => {
+              if (value === 'h2') {
+                setAttributes({ showH2: true, showH3: false });
+              } else if (value === 'h3') {
+                setAttributes({ showH2: false, showH3: true });
+              } else {
+                setAttributes({ showH2: false, showH3: false });
+              }
+            }}
           />
 
           <ToggleControl
@@ -322,13 +337,24 @@ export default function Edit({ attributes, setAttributes }) {
                     </div>
                   )}
 
+                  {showH2 && (
+                    <RichText
+                      tagName="h2"
+                      className="two-col-block_heading"
+                      value={h2Text}
+                      onChange={(value) => setAttributes({ h2Text: value })}
+                      placeholder={__('Enter H2 heading...', 'webdune-blocks')}
+                      allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
+                    />
+                  )}
+
                   {showH3 && (
                     <RichText
                       tagName="h3"
                       className="two-col-block_heading"
                       value={h3Text}
                       onChange={(value) => setAttributes({ h3Text: value })}
-                      placeholder={__('Enter heading...', 'webdune-blocks')}
+                      placeholder={__('Enter H3 heading...', 'webdune-blocks')}
                       allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
                     />
                   )}

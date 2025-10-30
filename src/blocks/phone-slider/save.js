@@ -45,7 +45,7 @@ export default function Save({ attributes }) {
 
       <div className="padding-global z-index-1">
         <div className="w-layout-blockcontainer container-xsmall w-container">
-          <div className="home-phones_footer">
+          <div className="home-phones_bottom-content">
             <div className="margin-bottom margin-small">
               <div className="text-align-center">
                 <p className="text-color-grey">{bottomText}</p>
@@ -59,28 +59,6 @@ export default function Save({ attributes }) {
                 rel={buttonOpenInNewTab ? 'noopener noreferrer' : undefined}
               >
                 <div>{buttonText}</div>
-                <div className="button_icon-wrapper">
-                  <div className="icon-embed-xsmall w-embed">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="100%"
-                      height="100%"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      preserveAspectRatio="xMidYMid meet"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path
-                        d="M13.0246 15.3334L18.3329 10.0251M18.3329 10.0251L13.0246 4.7168M18.3329 10.0251L1.66626 10.0251"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="square"
-                        strokeLinejoin="bevel"
-                      />
-                    </svg>
-                  </div>
-                </div>
               </a>
             </div>
           </div>

@@ -18,16 +18,16 @@
 
 .section_home-faqs {
   background-color: #fff;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
 }
 
 .home-faqs_content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 3rem;
+  margin-bottom: 4rem;
 
   h2 {
     margin: 0;
@@ -49,19 +49,8 @@
 }
 
 // Responsive
-@media screen and (max-width: 991px) {
-  .section_home-faqs {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
 
 @media screen and (max-width: 767px) {
-  .section_home-faqs {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
   .home-faqs_content {
     margin-bottom: 2rem;
     gap: 1.5rem;

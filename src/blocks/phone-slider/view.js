@@ -90,7 +90,7 @@ function renderPhoneSlider(block, blockId, posts, config) {
               <img src="${imageUrl}" loading="lazy" alt="${title}" class="phone-slide_img">
               <div class="phone-slide_content">
                 <h3>${title}</h3>
-                ${maxPrice > 0 ? `<div class="text-size-tiny text-color-grey">Get up to <strong class="text-color-dark">$${maxPrice}</strong></div>` : ''}
+                ${maxPrice > 0 ? `<div class="text-color-grey">Get up to <strong class="text-color-dark">$${maxPrice}</strong></div>` : ''}
               </div>
             </a>
           `;

@@ -23,9 +23,9 @@ export default function Save({ attributes }) {
               value={heading}
             />
 
-            {buttonText && buttonUrl && (
+            {buttonText && (
               <a
-                href={buttonUrl}
+                href={buttonUrl || '#'}
                 className="button w-button"
                 target={buttonOpenInNewTab ? '_blank' : '_self'}
                 rel={buttonOpenInNewTab ? 'noopener noreferrer' : undefined}

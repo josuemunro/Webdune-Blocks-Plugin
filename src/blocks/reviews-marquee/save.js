@@ -19,7 +19,7 @@ export default function Save({ attributes }) {
             />
             <div className="reviews_tag">
               <img
-                src="/wp-content/plugins/webdune-blocks/sellmycell.webflow/images/Google-Logo.svg"
+                src="https://cdn.prod.website-files.com/68f9aab9d5bffd1726ea49b3/68f9ca6f3bcb96752c49a939_Google%20Logo.svg"
                 loading="lazy"
                 alt="Google"
                 className="reviews_google-logo"
@@ -74,10 +74,10 @@ export default function Save({ attributes }) {
             autoplaySpeed,
             blockId
           })
-          // Escape special HTML characters to prevent emoji/character corruption
-          .replace(/</g, '\\u003c')
-          .replace(/>/g, '\\u003e')
-          .replace(/&/g, '\\u0026')
+            // Escape special HTML characters to prevent emoji/character corruption
+            .replace(/</g, '\\u003c')
+            .replace(/>/g, '\\u003e')
+            .replace(/&/g, '\\u0026')
         }}
       />
 

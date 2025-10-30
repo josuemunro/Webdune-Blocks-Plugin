@@ -156,6 +156,12 @@ if (typeof window !== 'undefined') {
   if (!isEditor) {
     window.addEventListener('DOMContentLoaded', () => {
       const lenis = initSmoothScroll();
+      
+      // Expose Lenis globally so other scripts (like FAQ) can trigger resize
+      if (lenis) {
+        window.lenis = lenis;
+      }
+      
       initParallax(lenis);
       initNavScrollBehavior(lenis);
     });
