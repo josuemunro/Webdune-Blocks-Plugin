@@ -36,12 +36,46 @@ Every block follows this pattern:
 ```
 src/blocks/[name]/
 ├── block.json
-├── index.js
+├── index.js       # MUST import ./style.scss and ./editor.scss
 ├── edit.js
 ├── save.js
-├── style.scss
-├── editor.scss (optional)
-└── view.js (optional)
+├── style.scss     # Frontend + Editor styles
+├── editor.scss    # Editor-only styles (optional)
+└── view.js        # Frontend JS (optional)
+```
+
+### Critical: SCSS Imports & File Paths
+
+**In index.js, you MUST import SCSS:**
+```javascript
+import './style.scss';      // Required
+import './editor.scss';     // Required if editor.scss exists
+```
+
+**Webpack CSS Naming (DO NOT GET THIS WRONG!):**
+- `style.scss` → builds to `style-index.css`
+- `editor.scss` → builds to `index.css`
+
+**In block.json, use these EXACT paths:**
+```json
+{
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",        ← NOT editor.css!
+  "style": "file:./style-index.css",        ← NOT style.css!
+  "viewScript": "file:./view.js"
+}
+```
+
+**❌ WRONG (CSS won't load):**
+```json
+"style": "file:./style.css"
+"editorStyle": "file:./editor.css"
+```
+
+**✅ CORRECT:**
+```json
+"style": "file:./style-index.css"
+"editorStyle": "file:./index.css"
 ```
 
 ## Design System

@@ -8,7 +8,7 @@ export default function Save({ attributes }) {
   } = attributes;
 
   const blockProps = useBlockProps.save({
-    className: 'faq5_accordion',
+    className: 'faq5_accordion align-left',
   });
 
   return (
@@ -35,7 +35,7 @@ export default function Save({ attributes }) {
       </div>
 
       <div
-        className="faq5_answer"
+        className="faq5_answer align-left"
         style={{ height: defaultOpen ? 'auto' : '0px' }}
         data-faq-answer
       >

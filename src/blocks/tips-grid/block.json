@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/tips-grid",
+  "version": "1.0.0",
+  "title": "Tips Grid",
+  "category": "webdune",
+  "icon": "grid-view",
+  "description": "Displays a grid of Tips posts with pagination",
+  "keywords": ["tips", "blog", "grid", "posts"],
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "postsPerPage": {
+      "type": "number",
+      "default": 9
+    },
+    "showTags": {
+      "type": "boolean",
+      "default": true
+    },
+    "showReadTime": {
+      "type": "boolean",
+      "default": true
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": true
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
+}
+

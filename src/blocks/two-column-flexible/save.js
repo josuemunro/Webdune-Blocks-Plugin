@@ -14,8 +14,8 @@ export default function Save({ attributes }) {
     numberValue,
     showH3,
     h3Text,
-    showH2, // Legacy - for backward compatibility
-    h2Text, // Legacy - for backward compatibility
+    showH2,
+    h2Text,
     showRichText,
     showCTA,
     ctaStyle,
@@ -30,7 +30,8 @@ export default function Save({ attributes }) {
     singleImage,
     doubleImageMode,
     doubleImageFirst,
-    doubleImageSecond
+    doubleImageSecond,
+    centerAlignText
   } = attributes;
 
   const blockProps = useBlockProps.save({
@@ -79,7 +80,7 @@ export default function Save({ attributes }) {
               style={{ gridTemplateColumns: `${gridRatioLeft}fr ${gridRatioRight}fr` }}
             >
               {/* Text Content Column */}
-              <div className="two-col-block_text-content">
+              <div className={`two-col-block_text-content ${centerAlignText ? 'center-align' : ''}`}>
                 {showNumber && numberValue && (
                   <div className="two-col-block_number">
                     {numberValue}.

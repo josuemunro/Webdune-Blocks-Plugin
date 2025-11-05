@@ -90,6 +90,12 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+
+  // Center align option
+  &.center-align {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .two-col-block_number {
@@ -165,6 +171,11 @@
    =================================== */
 .two-col-block_media-content {
   position: relative;
+  height: 100%;
+}
+
+.media-single-image.media-single-full-height {
+  height: 100%;
 }
 
 /* Video Styles */

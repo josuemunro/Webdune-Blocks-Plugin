@@ -260,3 +260,293 @@ function webdune_generate_block_id($prefix = 'block')
   $counter++;
   return sprintf('%s-%s-%d', $prefix, uniqid(), $counter);
 }
+
+/**
+ * Render Tips Grid Block
+ * Displays a grid of Tips posts with pagination
+ * 
+ * @param array $attributes Block attributes
+ * @return string Block HTML
+ */
+function webdune_render_tips_grid_block($attributes)
+{
+  // Parse attributes with defaults
+  $attributes = wp_parse_args($attributes, array(
+    'postsPerPage' => 9,
+    'showTags' => true,
+    'showReadTime' => true,
+    'showExcerpt' => true,
+    'columns' => 3,
+  ));
+
+  // Get current page for pagination
+  $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
+  // Query Tips posts
+  $query_args = array(
+    'post_type' => 'tip',
+    'posts_per_page' => $attributes['postsPerPage'],
+    'paged' => $paged,
+    'post_status' => 'publish',
+    'orderby' => 'date',
+    'order' => 'DESC',
+  );
+
+  $tips_query = new WP_Query($query_args);
+
+  // Start output buffering
+  ob_start();
+?>
+  <section class="tips-grid-section">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="tips-grid">
+          <?php if ($tips_query->have_posts()) : ?>
+            <div class="tips-grid__list tips-grid__list--columns-<?php echo esc_attr($attributes['columns']); ?>">
+              <?php while ($tips_query->have_posts()) : $tips_query->the_post(); ?>
+                <article class="tips-grid__card">
+                  <a href="<?php the_permalink(); ?>" class="tips-grid__card-link-wrapper">
+                    <?php if (has_post_thumbnail()) : ?>
+                      <div class="tips-grid__card-image">
+                        <?php the_post_thumbnail('large', array('class' => 'tips-grid__card-img')); ?>
+                      </div>
+                    <?php endif; ?>
+
+                    <div class="tips-grid__card-content">
+                      <?php if ($attributes['showTags'] || $attributes['showReadTime']) : ?>
+                        <div class="tips-grid__card-meta">
+                          <?php if ($attributes['showTags']) :
+                            $tags = get_the_terms(get_the_ID(), 'tip_tag');
+                            if ($tags && !is_wp_error($tags)) :
+                              $first_tag = array_shift($tags);
+                          ?>
+                              <span class="tips-grid__card-tag"><?php echo esc_html($first_tag->name); ?></span>
+                            <?php endif;
+                          endif; ?>
+
+                          <?php if ($attributes['showReadTime']) : ?>
+                            <span class="tips-grid__card-read-time">
+                              <?php echo esc_html(webdune_calculate_read_time(get_the_ID())); ?>
+                            </span>
+                          <?php endif; ?>
+                        </div>
+                      <?php endif; ?>
+
+                      <h3 class="tips-grid__card-title">
+                        <?php the_title(); ?>
+                      </h3>
+
+                      <?php if ($attributes['showExcerpt']) : ?>
+                        <div class="tips-grid__card-excerpt">
+                          <?php echo wp_kses_post(get_the_excerpt()); ?>
+                        </div>
+                      <?php endif; ?>
+
+                      <div class="tips-grid__card-link">
+                        <div class="tips-grid__card-link-inner">
+                          <svg class="tips-grid__card-link-underline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 87 3" fill="none">
+                            <path d="M0.5 1.5C20.5 1.5 66.5 1.5 86.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                          </svg>
+                          <span><?php _e('Read more', 'webdune-blocks'); ?></span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              <?php endwhile; ?>
+            </div>
+
+            <?php
+            // Pagination
+            if ($tips_query->max_num_pages > 1) :
+              $big = 999999999;
+              echo '<div class="tips-grid__pagination">';
+              echo paginate_links(array(
+                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format' => '?paged=%#%',
+                'current' => max(1, $paged),
+                'total' => $tips_query->max_num_pages,
+                'prev_text' => __('&larr; Previous', 'webdune-blocks'),
+                'next_text' => __('Next &rarr;', 'webdune-blocks'),
+              ));
+              echo '</div>';
+            endif;
+            ?>
+
+          <?php else : ?>
+            <div class="tips-grid__empty">
+              <p><?php _e('No tips found.', 'webdune-blocks'); ?></p>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php
+
+  // Reset post data
+  wp_reset_postdata();
+
+  return ob_get_clean();
+}
+
+/**
+ * Register Tips Grid block with render callback
+ */
+add_filter('render_block_webdune/tips-grid', function ($block_content, $block) {
+  return webdune_render_tips_grid_block($block['attrs']);
+}, 10, 2);
+
+/**
+ * Render Related Tips Block
+ * Displays related Tips posts based on tags and categories
+ * 
+ * @param array $attributes Block attributes
+ * @return string Block HTML
+ */
+function webdune_render_related_tips_block($attributes)
+{
+  // Parse attributes with defaults
+  $attributes = wp_parse_args($attributes, array(
+    'heading' => 'Related tips',
+    'postsCount' => 3,
+    'showButton' => true,
+    'buttonText' => 'All posts',
+    'buttonUrl' => '/tips',
+  ));
+
+  // Get current post ID
+  global $post;
+  if (!$post || $post->post_type !== 'tip') {
+    return '';
+  }
+
+  $current_post_id = $post->ID;
+
+  // Get tags and categories for the current post
+  $tags = wp_get_post_terms($current_post_id, 'tip_tag', array('fields' => 'ids'));
+  $categories = wp_get_post_terms($current_post_id, 'tip_category', array('fields' => 'ids'));
+
+  // Build query args for related posts
+  $query_args = array(
+    'post_type' => 'tip',
+    'posts_per_page' => $attributes['postsCount'],
+    'post__not_in' => array($current_post_id),
+    'post_status' => 'publish',
+    'orderby' => 'date',
+    'order' => 'DESC',
+  );
+
+  // Add tax query if tags or categories exist
+  if (!empty($tags) || !empty($categories)) {
+    $tax_query = array('relation' => 'OR');
+
+    if (!empty($tags)) {
+      $tax_query[] = array(
+        'taxonomy' => 'tip_tag',
+        'field' => 'term_id',
+        'terms' => $tags,
+      );
+    }
+
+    if (!empty($categories)) {
+      $tax_query[] = array(
+        'taxonomy' => 'tip_category',
+        'field' => 'term_id',
+        'terms' => $categories,
+      );
+    }
+
+    $query_args['tax_query'] = $tax_query;
+  }
+
+  $related_query = new WP_Query($query_args);
+
+  // Start output buffering
+  ob_start();
+?>
+  <section class="related-tips-section">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="related-tips">
+          <div class="related-tips__header">
+            <div class="related-tips__title-wrapper">
+              <p class="related-tips__tagline"><?php _e('Tips', 'webdune-blocks'); ?></p>
+              <h2 class="related-tips__heading"><?php echo wp_kses_post($attributes['heading']); ?></h2>
+            </div>
+            <?php if ($attributes['showButton']) : ?>
+              <div class="related-tips__actions">
+                <a href="<?php echo esc_url($attributes['buttonUrl']); ?>" class="related-tips__button">
+                  <?php echo esc_html($attributes['buttonText']); ?>
+                </a>
+              </div>
+            <?php endif; ?>
+          </div>
+
+          <?php if ($related_query->have_posts()) : ?>
+            <div class="related-tips__grid">
+              <?php while ($related_query->have_posts()) : $related_query->the_post(); ?>
+                <article class="related-tips__card">
+                  <a href="<?php the_permalink(); ?>" class="related-tips__card-link-wrapper">
+                    <?php if (has_post_thumbnail()) : ?>
+                      <div class="related-tips__card-image">
+                        <?php the_post_thumbnail('large', array('class' => 'related-tips__card-img')); ?>
+                      </div>
+                    <?php endif; ?>
+
+                    <div class="related-tips__card-content">
+                      <div class="related-tips__card-meta">
+                        <?php
+                        $tags = get_the_terms(get_the_ID(), 'tip_tag');
+                        if ($tags && !is_wp_error($tags)) :
+                          $first_tag = array_shift($tags);
+                        ?>
+                          <span class="related-tips__card-tag"><?php echo esc_html($first_tag->name); ?></span>
+                        <?php endif; ?>
+                        <span class="related-tips__card-read-time">
+                          <?php echo esc_html(webdune_calculate_read_time(get_the_ID())); ?>
+                        </span>
+                      </div>
+
+                      <div class="related-tips__card-text">
+                        <h3 class="related-tips__card-title">
+                          <?php the_title(); ?>
+                        </h3>
+
+                        <div class="related-tips__card-excerpt">
+                          <?php echo wp_kses_post(get_the_excerpt()); ?>
+                        </div>
+                      </div>
+
+                      <div class="related-tips__card-link">
+                        <div class="related-tips__card-link-inner">
+                          <svg class="related-tips__card-link-underline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 87 3" fill="none">
+                            <path d="M0.5 1.5C20.5 1.5 66.5 1.5 86.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                          </svg>
+                          <span><?php _e('Read more', 'webdune-blocks'); ?></span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              <?php endwhile; ?>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php
+
+  // Reset post data
+  wp_reset_postdata();
+
+  return ob_get_clean();
+}
+
+/**
+ * Register Related Tips block with render callback
+ */
+add_filter('render_block_webdune/related-tips', function ($block_content, $block) {
+  return webdune_render_related_tips_block($block['attrs']);
+}, 10, 2);

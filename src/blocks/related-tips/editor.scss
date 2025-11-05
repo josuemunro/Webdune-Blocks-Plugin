@@ -1,0 +1,19 @@
+/**
+ * Related Tips Block - Editor Styles
+ */
+
+.wp-block-webdune-related-tips {
+  // Editor-specific styles
+  .related-tips__heading.block-editor-rich-text__editable {
+    &:focus {
+      outline: 2px solid #007cba;
+      outline-offset: 2px;
+    }
+  }
+
+  .related-tips__button {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+

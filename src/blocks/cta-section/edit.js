@@ -71,6 +71,7 @@ export default function Edit({ attributes, setAttributes }) {
             label={__('Show Button 1', 'webdune-blocks')}
             checked={button1.enabled}
             onChange={(value) => updateButton(1, 'enabled', value)}
+            __nextHasNoMarginBottom
           />
           {button1.enabled && (
             <>
@@ -78,12 +79,16 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Button Text', 'webdune-blocks')}
                 value={button1.text}
                 onChange={(value) => updateButton(1, 'text', value)}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
               <TextControl
                 label={__('Button URL', 'webdune-blocks')}
                 value={button1.url}
                 onChange={(value) => updateButton(1, 'url', value)}
                 type="url"
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
               <SelectControl
                 label={__('Button Style', 'webdune-blocks')}
@@ -99,6 +104,7 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Open in New Tab', 'webdune-blocks')}
                 checked={button1.openInNewTab}
                 onChange={(value) => updateButton(1, 'openInNewTab', value)}
+                __nextHasNoMarginBottom
               />
             </>
           )}
@@ -110,6 +116,7 @@ export default function Edit({ attributes, setAttributes }) {
             label={__('Show Button 2', 'webdune-blocks')}
             checked={button2.enabled}
             onChange={(value) => updateButton(2, 'enabled', value)}
+            __nextHasNoMarginBottom
           />
           {button2.enabled && (
             <>
@@ -117,12 +124,16 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Button Text', 'webdune-blocks')}
                 value={button2.text}
                 onChange={(value) => updateButton(2, 'text', value)}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
               <TextControl
                 label={__('Button URL', 'webdune-blocks')}
                 value={button2.url}
                 onChange={(value) => updateButton(2, 'url', value)}
                 type="url"
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
               <SelectControl
                 label={__('Button Style', 'webdune-blocks')}
@@ -138,6 +149,7 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Open in New Tab', 'webdune-blocks')}
                 checked={button2.openInNewTab}
                 onChange={(value) => updateButton(2, 'openInNewTab', value)}
+                __nextHasNoMarginBottom
               />
             </>
           )}
@@ -149,6 +161,7 @@ export default function Edit({ attributes, setAttributes }) {
             label={__('Show Button 3', 'webdune-blocks')}
             checked={button3.enabled}
             onChange={(value) => updateButton(3, 'enabled', value)}
+            __nextHasNoMarginBottom
           />
           {button3.enabled && (
             <>
@@ -156,12 +169,16 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Button Text', 'webdune-blocks')}
                 value={button3.text}
                 onChange={(value) => updateButton(3, 'text', value)}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
               <TextControl
                 label={__('Button URL', 'webdune-blocks')}
                 value={button3.url}
                 onChange={(value) => updateButton(3, 'url', value)}
                 type="url"
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
               <SelectControl
                 label={__('Button Style', 'webdune-blocks')}
@@ -177,6 +194,7 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Open in New Tab', 'webdune-blocks')}
                 checked={button3.openInNewTab}
                 onChange={(value) => updateButton(3, 'openInNewTab', value)}
+                __nextHasNoMarginBottom
               />
             </>
           )}

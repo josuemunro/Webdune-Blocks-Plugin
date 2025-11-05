@@ -103,12 +103,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             value={googleRating}
             onChange={(value) => setAttributes({ googleRating: value })}
             help={__('e.g., 5.0', 'webdune-blocks')}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
           <TextControl
             label={__('Review Count', 'webdune-blocks')}
             value={reviewCount}
             onChange={(value) => setAttributes({ reviewCount: value })}
             help={__('e.g., 276', 'webdune-blocks')}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
         </PanelBody>
 
@@ -136,6 +140,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 value={review.author}
                 onChange={(value) => updateReview(index, 'author', value)}
                 help={__('Max 50 characters', 'webdune-blocks')}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
 
               <TextControl
@@ -143,6 +149,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 value={review.text}
                 onChange={(value) => updateReview(index, 'text', value)}
                 help={`${review.text.length}/300 characters`}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
 
               <TextControl
@@ -150,6 +158,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 value={review.date}
                 onChange={(value) => updateReview(index, 'date', value)}
                 placeholder="a month ago"
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
               />
 
               <MediaUpload

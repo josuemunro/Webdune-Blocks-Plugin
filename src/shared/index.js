@@ -10,6 +10,7 @@ import './layout.scss';
 import './theme-overrides.scss';
 import './utilities.scss';
 import './effects.scss';
+import './tips-content.scss';
 
 // Custom rich text formats (gradient underlines, etc.)
 // IMPORTANT: Import BEFORE animations.js to ensure formats register immediately

@@ -1,0 +1,444 @@
+/**
+ * Tips Content Section Styles
+ * Scoped styles for the Tips post content area
+ * Applied to the core/group block with 'tips-content-section' class
+ */
+
+@import './colors.scss';
+
+// Tips content section wrapper
+.tips-content-section {
+  background-color: white;
+  padding: 7.5rem 0;
+
+  @media (max-width: 991px) {
+    padding: 6rem 0;
+  }
+
+  @media (max-width: 767px) {
+    padding: 5rem 0;
+  }
+
+  // Container constraint
+  .wp-block-group__inner-container {
+    max-width: 48rem; // 768px
+    margin: 0 auto;
+    padding: 0 4rem;
+
+    @media (max-width: 991px) {
+      padding: 0 2rem;
+    }
+
+    @media (max-width: 767px) {
+      padding: 0 1.5rem;
+    }
+  }
+}
+
+// Typography styles for Tips content
+.tips-content {
+  &__heading {
+    font-size: 3.75rem;
+    line-height: 4rem;
+    letter-spacing: -0.09375rem;
+    color: $color-dark;
+    margin: 0 0 1.5rem;
+    padding: 1.5rem 0;
+
+    @media (max-width: 767px) {
+      font-size: 2.75rem;
+      line-height: 3rem;
+      margin-bottom: 1rem;
+      padding: 1rem 0;
+    }
+  }
+
+  &__paragraph {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    color: $color-dark;
+    margin: 0 0 1.5rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Headings in Tips content
+.tips-content-section {
+  h2,
+  .wp-block-heading {
+    font-size: 3.75rem;
+    line-height: 4rem;
+    letter-spacing: -0.09375rem;
+    color: $color-dark;
+    margin: 1.75rem 0 1.5rem;
+    font-weight: 400;
+
+    @media (max-width: 767px) {
+      font-size: 2.75rem;
+      line-height: 3rem;
+      margin: 1.5rem 0 1rem;
+    }
+  }
+
+  h3 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    letter-spacing: -0.03rem;
+    color: $color-dark;
+    margin: 1.75rem 0 1.5rem;
+    font-weight: 400;
+
+    @media (max-width: 767px) {
+      font-size: 1.75rem;
+      line-height: 2rem;
+      margin: 1.5rem 0 1rem;
+    }
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: -0.02rem;
+    color: $color-dark;
+    margin: 1.5rem 0 1rem;
+    font-weight: 400;
+  }
+
+  // Paragraphs
+  p {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    color: $color-dark;
+    margin: 0 0 1.5rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Large paragraph style
+  .has-large-font-size {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 767px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  // Images
+  .wp-block-image {
+    margin: 3rem 0;
+
+    @media (max-width: 767px) {
+      margin: 2rem 0;
+    }
+
+    img {
+      border-radius: 2rem;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: $color-dark;
+      position: relative;
+      padding-left: 0.75rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: $color-dark;
+      }
+    }
+  }
+
+  // Quotes
+  .wp-block-quote,
+  blockquote {
+    background: transparent;
+    border-left: 2px solid #cb6833;
+    margin: 3rem 0;
+    padding: 1.25rem 0 1.25rem 1.25rem;
+
+    @media (max-width: 767px) {
+      margin: 2rem 0;
+      padding: 1rem 0 1rem 1rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      color: #cb6833;
+      margin: 0;
+      font-style: normal;
+
+      @media (max-width: 767px) {
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: $color-dark;
+      font-style: normal;
+    }
+  }
+
+  // Lists
+  ul,
+  ol {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    color: $color-dark;
+    margin: 0 0 1.5rem;
+    padding-left: 2rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Code blocks
+  pre,
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f5f5f7;
+    border-radius: 0.5rem;
+  }
+
+  code {
+    padding: 0.125rem 0.375rem;
+    font-size: 0.875em;
+  }
+
+  pre {
+    padding: 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+
+    code {
+      padding: 0;
+      background: transparent;
+    }
+  }
+
+  // Separator
+  hr,
+  .wp-block-separator {
+    border: none;
+    border-top: 1px solid #e8e8ed;
+    margin: 3rem 0;
+
+    @media (max-width: 767px) {
+      margin: 2rem 0;
+    }
+  }
+
+  // Links
+  a {
+    color: #597aa1;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: darken(#597aa1, 10%);
+    }
+  }
+
+  // Share section (custom)
+  .tips-share-section {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid #e8e8ed;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 3rem;
+      padding-top: 3rem;
+    }
+  }
+
+  .tips-share {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__label {
+      font-size: 1.125rem;
+      line-height: 1.5;
+      color: $color-dark;
+      margin: 0;
+    }
+
+    &__buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background-color: #597aa1;
+      border-radius: 4rem;
+      padding: 0.25rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+
+      &:hover {
+        background-color: darken(#597aa1, 10%);
+        transform: translateY(-2px);
+      }
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: white;
+      }
+    }
+  }
+
+  // Tags
+  .tips-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tips-tag {
+    background-color: #e8e8ed;
+    padding: 0.25rem 0.5rem 0.375rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: $color-dark;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: darken(#e8e8ed, 5%);
+      color: $color-dark;
+    }
+  }
+
+  // Buttons in content
+  .wp-block-button {
+    margin: 2rem 0;
+
+    &__link {
+      background-color: $color-primary;
+      color: $color-dark;
+      padding: 1rem 1.5rem;
+      border-radius: 6.25rem;
+      font-size: 1.125rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        color: $color-dark;
+      }
+    }
+  }
+
+  // Table
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+
+    th,
+    td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e8e8ed;
+    }
+
+    th {
+      font-weight: 700;
+      background-color: #f5f5f7;
+    }
+
+    @media (max-width: 767px) {
+      font-size: 0.875rem;
+
+      th,
+      td {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  }
+
+  // Gallery
+  .wp-block-gallery {
+    margin: 3rem 0;
+    gap: 1rem;
+
+    @media (max-width: 767px) {
+      margin: 2rem 0;
+      gap: 0.5rem;
+    }
+
+    .wp-block-image {
+      margin: 0;
+    }
+  }
+
+  // Columns
+  .wp-block-columns {
+    margin: 2rem 0;
+
+    @media (max-width: 767px) {
+      margin: 1.5rem 0;
+    }
+  }
+
+  // Cover block
+  .wp-block-cover {
+    border-radius: 2rem;
+    margin: 3rem 0;
+
+    @media (max-width: 767px) {
+      margin: 2rem 0;
+    }
+  }
+}
+

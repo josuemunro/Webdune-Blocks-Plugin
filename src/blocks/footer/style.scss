@@ -201,9 +201,11 @@ footer.text-style-link:hover {
     grid-column-gap: 6rem;
     grid-row-gap: 4rem;
     grid-template-rows: auto;
-    grid-template-columns: 1fr;
-    grid-auto-columns: 1fr;
     display: grid;
+  }
+
+  .footer_logo-wrap {
+    grid-column: span 3;
   }
 
   .footer2_left-wrapper {
@@ -229,6 +231,10 @@ footer.text-style-link:hover {
   .footer2_top-wrapper {
     grid-row-gap: 6rem;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .footer_logo-wrap {
+    grid-column: span 1;
   }
 
   .footer2_left-wrapper {

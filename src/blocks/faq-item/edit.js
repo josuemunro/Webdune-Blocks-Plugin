@@ -34,7 +34,7 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <div className="faq5_accordion">
+        <div className="faq5_accordion align-left">
           <div className="faq5_question">
             <div className="faq5_icon-wrapper">
               <div className="icon-embed-small">
@@ -53,7 +53,7 @@ export default function Edit({ attributes, setAttributes }) {
             />
           </div>
 
-          <div className="faq5_answer" style={{ height: defaultOpen ? 'auto' : '0px' }}>
+          <div className="faq5_answer align-left" style={{ height: defaultOpen ? 'auto' : '0px' }}>
             <RichText
               tagName="p"
               className="faq_answer-inner"

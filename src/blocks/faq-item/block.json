@@ -13,7 +13,7 @@
     "answer"
   ],
   "parent": [
-    "webdune/faq"
+    "webdune/faq-category"
   ],
   "textdomain": "webdune-blocks",
   "supports": {

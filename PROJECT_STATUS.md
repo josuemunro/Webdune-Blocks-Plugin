@@ -1,14 +1,16 @@
 # Project Status - Webdune Blocks Plugin
 
-**Last Updated**: October 29, 2025  
+**Last Updated**: November 4, 2025  
 **Project**: SellMyCell Custom Gutenberg Blocks  
-**Status**: Core Development Complete - Ready for Live Site Testing
+**Status**: Homepage + Tips + FAQ Complete - Ready for Live Deployment
 
 ---
 
 ## 📊 Current Progress
 
-**Core Blocks Completed**: 14 / 14 (100%) ✅  
+**Core Blocks Completed**: 16 / 16 (100%) ✅  
+**Tips System**: Complete with custom post type, clickable cards, InnerBlocks content, smart pattern/block fallback  
+**FAQ System**: Complete with ToC, categories, and scroll anchors  
 **Status**: All core blocks built, compiled, and ready for deployment  
 **Next**: Live site testing with real data
 
@@ -157,6 +159,48 @@
    - Responsive padding (10rem desktop, 7.5rem mobile)
    - Animation triggers once per page load
    - Fully responsive
+
+15. **FAQ with ToC Block** (`webdune/faq-with-toc`) - NEW Nov 2025
+   - Full FAQ page with sidebar table of contents
+   - Two-column layout: sticky sidebar + content area
+   - Auto-generates table of contents from categories
+   - Smooth scrolling to FAQ categories
+   - Active state highlighting on scroll
+   - Dynamic scroll anchor generation
+   - InnerBlocks for FAQ categories
+   - Fully responsive (stacks on mobile)
+   - Integrates with Lenis smooth scroll
+   - Based on Webflow FAQ page design
+
+16. **FAQ Category Block** (`webdune/faq-category`) - NEW Nov 2025
+   - Child block for FAQ with ToC
+   - Category name with RichText editing
+   - Auto-generated category IDs for scroll anchors
+   - Contains FAQ Item blocks
+   - Scroll target for table of contents
+   - Editor preview of scroll target ID
+
+### Tips System Enhancements - November 2025
+
+**Tips Post Type**:
+- ✅ Locked block template with InnerBlocks content area
+- ✅ Allowed blocks: paragraphs, headings, lists, quotes, images, videos, etc.
+- ✅ Default page template: "Webdune Full Width" (with fallback)
+- ✅ Block restrictions to maintain consistent formatting
+- ✅ Smart pattern/block fallback system:
+  - Uses `site-header` pattern (ID: 19396) or falls back to Webdune Navigation
+  - Uses `site-footer` pattern (ID: 19397) or falls back to Webdune Footer
+  - Automatically locked in template (can't move/remove)
+- ✅ Auto-sync metadata from Template Hero:
+  - Post title syncs with hero heading
+  - Featured image syncs with hero image
+- ✅ Automatic permalink flush on plugin activation (no more 404s!)
+
+**Tips Grid Block (Enhanced)**:
+- ✅ Whole card now clickable (not just image/link)
+- ✅ Featured image, title, read time, tags, excerpt
+- ✅ "Read more" is visual element (not separate link)
+- ✅ Improved hover states and animations
 
 ---
 
@@ -436,10 +480,20 @@ Add remaining content blocks (stats, charity, reviews, etc.).
 
 ---
 
-**Last Build**: October 29, 2025  
+**Last Build**: October 30, 2025  
 **Build Status**: ✅ Successful  
-**✅ Completed**: Stats Section block with GSAP count-up animations  
-**Ready for**: Full Width Photo block (final block)
+**Plugin ZIP**: ✅ Ready (`webdune-blocks.zip`)
+
+### Recent Updates (Oct 30, 2025)
+- ✅ **Animations Fixed**: Lenis smooth scroll, parallax, and navigation behaviors working
+- ✅ **Phone Prices Fixed**: Correct calculation for Flawless condition (0 deduction)
+- ✅ **Lenis Recalc**: FAQ toggles now trigger scroll recalculation
+- ✅ **Two-Column H2**: Added H2/H3 heading level selector
+- ✅ **Two-Column Center**: Added center align text option
+- ✅ **FAQ Button**: Fixed visibility on frontend
+- ✅ **Content Image Heights**: Fixed heights when content disabled (56rem/48rem/40rem)
+
+**Status**: Homepage ready for live deployment. Future blocks coming soon!
 
 ---
 

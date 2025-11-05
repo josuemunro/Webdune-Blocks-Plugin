@@ -40,11 +40,14 @@ export default function Edit({ attributes, setAttributes }) {
             label={__('Button URL', 'webdune-blocks')}
             value={ctaUrl}
             onChange={(value) => setAttributes({ ctaUrl: value })}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
           <ToggleControl
             label={__('Open in new tab', 'webdune-blocks')}
             checked={ctaOpenInNewTab}
             onChange={(value) => setAttributes({ ctaOpenInNewTab: value })}
+            __nextHasNoMarginBottom
           />
         </PanelBody>
         <PanelBody title={__('Image', 'webdune-blocks')}>
@@ -94,12 +97,16 @@ export default function Edit({ attributes, setAttributes }) {
                     value={step.title}
                     onChange={(value) => updateStep(index, 'title', value)}
                     placeholder={__('Step title...', 'webdune-blocks')}
+                    __next40pxDefaultSize
+                    __nextHasNoMarginBottom
                   />
                   <TextControl
                     label={__('Description', 'webdune-blocks')}
                     value={step.description}
                     onChange={(value) => updateStep(index, 'description', value)}
                     placeholder={__('Step description...', 'webdune-blocks')}
+                    __next40pxDefaultSize
+                    __nextHasNoMarginBottom
                   />
                   {steps.length > 1 && (
                     <Button
@@ -124,6 +131,8 @@ export default function Edit({ attributes, setAttributes }) {
             value={ctaText}
             onChange={(value) => setAttributes({ ctaText: value })}
             placeholder={__('Get started', 'webdune-blocks')}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
         </div>
       </div>

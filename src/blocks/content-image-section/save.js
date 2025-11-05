@@ -37,7 +37,10 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      <section className="section_content-image" style={{ color: textColor }}>
+      <section 
+        className={`section_content-image ${!showContent ? 'no-content' : ''}`} 
+        style={{ color: textColor }}
+      >
         {showContent && (
           <div className="padding-global z-index-2">
             <div className="container-small">

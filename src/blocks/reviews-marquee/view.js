@@ -99,8 +99,6 @@ function initReviewsMarquee() {
           disableOnInteraction: false,
           reverseDirection: false,
         },
-        freeMode: true,
-        freeModeMomentum: false,
         allowTouchMove: true, // Disable dragging
       });
 
@@ -130,8 +128,6 @@ function initReviewsMarquee() {
             },
           },
         },
-        freeMode: true,
-        freeModeMomentum: false,
         allowTouchMove: true, // Allow touch on mobile
         // Navigation arrows for mobile
         navigation: {

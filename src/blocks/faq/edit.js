@@ -46,6 +46,8 @@ export default function Edit({ attributes, setAttributes }) {
             value={buttonText}
             onChange={(value) => setAttributes({ buttonText: value })}
             help={__('Leave empty to hide button', 'webdune-blocks')}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
           {buttonText && (
             <>
@@ -58,6 +60,7 @@ export default function Edit({ attributes, setAttributes }) {
                 label={__('Open in new tab', 'webdune-blocks')}
                 checked={buttonOpenInNewTab}
                 onChange={(value) => setAttributes({ buttonOpenInNewTab: value })}
+                __nextHasNoMarginBottom
               />
             </>
           )}

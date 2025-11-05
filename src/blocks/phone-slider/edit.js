@@ -78,12 +78,14 @@ export default function Edit({ attributes, setAttributes }) {
             label={__('Show Navigation Arrows', 'webdune-blocks')}
             checked={showArrows}
             onChange={(value) => setAttributes({ showArrows: value })}
+            __nextHasNoMarginBottom
           />
 
           <ToggleControl
             label={__('Enable Autoplay', 'webdune-blocks')}
             checked={autoplay}
             onChange={(value) => setAttributes({ autoplay: value })}
+            __nextHasNoMarginBottom
           />
 
           {autoplay && (
@@ -104,12 +106,16 @@ export default function Edit({ attributes, setAttributes }) {
             value={bottomText}
             onChange={(value) => setAttributes({ bottomText: value })}
             help={__('Text displayed below the slider', 'webdune-blocks')}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
 
           <TextControl
             label={__('Button Text', 'webdune-blocks')}
             value={buttonText}
             onChange={(value) => setAttributes({ buttonText: value })}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
 
           <TextControl
@@ -117,12 +123,15 @@ export default function Edit({ attributes, setAttributes }) {
             value={buttonUrl}
             onChange={(value) => setAttributes({ buttonUrl: value })}
             type="url"
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
 
           <ToggleControl
             label={__('Open in New Tab', 'webdune-blocks')}
             checked={buttonOpenInNewTab}
             onChange={(value) => setAttributes({ buttonOpenInNewTab: value })}
+            __nextHasNoMarginBottom
           />
         </PanelBody>
       </InspectorControls>

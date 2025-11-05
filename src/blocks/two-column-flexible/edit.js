@@ -62,7 +62,8 @@ export default function Edit({ attributes, setAttributes }) {
     singleImage,
     doubleImageMode,
     doubleImageFirst,
-    doubleImageSecond
+    doubleImageSecond,
+    centerAlignText
   } = attributes;
 
   const blockProps = useBlockProps({
@@ -203,6 +204,12 @@ export default function Edit({ attributes, setAttributes }) {
           />
 
           <ToggleControl
+            label={__('Center Align Text', 'webdune-blocks')}
+            checked={centerAlignText}
+            onChange={(value) => setAttributes({ centerAlignText: value })}
+          />
+
+          <ToggleControl
             label={__('Show CTA', 'webdune-blocks')}
             checked={showCTA}
             onChange={(value) => setAttributes({ showCTA: value })}
@@ -330,7 +337,7 @@ export default function Edit({ attributes, setAttributes }) {
                 style={{ gridTemplateColumns: `${gridRatioLeft}fr ${gridRatioRight}fr` }}
               >
                 {/* Text Content Column */}
-                <div className="two-col-block_text-content">
+                <div className={`two-col-block_text-content ${centerAlignText ? 'center-align' : ''}`}>
                   {showNumber && (
                     <div className="two-col-block_number">
                       {numberValue}.

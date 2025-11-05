@@ -1,8 +1,8 @@
 # 🚀 START HERE - Webdune Blocks Plugin
 
-**Last Updated**: October 29, 2025  
-**Project Status**: 14/14 Core Blocks Complete (100%)  
-**Current Phase**: Ready for live site testing and deployment
+**Last Updated**: November 4, 2025  
+**Project Status**: 16/16 Core Blocks Complete & Polished (100%)  
+**Current Phase**: Homepage + Tips + FAQ Complete - Ready for Live Deployment
 
 ---
 
@@ -10,14 +10,14 @@
 
 This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks system that will replace WP Bakery for new pages.
 
-### Current Status - October 29, 2025
+### Current Status - November 4, 2025
 - ✅ Plugin structure created
 - ✅ Documentation complete & streamlined
 - ✅ Helper functions ready
 - ✅ Shared styles configured (colors, typography, layout, utilities, effects)
 - ✅ Shared animations (GSAP, Lenis, parallax)
 - ✅ Development workflow established
-- ✅ **All 14 Core Blocks Completed and Built** (100%):
+- ✅ **All 16 Core Blocks Completed and Built** (100%):
   - Navigation block (liquid glass, scroll behaviors, mobile menu)
   - Footer block (newsletter, social links, contact info)
   - Hero block (Homepage with phone search UI - needs live testing)
@@ -32,7 +32,10 @@ This is the **Webdune Blocks Plugin** for SellMyCell - a custom Gutenberg blocks
   - Content Image Section block (background image with overlay)
   - Charity Section block (logos, colored text, dark background)
   - Stats Section block (GSAP count-up animations)
+  - FAQ with ToC block (sidebar table of contents, categorized FAQs - NEW)
+  - FAQ Category block (child block for FAQ with ToC - NEW)
 - 📦 **SOURCE**: Webflow export in `sellmycell.webflow/` folder
+- ✅ **TIPS SYSTEM**: Custom post type with locked template, InnerBlocks content, clickable cards, pattern fallbacks
 - 🎯 **NEXT**: 
   - Deploy to live site for testing
   - Test phone search with real data

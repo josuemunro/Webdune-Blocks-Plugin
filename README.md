@@ -150,14 +150,47 @@ webdune-blocks/
    ```
    src/blocks/[block-name]/
    ├── block.json         # Block registration & metadata
-   ├── index.js           # Entry point
+   ├── index.js           # Entry point (imports SCSS!)
    ├── edit.js            # Editor component (React)
    ├── save.js            # Frontend output
    ├── style.scss         # Frontend + editor styles
    └── editor.scss        # Editor-only styles (optional)
    ```
 
-5. **Use standard section structure**
+5. **IMPORTANT: Import SCSS in index.js**
+   ```javascript
+   import { registerBlockType } from '@wordpress/blocks';
+   import Edit from './edit';
+   import save from './save';
+   import metadata from './block.json';
+   import './style.scss';      // REQUIRED - Frontend styles
+   import './editor.scss';     // REQUIRED - Editor styles
+   
+   registerBlockType(metadata.name, {
+     ...metadata,
+     edit: Edit,
+     save,
+   });
+   ```
+
+6. **CRITICAL: Use correct file paths in block.json**
+   
+   Webpack builds CSS with specific names - use these exact paths:
+   ```json
+   {
+     "name": "webdune/your-block",
+     "editorScript": "file:./index.js",
+     "editorStyle": "file:./index.css",        ← editor.scss builds to this
+     "style": "file:./style-index.css",        ← style.scss builds to this
+     "viewScript": "file:./view.js"
+   }
+   ```
+   
+   **❌ WRONG:** `"style": "file:./style.css"` (this file won't exist!)
+   
+   **✅ CORRECT:** `"style": "file:./style-index.css"` (this is what webpack builds)
+
+7. **Use standard section structure**
    ```jsx
    <section className="[block-name]-section">
      <div className="padding-global">

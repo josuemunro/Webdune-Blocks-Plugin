@@ -230,16 +230,20 @@
 
     .navbar14_menu-links {
       flex-direction: column;
+      align-items: flex-start;
+      margin-top: 1rem;
     }
 
     .navbar14_link {
       padding: 1rem;
+      padding-left: 0;
       text-align: center;
     }
 
     .navbar14_button-wrapper {
       width: 100%;
       justify-content: center;
+      display: none;
 
       &.mobile {
         display: flex; // Show mobile account icon
@@ -261,10 +265,6 @@
     .navbar14_container {
       padding: 0.75rem 1rem;
     }
-
-    .navbar14_logo {
-      height: 2.5rem; // 40px
-    }
   }
 
   // Responsive: Mobile Portrait
@@ -274,18 +274,9 @@
       padding: 0.625rem 0.875rem;
     }
 
-    .navbar14_logo {
-      height: 2.25rem; // 36px
-    }
-
     .menu-icon2 {
       width: 40px;
       height: 40px;
-    }
-
-    .icon-embed-small {
-      width: 1.25rem;
-      height: 1.25rem;
     }
   }
 }

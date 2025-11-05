@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/faq-category",
+  "version": "1.0.0",
+  "title": "FAQ Category",
+  "category": "webdune",
+  "icon": "category",
+  "description": "A category section within FAQ with Table of Contents",
+  "keywords": ["faq", "category", "section"],
+  "parent": ["webdune/faq-with-toc"],
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "inserter": false
+  },
+  "attributes": {
+    "categoryName": {
+      "type": "string",
+      "default": "Category Name"
+    },
+    "categoryId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
+

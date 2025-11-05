@@ -181,7 +181,7 @@ export default function Edit({ attributes, setAttributes }) {
       {/* Editor Preview */}
       <div {...blockProps}>
         <section
-          className="section_content-image"
+          className={`section_content-image ${!showContent ? 'no-content' : ''}`}
           style={{
             backgroundImage: backgroundImage.url ? `url(${backgroundImage.url})` : 'none',
             color: textColor

@@ -29,6 +29,34 @@ define('WEBDUNE_BLOCKS_BUILD_URL', WEBDUNE_BLOCKS_PLUGIN_URL . 'build/');
 define('WEBDUNE_BLOCKS_ASSETS_URL', WEBDUNE_BLOCKS_PLUGIN_URL . 'assets/');
 
 /**
+ * Plugin activation hook - flush rewrite rules for custom post types
+ * DISABLED - Caused 500 errors
+ * 
+ * NOTE: If Tips posts show 404 errors, manually flush permalinks:
+ * Go to Settings → Permalinks and click "Save Changes"
+ */
+/*
+function webdune_blocks_activate()
+{
+  // Register custom post types first
+  require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/post-types.php';
+  webdune_register_tips_post_type();
+  webdune_register_tip_category_taxonomy();
+  webdune_register_tip_tag_taxonomy();
+  
+  // Flush rewrite rules so Tips URLs work immediately
+  flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'webdune_blocks_activate');
+
+function webdune_blocks_deactivate()
+{
+  flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'webdune_blocks_deactivate');
+*/
+
+/**
  * Register custom block category
  */
 function webdune_blocks_category($block_categories, $editor_context)
@@ -77,6 +105,12 @@ function webdune_blocks_register_blocks()
     // FAQ
     'faq',
     'faq-item',
+    'faq-with-toc',
+    'faq-category',
+
+    // Tips / Blog
+    'tips-grid',
+    'related-tips',
   );
 
   // Register each block
@@ -253,8 +287,9 @@ function webdune_blocks_image_sizes()
 add_action('after_setup_theme', 'webdune_blocks_image_sizes');
 
 /**
- * Include helper functions
+ * Include helper functions and custom post types
  */
+require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/post-types.php';
 require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/phone-queries.php';
 require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/block-helpers.php';
 

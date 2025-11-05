@@ -1,0 +1,38 @@
+// Editor-specific styles for FAQ with ToC
+
+.wp-block-webdune-faq-with-toc {
+  // Ensure the section wrapper doesn't interfere with block selection
+  .section_faq-main {
+    position: relative;
+  }
+
+  // Make sure inner blocks are clickable
+  .faq-sections_list {
+    // Ensure nested blocks can be selected
+    .block-editor-inner-blocks,
+    .block-editor-block-list__layout {
+      > .wp-block {
+        // Each FAQ category block should be selectable
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // Add visual spacing in editor
+  .faq-grid {
+    margin: 2rem 0;
+  }
+}
+
+.faq-toc-note {
+  font-size: 0.875rem;
+  color: #666;
+  font-style: italic;
+  padding: 1rem;
+  background: #f0f0f1;
+  border-radius: 4px;
+  margin: 0;
+}
+

@@ -1,0 +1,78 @@
+// Editor-specific styles for FAQ Category block
+
+.wp-block-webdune-faq-category {
+  // Add visual indication of the block boundary
+  position: relative;
+  padding: 1.5rem;
+  border: 2px dashed transparent;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+  
+  // Make the block clearly clickable and selectable
+  cursor: pointer;
+  
+  &:hover {
+    border-color: #ddd;
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+  
+  // When selected, show clear indication
+  &.is-selected,
+  &.has-child-selected {
+    border-color: #007cba;
+    background-color: rgba(0, 123, 186, 0.03);
+  }
+
+  // Make sure the h2 is clickable for selecting the block
+  .faq-h2 {
+    cursor: pointer;
+    margin: 0 0 2rem 0;
+    position: relative;
+    
+    &:before {
+      content: 'Category: ';
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+  }
+
+  // Style the scroll target preview
+  .scroll_target-preview {
+    background: #f0f0f1;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border-left: 3px solid #007cba;
+    
+    small {
+      font-family: 'Courier New', monospace;
+      color: #2c3338;
+      font-size: 0.875rem;
+    }
+  }
+
+  // Ensure InnerBlocks container is properly clickable
+  .faq-list {
+    position: relative;
+    
+    // Allow inner blocks to be clicked
+    .block-editor-inner-blocks {
+      > .block-editor-block-list__layout {
+        > .wp-block {
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  // FAQ item preview styling in editor
+  .webdune-faq-item {
+    pointer-events: auto;
+  }
+}

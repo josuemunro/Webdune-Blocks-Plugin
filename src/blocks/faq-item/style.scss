@@ -7,6 +7,10 @@
   align-items: center;
   display: flex;
   overflow: hidden;
+
+  &.align-left {
+    align-items: flex-start;
+  }
 }
 
 .faq5_question {
@@ -68,6 +72,10 @@
   overflow: hidden;
   transition: height 0.3s ease;
   width: 100%;
+
+  &.align-left {
+    padding-left: 0;
+  }
 }
 
 .faq_answer-inner {

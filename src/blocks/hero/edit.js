@@ -27,11 +27,15 @@ export default function Edit({ attributes, setAttributes }) {
             value={searchPlaceholder}
             onChange={(value) => setAttributes({ searchPlaceholder: value })}
             help={__('Placeholder text for phone search input', 'webdune-blocks')}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
           <TextControl
             label={__('Search Button Text', 'webdune-blocks')}
             value={searchButtonText}
             onChange={(value) => setAttributes({ searchButtonText: value })}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
         </PanelBody>
 

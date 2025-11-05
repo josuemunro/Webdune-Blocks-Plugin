@@ -140,6 +140,10 @@
     "doubleImageSecond": {
       "type": "object",
       "default": {}
+    },
+    "centerAlignText": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "webdune-blocks",

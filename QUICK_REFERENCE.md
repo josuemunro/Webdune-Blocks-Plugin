@@ -119,9 +119,62 @@ src/blocks/[block-name]/
 ├── index.js            # Entry point (registers block + format types)
 ├── edit.js             # Editor component (React)
 ├── save.js             # Frontend output
-├── style.scss          # Frontend styles
-├── editor.scss         # Editor-only styles
+├── style.scss          # Frontend styles (loads on both editor + frontend)
+├── editor.scss         # Editor-only styles (loads only in editor)
 └── view.js             # Optional: Frontend JavaScript
+```
+
+### How to Import Styles (IMPORTANT)
+
+**In `index.js`, you MUST import your SCSS files:**
+
+```javascript
+import { registerBlockType } from '@wordpress/blocks';
+import Edit from './edit';
+import save from './save';
+import metadata from './block.json';
+import './style.scss';      // Frontend + Editor styles
+import './editor.scss';     // Editor-only styles
+
+registerBlockType(metadata.name, {
+  ...metadata,
+  edit: Edit,
+  save,
+});
+```
+
+### Webpack CSS Naming Convention
+
+`@wordpress/scripts` uses **automatic naming conventions** for CSS output:
+
+| Source File | Import Statement | Builds To | Reference In block.json |
+|------------|------------------|-----------|------------------------|
+| `style.scss` | `import './style.scss'` | `style-index.css` | `"style": "file:./style-index.css"` |
+| `editor.scss` | `import './editor.scss'` | `index.css` | `"editorStyle": "file:./index.css"` |
+| `view.js` | N/A (separate entry) | `view.js` | `"viewScript": "file:./view.js"` |
+
+### Example block.json (CRITICAL - Use Correct Paths!)
+
+```json
+{
+  "name": "webdune/your-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",        ← Editor SCSS builds to this
+  "style": "file:./style-index.css",        ← Frontend SCSS builds to this
+  "viewScript": "file:./view.js"
+}
+```
+
+**❌ WRONG (will not load CSS):**
+```json
+"style": "file:./style.css",      // This file doesn't exist!
+"editorStyle": "file:./editor.css"  // This file doesn't exist!
+```
+
+**✅ CORRECT:**
+```json
+"style": "file:./style-index.css",   // This is what webpack builds
+"editorStyle": "file:./index.css"    // This is what webpack builds
 ```
 
 ---

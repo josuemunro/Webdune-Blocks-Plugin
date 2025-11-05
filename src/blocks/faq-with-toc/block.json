@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/faq-with-toc",
+  "version": "1.0.0",
+  "title": "FAQ with Table of Contents",
+  "category": "webdune",
+  "icon": "list-view",
+  "description": "FAQ section with sidebar table of contents and categorized questions",
+  "keywords": ["faq", "accordion", "table of contents", "toc", "categories"],
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "sectionHeading": {
+      "type": "string",
+      "default": "FAQ Categories"
+    }
+  },
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}
+

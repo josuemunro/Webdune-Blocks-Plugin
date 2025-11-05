@@ -13,5 +13,7 @@ import './blocks/reviews-marquee';
 import './blocks/charity-section';
 import './blocks/content-image-section';
 import './blocks/stats-section';
+import './blocks/tips-grid';
+import './blocks/related-tips';
 
 

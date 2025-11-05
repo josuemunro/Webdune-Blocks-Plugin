@@ -163,7 +163,32 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 
 ---
 
-### 8. CTA Section Block (Reusable)
+### 8. FAQ with Table of Contents Block (NEW - Nov 2025)
+**Name**: `webdune/faq-with-toc`  
+**Figma**: FAQ page design  
+**Purpose**: Full FAQ page with sidebar table of contents and categorized questions  
+**Attributes**:
+- Section Heading (Text - "FAQ Categories" by default)
+- Uses **InnerBlocks** (allows only `webdune/faq-category`)
+
+**Features**:
+- Two-column layout: sidebar + content
+- Sticky sidebar with auto-generated table of contents
+- Dynamic scroll anchors for each category
+- Smooth scrolling to categories
+- Active state highlighting on scroll
+- Fully responsive (stacks on mobile)
+
+**Child Block**: `webdune/faq-category`
+- Category Name (RichText - auto-generates ID)
+- Category ID (Text - for scroll target)
+- Contains `webdune/faq-item` blocks
+
+**Priority**: HIGH - Full FAQ page implementation
+
+---
+
+### 9. CTA Section Block (Reusable)
 **Name**: `webdune/cta-section`  
 **Figma**: Multiple (22:256, 26:81, etc.)  
 **Purpose**: Call-to-action section with heading, text, button  
@@ -416,6 +441,14 @@ All blocks are under the **"Webdune Blocks"** category in the block inserter.
 | LOW | Stats Section | ✅ **COMPLETE** | Webflow export | GSAP ScrollTrigger | Count-up animation |
 
 **Total Core Blocks**: 14 / 14 (100% Complete)
+
+### New Blocks Added (November 2025)
+
+| Priority | Block Name | Status | Source | Dependencies | Notes |
+|----------|------------|--------|---------|--------------|-------|
+| HIGH | FAQ with ToC (`webdune/faq-with-toc`) | ✅ **COMPLETE** | Webflow FAQ page | InnerBlocks | Table of contents sidebar |
+| HIGH | FAQ Category (`webdune/faq-category`) | ✅ **COMPLETE** | Webflow FAQ page | Parent: FAQ with ToC | Category sections with scroll anchors |
+| MEDIUM | Tips Grid (Enhanced) | ✅ **UPDATED** | Tips system | PHP, dynamic | Whole card now clickable |
 
 ### Removed/Redundant Blocks
 
