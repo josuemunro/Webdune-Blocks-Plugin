@@ -76,6 +76,15 @@
   &.align-left {
     padding-left: 0;
   }
+
+  &.align-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .faq_answer-inner {
+    margin: 0.5rem 0 0;
+  }
 }
 
 .faq_answer-inner {

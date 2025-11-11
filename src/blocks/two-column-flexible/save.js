@@ -34,6 +34,20 @@ export default function Save({ attributes }) {
     centerAlignText
   } = attributes;
 
+  // Check if block has any content - hide if completely empty
+  const hasTextContent = (showH2 && h2Text) || (showH3 && h3Text) || (showCTA && ctaText);
+  const hasMediaContent = 
+    (mediaType === 'video' && videoUrl) ||
+    (mediaType === 'single-image' && singleImage?.url) ||
+    (mediaType === 'double-images' && (doubleImageFirst?.url || doubleImageSecond?.url));
+  
+  const hasContent = hasTextContent || hasMediaContent || (showHeader && headerText);
+  
+  // Return null if block is empty (won't render on frontend)
+  if (!hasContent) {
+    return null;
+  }
+
   const blockProps = useBlockProps.save({
     className: 'webdune-two-column-flexible',
   });

@@ -380,6 +380,98 @@ npm run build
 - Check no JavaScript errors in console
 - Try `wp cache flush` in Local site shell
 
+### Adding child blocks programmatically (InnerBlocks)
+**Problem**: Button to add child blocks doesn't work, nothing appears in editor
+
+**Common mistake**: Using `insertBlock()` incorrectly with InnerBlocks
+```javascript
+// ❌ WRONG - insertBlock returns a Promise, doesn't work reliably
+const { insertBlock } = useDispatch('core/block-editor');
+insertBlock(newBlock, undefined, clientId);
+```
+
+**Solution**: Use `replaceInnerBlocks()` to append to existing blocks
+```javascript
+// ✅ CORRECT - replaceInnerBlocks with updated array
+const { replaceInnerBlocks } = useDispatch('core/block-editor');
+
+// Get current inner blocks
+const innerBlocks = useSelect(
+  (select) => {
+    const { getBlock } = select('core/block-editor');
+    return getBlock(clientId)?.innerBlocks || [];
+  },
+  [clientId]
+);
+
+// Function to add child block
+const addChildBlock = () => {
+  const newBlock = createBlock('webdune/child-block', {
+    // attributes here
+  });
+  
+  // Append to existing blocks
+  const updatedBlocks = [...innerBlocks, newBlock];
+  
+  // Replace with updated array
+  replaceInnerBlocks(clientId, updatedBlocks, false);
+};
+```
+
+**Example blocks**: FAQ Parent, FAQ with ToC, FAQ Category
+
+### Blocks failing to save with emojis or special characters
+**Problem**: Block content won't save when emojis (😀) or special characters are added
+
+**Common causes**:
+1. Null bytes (`\0`) in the text
+2. Zero-width characters that break JSON parsing
+3. MySQL not using utf8mb4 collation
+
+**Solution**: Sanitize text attributes before saving
+```javascript
+// Add sanitization helper function in edit.js
+const sanitizeTextAttribute = (value) => {
+  if (!value) return value;
+  // Remove null bytes that can break database saves
+  let sanitized = value.replace(/\0/g, '');
+  // Remove problematic zero-width characters
+  sanitized = sanitized.replace(/[\u200B-\u200D\uFEFF]/g, '');
+  return sanitized;
+};
+
+// Apply to all text input onChange handlers
+<RichText
+  value={text}
+  onChange={(value) => setAttributes({ text: sanitizeTextAttribute(value) })}
+/>
+
+<TextControl
+  value={text}
+  onChange={(value) => setAttributes({ text: sanitizeTextAttribute(value) })}
+/>
+```
+
+**For multi-line text**: Use `TextareaControl` instead of `TextControl`
+```javascript
+import { TextareaControl } from '@wordpress/components';
+
+<TextareaControl
+  label="Review Text"
+  value={text}
+  onChange={(value) => updateText(sanitizeTextAttribute(value))}
+  rows={4}
+/>
+```
+
+**Fixed blocks**: Reviews Marquee, Two-Column Flexible
+
+**Still having emoji issues?** See `EMOJI-TROUBLESHOOTING.md` for:
+- Console debugging tools (auto-loads in editor)
+- Database encoding checks
+- Step-by-step diagnosis
+- Server-side fixes
+
 ---
 
 ## 📝 Daily Workflow
@@ -427,11 +519,51 @@ npm start
    git push origin main --tags
    ```
 
-4. **Upload to Live Site**
-   - Deactivate & delete old plugin
-   - Upload `webdune-blocks.zip`
-   - Activate new version
-   - Test functionality
+4. **Deploy to Live Site**
+   
+   **Option A: Automated Deployment (Recommended) 🚀**
+   ```bash
+   npm run deploy:prod
+   ```
+   This command will:
+   - Build the plugin
+   - Create the zip with assets folder
+   - Backup existing plugin on server
+   - Upload new version via SCP
+   - Extract and replace automatically
+   - Set proper permissions
+   
+   **Option B: Manual WordPress Update**
+   - Go to Plugins → Installed Plugins
+   - Find "Webdune Blocks"
+   - Click "Deactivate"
+   - Click "Delete" (WordPress will properly clear all files)
+   - Go to Plugins → Add New → Upload Plugin
+   - Choose `webdune-blocks.zip`
+   - Click "Install Now" → "Activate"
+   
+   **Option C: Manual FTP/File Manager (If needed)**
+   - Deactivate plugin in WordPress
+   - Wait 30 seconds (let server release file locks)
+   - Delete via FTP/File Manager: `wp-content/plugins/webdune-blocks/`
+   - Upload new `webdune-blocks.zip` and extract
+   - Activate in WordPress
+   
+   **Why you need the assets folder:**
+   - Contains Helvetica World fonts (.woff2 files)
+   - Loaded on every page (frontend + editor)
+   - Can't be removed without breaking typography
+   
+   **Deployment Requirements (for automated deploy):**
+   - SSH key at `~/.ssh/github_rsa`
+   - SSH access to production server
+   - Git Bash or Linux/Mac terminal
+   
+   **If deployment fails:**
+   - Check SSH key path and permissions
+   - Verify server credentials in `deploy-to-production.sh`
+   - Backup is automatically created before deployment
+   - Fallback to Option B or C
 
 ### Evening Wrap-up
 ```bash
@@ -458,6 +590,8 @@ git push
 ```bash
 npm start              # Development (watch mode)
 npm run build          # Production build
+npm run plugin-zip     # Build + create deployment zip
+npm run deploy:prod    # Build + deploy to live site automatically 🚀
 wp plugin list         # List plugins (in Local shell)
 wp cache flush         # Clear cache (in Local shell)
 ```

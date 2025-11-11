@@ -27,6 +27,22 @@
   .wp-block {
     max-width: none !important;
   }
+
+  // Constrain the main tips content group in the editor
+  .tips-content-section {
+    max-width: 48rem;
+    margin: 0 auto;
+    
+    // Override any theme styles that might expand the width
+    &.wp-block-group {
+      max-width: 48rem !important;
+    }
+    
+    // Ensure the inner container respects the width
+    .wp-block-group__inner-container {
+      max-width: 48rem;
+    }
+  }
 }
 
 // Remove padding and width constraints from blocks marked as alignfull

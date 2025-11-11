@@ -207,7 +207,7 @@ function webdune_get_phones_for_slider($args = array())
         'id'          => $post_id,
         'title'       => get_the_title(),
         'url'         => get_permalink(),
-        'image'       => get_the_post_thumbnail_url($post_id, 'webdune-phone-thumb'),
+        'image'       => get_the_post_thumbnail_url($post_id, 'medium'), // Changed from webdune-phone-thumb to WP default
         'image_alt'   => get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true),
         'max_price'   => $price_range['max'],
       );

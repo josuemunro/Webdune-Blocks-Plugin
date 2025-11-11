@@ -96,3 +96,21 @@
     }
   }
 }
+
+// Make textarea controls more visible and easier to use
+.components-panel__body {
+  .components-textarea-control {
+    textarea {
+      min-height: 100px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 8px;
+      
+      &:focus {
+        border-color: #2271b1;
+        box-shadow: 0 0 0 1px #2271b1;
+      }
+    }
+  }
+}

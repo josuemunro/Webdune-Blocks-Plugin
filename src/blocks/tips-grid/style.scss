@@ -28,25 +28,25 @@
 
     // Column variations
     &--columns-2 {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     &--columns-3 {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     &--columns-4 {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     // Responsive breakpoints
     @media (max-width: 991px) {
-      grid-template-columns: repeat(2, 1fr) !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       gap: 2.5rem;
     }
 
     @media (max-width: 767px) {
-      grid-template-columns: 1fr !important;
+      grid-template-columns: minmax(0, 1fr) !important;
       gap: 2rem;
     }
   }
@@ -103,49 +103,54 @@
   &__card-content {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1rem; // 16px gap inside content
     flex: 1;
   }
 
   &__card-meta {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1rem; // 16px gap between tags and read time
   }
 
   &__card-tag {
     background-color: #e8e8ed;
-    padding: 0.25rem 0.5rem 0.375rem;
-    border-radius: 1rem;
-    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem 0.375rem; // 4px 8px 6px
+    border-radius: 1rem; // 16px
+    font-size: 0.875rem; // 14px
     line-height: 1.5;
     color: $color-dark;
   }
 
   &__card-read-time {
-    font-size: 0.875rem;
+    font-size: 0.875rem; // 14px
     line-height: 1.5;
     color: $color-dark;
   }
 
+  &__card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; // 8px gap between title and excerpt (same as related-tips)
+  }
+
   &__card-title {
-    font-size: 2rem;
-    line-height: 2.5rem;
-    letter-spacing: -0.03rem;
+    font-size: 2rem; // 32px
+    line-height: 2.5rem; // 40px
+    letter-spacing: -0.03rem; // -0.48px
     color: $color-dark;
     margin: 0;
 
     @media (max-width: 767px) {
-      font-size: 1.75rem;
-      line-height: 2rem;
+      font-size: 1.75rem; // 28px
+      line-height: 2rem; // 32px
     }
   }
 
   &__card-excerpt {
-    font-size: 1rem;
+    font-size: 1rem; // 16px
     line-height: 1.5;
     color: $color-dark;
-    flex: 1;
 
     p {
       margin: 0;
@@ -223,7 +228,7 @@
 
     @media (max-width: 767px) {
       margin-top: 3rem;
-      
+
       .page-numbers {
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
@@ -258,4 +263,3 @@
     }
   }
 }
-

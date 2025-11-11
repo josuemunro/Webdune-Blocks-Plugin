@@ -14,7 +14,9 @@
     "lint:md:docs": "wp-scripts lint-md-docs",
     "lint:pkg-json": "wp-scripts lint-pkg-json",
     "packages-update": "wp-scripts packages-update",
-    "plugin-zip": "npm run build && wp-scripts plugin-zip"
+    "plugin-zip": "npm run build && wp-scripts plugin-zip && npm run add-assets-to-zip",
+    "add-assets-to-zip": "node add-assets-to-zip.js",
+    "deploy:prod": "bash deploy-to-production.sh"
   },
   "devDependencies": {
     "@wordpress/scripts": "^27.0.0"

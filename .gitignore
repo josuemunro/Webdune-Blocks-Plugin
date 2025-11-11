@@ -36,8 +36,17 @@ yarn.lock
 .env
 .env.local
 .env.*.local
+*.sh
 
 # Plugin ZIP files (created by npm run plugin-zip)
 *.zip
 webdune-blocks.zip
+
+# SSH keys and sensitive files
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+github_rsa
+*.ppk
 

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "webdune/tips-meta",
+  "version": "1.0.0",
+  "title": "Tips Meta",
+  "category": "webdune",
+  "icon": "share",
+  "description": "Displays tip categories and share buttons (automatically added to Tips posts)",
+  "keywords": [
+    "tips",
+    "share",
+    "categories",
+    "tags",
+    "social"
+  ],
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "attributes": {},
+  "textdomain": "webdune-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

@@ -10,6 +10,8 @@
 .tips-content-section {
   background-color: white;
   padding: 7.5rem 0;
+  max-width: 48rem;
+  margin: 0 auto;
 
   @media (max-width: 991px) {
     padding: 6rem 0;
@@ -17,6 +19,17 @@
 
   @media (max-width: 767px) {
     padding: 5rem 0;
+
+    &.has-global-padding.wp-block-group {
+      padding-left: 5% !important;
+      padding-right: 5% !important;
+    }
+  }
+
+  // Make all direct children full width (for full-width blocks like images, videos, etc.)
+  >* {
+    max-width: none;
+    width: 100%;
   }
 
   // Container constraint
@@ -68,6 +81,7 @@
 
 // Headings in Tips content
 .tips-content-section {
+
   h2,
   .wp-block-heading {
     font-size: 3.75rem;
@@ -441,4 +455,3 @@
     }
   }
 }
-

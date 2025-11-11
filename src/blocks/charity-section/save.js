@@ -1,14 +1,16 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
   const {
     backgroundColor,
+    textColor,
     heading,
     headingHighlightColor,
     content,
     buttonText,
     buttonUrl,
     buttonOpenInNewTab,
+    buttonPosition,
     charityLogos
   } = attributes;
 
@@ -21,6 +23,10 @@ export default function save({ attributes }) {
     '--charity-highlight-color': headingHighlightColor || '#FFD940',
   };
 
+  const contentStyle = {
+    color: textColor || '#FFFFFF',
+  };
+
   const buttonTarget = buttonOpenInNewTab ? '_blank' : undefined;
   const buttonRel = buttonOpenInNewTab ? 'noopener noreferrer' : undefined;
 
@@ -29,20 +35,23 @@ export default function save({ attributes }) {
       <section className="section_home-charity" style={sectionStyle}>
         <div className="padding-global z-index-1">
           <div className="container-small">
-            <div className="home-charity_content">
+            <div className="home-charity_content" style={contentStyle}>
               <RichText.Content
                 tagName="h2"
-                className="heading-style-h2 text-color-white text-align-center"
+                className="heading-style-h2 text-align-center"
                 value={heading}
               />
+              <div className="charity-innerblocks">
+                <InnerBlocks.Content />
+              </div>
               {content && (
                 <RichText.Content
                   tagName="p"
-                  className="text-align-center text-color-white"
+                  className="text-align-center"
                   value={content}
                 />
               )}
-              {buttonText && (
+              {buttonText && buttonPosition === 'before' && (
                 <a href={buttonUrl} className="button w-button" target={buttonTarget} rel={buttonRel}>
                   {buttonText}
                 </a>
@@ -62,6 +71,13 @@ export default function save({ attributes }) {
                     />
                   ))
                 }
+              </div>
+            )}
+            {buttonText && buttonPosition === 'after' && (
+              <div className="home-charity_button-after">
+                <a href={buttonUrl} className="button w-button" target={buttonTarget} rel={buttonRel}>
+                  {buttonText}
+                </a>
               </div>
             )}
           </div>

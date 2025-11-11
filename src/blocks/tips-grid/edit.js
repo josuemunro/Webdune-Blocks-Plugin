@@ -79,7 +79,7 @@ export default function Edit({ attributes, setAttributes }) {
                   {posts.map((post) => {
                     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
                     const tags = post._embedded?.['wp:term']?.flat() || [];
-                    
+
                     return (
                       <article key={post.id} className="tips-grid__card">
                         {featuredImage && (
@@ -90,7 +90,7 @@ export default function Edit({ attributes, setAttributes }) {
                             />
                           </div>
                         )}
-                        
+
                         <div className="tips-grid__card-content">
                           {(showTags || showReadTime) && (
                             <div className="tips-grid__card-meta">
@@ -99,25 +99,27 @@ export default function Edit({ attributes, setAttributes }) {
                                   {tags[0].name}
                                 </span>
                               )}
-                              {showReadTime && (
+                              {showReadTime && post.estimated_read_time && (
                                 <span className="tips-grid__card-read-time">
-                                  5 min read
+                                  {post.estimated_read_time}
                                 </span>
                               )}
                             </div>
                           )}
-                          
-                          <h3 className="tips-grid__card-title">
-                            {post.title.rendered}
-                          </h3>
-                          
-                          {showExcerpt && post.excerpt && (
-                            <div
-                              className="tips-grid__card-excerpt"
-                              dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                            />
-                          )}
-                          
+
+                          <div className="tips-grid__card-text">
+                            <h3 className="tips-grid__card-title">
+                              {post.title.rendered}
+                            </h3>
+
+                            {showExcerpt && post.excerpt && (
+                              <div
+                                className="tips-grid__card-excerpt"
+                                dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                              />
+                            )}
+                          </div>
+
                           <div className="tips-grid__card-link">
                             <span>{__('Read more', 'webdune-blocks')}</span>
                           </div>

@@ -4,13 +4,16 @@ import {
   RichText,
   MediaUpload,
   MediaUploadCheck,
-  InspectorControls
+  InspectorControls,
+  URLInput
 } from '@wordpress/block-editor';
 import {
   PanelBody,
   SelectControl,
   ToggleControl,
-  Button
+  Button,
+  RangeControl,
+  TextControl
 } from '@wordpress/components';
 import './editor.scss';
 
@@ -22,7 +25,13 @@ export default function Edit({ attributes, setAttributes }) {
     subheading,
     mainImage,
     phoneImage,
-    showDownArrow
+    showDownArrow,
+    columnRatioLeft,
+    columnRatioRight,
+    showCTA,
+    ctaText,
+    ctaUrl,
+    ctaOpenInNewTab
   } = attributes;
 
   const blockProps = useBlockProps({
@@ -44,6 +53,36 @@ export default function Edit({ attributes, setAttributes }) {
             help={__('Choose between image with phone overlay or single wide image', 'webdune-blocks')}
           />
 
+          {layoutType === 'wide-image' && (
+            <>
+              <RangeControl
+                label={__('Left Column Width', 'webdune-blocks')}
+                value={columnRatioLeft}
+                onChange={(value) => setAttributes({ columnRatioLeft: value })}
+                min={1}
+                max={12}
+                step={1}
+                help={__('Relative width of the text column (1-12)', 'webdune-blocks')}
+              />
+
+              <RangeControl
+                label={__('Right Column Width', 'webdune-blocks')}
+                value={columnRatioRight}
+                onChange={(value) => setAttributes({ columnRatioRight: value })}
+                min={1}
+                max={12}
+                step={1}
+                help={__('Relative width of the image column (1-12)', 'webdune-blocks')}
+              />
+
+              <p style={{ fontSize: '12px', color: '#757575', marginTop: '8px' }}>
+                {__('Current ratio:', 'webdune-blocks')} {columnRatioLeft}fr : {columnRatioRight}fr
+                <br />
+                {__('Example: 4:7 gives more space to image, 1:1 splits evenly', 'webdune-blocks')}
+              </p>
+            </>
+          )}
+
           <ToggleControl
             label={__('Show Down Arrow', 'webdune-blocks')}
             checked={showDownArrow}
@@ -61,6 +100,36 @@ export default function Edit({ attributes, setAttributes }) {
               style={{ width: '100%', height: '40px' }}
             />
           </div>
+        </PanelBody>
+
+        <PanelBody title={__('CTA Button', 'webdune-blocks')} initialOpen={false}>
+          <ToggleControl
+            label={__('Show CTA Button', 'webdune-blocks')}
+            checked={showCTA}
+            onChange={(value) => setAttributes({ showCTA: value })}
+            help={__('Display a call-to-action button below the paragraph', 'webdune-blocks')}
+          />
+          {showCTA && (
+            <>
+              <TextControl
+                label={__('Button Text', 'webdune-blocks')}
+                value={ctaText}
+                onChange={(value) => setAttributes({ ctaText: value })}
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
+              />
+              <URLInput
+                label={__('Button URL', 'webdune-blocks')}
+                value={ctaUrl}
+                onChange={(value) => setAttributes({ ctaUrl: value })}
+              />
+              <ToggleControl
+                label={__('Open in new tab', 'webdune-blocks')}
+                checked={ctaOpenInNewTab}
+                onChange={(value) => setAttributes({ ctaOpenInNewTab: value })}
+              />
+            </>
+          )}
         </PanelBody>
 
         <PanelBody title={__('Main Image', 'webdune-blocks')}>
@@ -157,7 +226,10 @@ export default function Edit({ attributes, setAttributes }) {
         >
           <div className="padding-global z-index-1">
             <div className="w-layout-blockcontainer container-large w-container">
-              <div className={`template-hero_content ${layoutType === 'wide-image' ? 'is-wide' : ''}`}>
+              <div 
+                className={`template-hero_content ${layoutType === 'wide-image' ? 'is-wide' : ''}`}
+                style={layoutType === 'wide-image' ? { gridTemplateColumns: `${columnRatioLeft}fr ${columnRatioRight}fr` } : {}}
+              >
                 <div className={`template-hero_left ${layoutType === 'wide-image' ? 'is-wide' : ''}`}>
                   <RichText
                     tagName="h1"
@@ -176,6 +248,19 @@ export default function Edit({ attributes, setAttributes }) {
                     placeholder={__('Enter subheading...', 'webdune-blocks')}
                     allowedFormats={[]}
                   />
+
+                  {showCTA && ctaText && (
+                    <div className="template-hero_cta" style={{ marginTop: '24px' }}>
+                      <a 
+                        href={ctaUrl || '#'} 
+                        className="button w-button"
+                        onClick={(e) => e.preventDefault()}
+                        style={{ pointerEvents: 'none' }}
+                      >
+                        {ctaText}
+                      </a>
+                    </div>
+                  )}
 
                   {showDownArrow && (
                     <div className="template-hero_down-arrow w-embed">

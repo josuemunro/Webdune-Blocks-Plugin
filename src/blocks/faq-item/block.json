@@ -32,6 +32,10 @@
     "defaultOpen": {
       "type": "boolean",
       "default": false
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
     }
   },
   "editorScript": "file:./index.js",

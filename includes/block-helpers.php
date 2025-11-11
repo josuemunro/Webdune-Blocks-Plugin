@@ -321,7 +321,7 @@ function webdune_render_tips_grid_block($attributes)
                               $first_tag = array_shift($tags);
                           ?>
                               <span class="tips-grid__card-tag"><?php echo esc_html($first_tag->name); ?></span>
-                            <?php endif;
+                          <?php endif;
                           endif; ?>
 
                           <?php if ($attributes['showReadTime']) : ?>
@@ -332,15 +332,21 @@ function webdune_render_tips_grid_block($attributes)
                         </div>
                       <?php endif; ?>
 
-                      <h3 class="tips-grid__card-title">
-                        <?php the_title(); ?>
-                      </h3>
+                      <div class="tips-grid__card-text">
+                        <h3 class="tips-grid__card-title">
+                          <?php the_title(); ?>
+                        </h3>
 
-                      <?php if ($attributes['showExcerpt']) : ?>
-                        <div class="tips-grid__card-excerpt">
-                          <?php echo wp_kses_post(get_the_excerpt()); ?>
-                        </div>
-                      <?php endif; ?>
+                        <?php if ($attributes['showExcerpt']) : ?>
+                          <div class="tips-grid__card-excerpt">
+                            <?php
+                            // Limit excerpt to 20 words (same as related-tips)
+                            $excerpt = get_the_excerpt();
+                            echo wp_kses_post(wp_trim_words($excerpt, 20, '...'));
+                            ?>
+                          </div>
+                        <?php endif; ?>
+                      </div>
 
                       <div class="tips-grid__card-link">
                         <div class="tips-grid__card-link-inner">
@@ -476,7 +482,7 @@ function webdune_render_related_tips_block($attributes)
             </div>
             <?php if ($attributes['showButton']) : ?>
               <div class="related-tips__actions">
-                <a href="<?php echo esc_url($attributes['buttonUrl']); ?>" class="related-tips__button">
+                <a href="<?php echo esc_url($attributes['buttonUrl']); ?>" class="button">
                   <?php echo esc_html($attributes['buttonText']); ?>
                 </a>
               </div>
@@ -514,7 +520,11 @@ function webdune_render_related_tips_block($attributes)
                         </h3>
 
                         <div class="related-tips__card-excerpt">
-                          <?php echo wp_kses_post(get_the_excerpt()); ?>
+                          <?php
+                          // Limit excerpt to 20 words
+                          $excerpt = get_the_excerpt();
+                          echo wp_kses_post(wp_trim_words($excerpt, 20, '...'));
+                          ?>
                         </div>
                       </div>
 

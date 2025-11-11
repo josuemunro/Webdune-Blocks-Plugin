@@ -2,7 +2,7 @@
 @import '../../shared/layout';
 
 .wp-block-webdune-charity-section-block {
-  .section_charity {
+  .section_home-charity {
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -12,20 +12,14 @@
     padding: 50px 20px;
     text-align: center;
 
-    .charity_content {
+    .home-charity_content {
       position: relative;
       z-index: 2;
-      color: $color-white;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
       margin-bottom: 2rem;
-
-      h2,
-      p {
-        color: inherit;
-      }
 
       h2 {
         margin: 0;
@@ -36,17 +30,34 @@
           font-weight: bold;
         }
       }
+
+      // InnerBlocks in editor
+      .charity-innerblocks {
+        width: 100%;
+        
+        .block-editor-block-list__layout {
+          p {
+            text-align: center;
+          }
+        }
+
+        // Style empty state
+        &:empty {
+          min-height: 0;
+        }
+      }
     }
 
-    .charity_logos {
+    .home-charity_logos {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 2rem;
       flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
 
-    .charity_img {
+    .home-charity_img {
       object-fit: contain;
 
       &.height-fixed {
@@ -58,6 +69,12 @@
         width: 120px;
         height: auto;
       }
+    }
+
+    .home-charity_button-after {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

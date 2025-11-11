@@ -4,13 +4,17 @@ import {
   InspectorControls,
   RichText,
   InnerBlocks,
-  URLInput
+  URLInput,
+  useInnerBlocksProps
 } from '@wordpress/block-editor';
 import {
   PanelBody,
   TextControl,
-  ToggleControl
+  ToggleControl,
+  Button
 } from '@wordpress/components';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { createBlock } from '@wordpress/blocks';
 
 const ALLOWED_BLOCKS = ['webdune/faq-item'];
 
@@ -25,7 +29,7 @@ const TEMPLATE = [
   }],
 ];
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
   const {
     heading,
     buttonText,
@@ -36,6 +40,39 @@ export default function Edit({ attributes, setAttributes }) {
   const blockProps = useBlockProps({
     className: 'webdune-faq-section',
   });
+
+  const { replaceInnerBlocks } = useDispatch('core/block-editor');
+  
+  // Get the inner blocks array
+  const innerBlocks = useSelect(
+    (select) => {
+      const { getBlock } = select('core/block-editor');
+      const block = getBlock(clientId);
+      return block?.innerBlocks || [];
+    },
+    [clientId]
+  );
+  
+  // Function to add a new FAQ item
+  const addFaqItem = () => {
+    console.log('Adding FAQ item. Current count:', innerBlocks.length);
+    
+    const newBlock = createBlock('webdune/faq-item', {
+      question: 'New question?',
+      answer: 'Add your answer here.'
+    });
+    
+    console.log('New block created:', newBlock.clientId);
+    
+    // Append new block to existing inner blocks
+    const updatedBlocks = [...innerBlocks, newBlock];
+    console.log('Updating inner blocks to count:', updatedBlocks.length);
+    
+    // Replace all inner blocks with the updated array (including the new one)
+    replaceInnerBlocks(clientId, updatedBlocks, false);
+    
+    console.log('✅ FAQ item added successfully!');
+  };
 
   return (
     <>
@@ -94,8 +131,22 @@ export default function Edit({ attributes, setAttributes }) {
                 allowedBlocks={ALLOWED_BLOCKS}
                 template={TEMPLATE}
                 templateLock={false}
-                renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
               />
+              
+              {/* Add FAQ Item Button */}
+              <div style={{ marginTop: '20px', textAlign: 'center', padding: '16px', background: '#f0f0f0', borderRadius: '4px' }}>
+                <Button
+                  variant="primary"
+                  onClick={addFaqItem}
+                  className="webdune-add-faq-item"
+                  style={{ width: '100%' }}
+                >
+                  {__('+ Add FAQ Item', 'webdune-blocks')}
+                </Button>
+                <p style={{ marginTop: '8px', marginBottom: '0', fontSize: '12px', color: '#666' }}>
+                  {__('Or use the block inserter (+) between items', 'webdune-blocks')}
+                </p>
+              </div>
             </div>
           </div>
         </div>

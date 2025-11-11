@@ -5,7 +5,7 @@ export default function save({ attributes }) {
   const blockProps = useBlockProps.save();
 
   return (
-    <section {...blockProps} className="section_faq-main">
+    <section {...blockProps} className="section_faq-main wp-block-webdune-faq-with-toc">
       <div className="padding-global z-index-1">
         <div className="w-layout-blockcontainer container-large w-container">
           <div className="faq-grid">

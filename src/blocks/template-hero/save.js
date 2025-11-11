@@ -8,7 +8,9 @@ export default function Save({ attributes }) {
     subheading,
     mainImage,
     phoneImage,
-    showDownArrow
+    showDownArrow,
+    columnRatioLeft,
+    columnRatioRight
   } = attributes;
 
   const blockProps = useBlockProps.save({
@@ -23,7 +25,10 @@ export default function Save({ attributes }) {
       >
         <div className="padding-global z-index-1">
           <div className="w-layout-blockcontainer container-large w-container">
-            <div className={`template-hero_content ${layoutType === 'wide-image' ? 'is-wide' : ''}`}>
+            <div 
+              className={`template-hero_content ${layoutType === 'wide-image' ? 'is-wide' : ''}`}
+              style={layoutType === 'wide-image' ? { gridTemplateColumns: `${columnRatioLeft}fr ${columnRatioRight}fr` } : {}}
+            >
               <div className={`template-hero_left ${layoutType === 'wide-image' ? 'is-wide' : ''}`}>
                 {heading && (
                   <RichText.Content

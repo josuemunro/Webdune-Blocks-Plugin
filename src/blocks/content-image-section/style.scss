@@ -44,6 +44,11 @@
     position: relative;
     z-index: 2;
 
+    @media screen and (max-width: 991px) {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
     h2 {
       margin-bottom: 0;
     }

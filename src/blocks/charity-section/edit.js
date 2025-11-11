@@ -5,26 +5,30 @@ import {
   InspectorControls,
   MediaUpload,
   MediaUploadCheck,
-  URLInput
+  URLInput,
+  InnerBlocks
 } from '@wordpress/block-editor';
 import {
   PanelBody,
   Button,
   ToggleControl,
   ColorPalette,
-  TextControl
+  TextControl,
+  SelectControl
 } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
   const {
     backgroundColor,
+    textColor,
     heading,
     headingHighlightColor,
     content,
     buttonText,
     buttonUrl,
     buttonOpenInNewTab,
+    buttonPosition,
     charityLogos
   } = attributes;
 
@@ -44,6 +48,19 @@ export default function Edit({ attributes, setAttributes }) {
   const sectionStyle = {
     backgroundColor: backgroundColor,
   };
+
+  const contentStyle = {
+    color: textColor,
+  };
+
+  const INNERBLOCKS_TEMPLATE = [
+    ['core/paragraph', { 
+      placeholder: 'Add additional content here (optional)...',
+      className: 'text-align-center'
+    }]
+  ];
+
+  const ALLOWED_BLOCKS = ['core/paragraph', 'core/heading', 'core/list'];
 
   // Add a logo
   const addLogo = () => {
@@ -75,12 +92,18 @@ export default function Edit({ attributes, setAttributes }) {
   return (
     <>
       <InspectorControls>
-        <PanelBody title={__('Background', 'webdune-blocks')} initialOpen={true}>
+        <PanelBody title={__('Background & Colors', 'webdune-blocks')} initialOpen={true}>
           <p>{__('Background Color', 'webdune-blocks')}</p>
           <ColorPalette
             colors={colors}
             value={backgroundColor}
             onChange={(color) => setAttributes({ backgroundColor: color })}
+          />
+          <p style={{ marginTop: '16px' }}>{__('Text Color', 'webdune-blocks')}</p>
+          <ColorPalette
+            colors={colors}
+            value={textColor}
+            onChange={(color) => setAttributes({ textColor: color })}
           />
         </PanelBody>
 
@@ -111,6 +134,16 @@ export default function Edit({ attributes, setAttributes }) {
             label={__('Open in New Tab', 'webdune-blocks')}
             checked={buttonOpenInNewTab}
             onChange={(value) => setAttributes({ buttonOpenInNewTab: value })}
+          />
+          <SelectControl
+            label={__('Button Position', 'webdune-blocks')}
+            value={buttonPosition}
+            options={[
+              { label: 'Before Images', value: 'before' },
+              { label: 'After Images', value: 'after' }
+            ]}
+            onChange={(value) => setAttributes({ buttonPosition: value })}
+            help={__('Choose whether the button appears before or after the charity logos', 'webdune-blocks')}
           />
         </PanelBody>
 
@@ -192,25 +225,33 @@ export default function Edit({ attributes, setAttributes }) {
         <section className="section_home-charity" style={sectionStyle}>
           <div className="padding-global z-index-1">
             <div className="container-small">
-              <div className="home-charity_content">
+              <div className="home-charity_content" style={contentStyle}>
                 <RichText
                   tagName="h2"
-                  className="heading-style-h2 text-color-white text-align-center"
+                  className="heading-style-h2 text-align-center"
                   value={heading}
                   onChange={(value) => setAttributes({ heading: value })}
                   placeholder={__('Enter heading...', 'webdune-blocks')}
-                  allowedFormats={['core/bold', 'core/italic', 'webdune/charity-highlight']}
+                  allowedFormats={['core/bold', 'core/italic', 'webdune/charity-highlight', 'webdune/gradient-underline']}
+                  style={{ color: textColor }}
                 />
+                <div className="charity-innerblocks">
+                  <InnerBlocks
+                    template={INNERBLOCKS_TEMPLATE}
+                    allowedBlocks={ALLOWED_BLOCKS}
+                  />
+                </div>
                 {content && (
                   <RichText
                     tagName="p"
-                    className="text-align-center text-color-white"
+                    className="text-align-center"
                     value={content}
                     onChange={(value) => setAttributes({ content: value })}
                     placeholder={__('Enter optional content...', 'webdune-blocks')}
+                    style={{ color: textColor }}
                   />
                 )}
-                {buttonText && (
+                {buttonText && buttonPosition === 'before' && (
                   <a href={buttonUrl} className="button w-button" target={buttonOpenInNewTab ? '_blank' : '_self'} rel={buttonOpenInNewTab ? 'noopener noreferrer' : ''}>
                     {buttonText}
                   </a>
@@ -233,6 +274,13 @@ export default function Edit({ attributes, setAttributes }) {
                   )
                 ))}
               </div>
+              {buttonText && buttonPosition === 'after' && (
+                <div className="home-charity_button-after">
+                  <a href={buttonUrl} className="button w-button" target={buttonOpenInNewTab ? '_blank' : '_self'} rel={buttonOpenInNewTab ? 'noopener noreferrer' : ''}>
+                    {buttonText}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </section>

@@ -4,11 +4,12 @@ export default function Save({ attributes }) {
   const {
     question,
     answer,
-    defaultOpen
+    defaultOpen,
+    alignment
   } = attributes;
 
   const blockProps = useBlockProps.save({
-    className: 'faq5_accordion align-left',
+    className: `faq5_accordion align-${alignment || 'left'}`,
   });
 
   return (
@@ -35,7 +36,7 @@ export default function Save({ attributes }) {
       </div>
 
       <div
-        className="faq5_answer align-left"
+        className={`faq5_answer align-${alignment || 'left'}`}
         style={{ height: defaultOpen ? 'auto' : '0px' }}
         data-faq-answer
       >

@@ -87,7 +87,7 @@ export default function Edit({ attributes, setAttributes }) {
                 </div>
                 {showButton && (
                   <div className="related-tips__actions">
-                    <span className="related-tips__button">{buttonText}</span>
+                    <span className="button">{buttonText}</span>
                   </div>
                 )}
               </div>

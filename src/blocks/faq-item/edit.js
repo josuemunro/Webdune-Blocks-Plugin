@@ -6,14 +6,16 @@ import {
 } from '@wordpress/block-editor';
 import {
   PanelBody,
-  ToggleControl
+  ToggleControl,
+  SelectControl
 } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
   const {
     question,
     answer,
-    defaultOpen
+    defaultOpen,
+    alignment
   } = attributes;
 
   const blockProps = useBlockProps({
@@ -24,6 +26,16 @@ export default function Edit({ attributes, setAttributes }) {
     <>
       <InspectorControls>
         <PanelBody title={__('FAQ Item Settings', 'webdune-blocks')}>
+          <SelectControl
+            label={__('Text Alignment', 'webdune-blocks')}
+            value={alignment}
+            options={[
+              { label: __('Left', 'webdune-blocks'), value: 'left' },
+              { label: __('Center', 'webdune-blocks'), value: 'center' }
+            ]}
+            onChange={(value) => setAttributes({ alignment: value })}
+            __nextHasNoMarginBottom
+          />
           <ToggleControl
             label={__('Open by default', 'webdune-blocks')}
             checked={defaultOpen}
@@ -34,7 +46,7 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <div className="faq5_accordion align-left">
+        <div className={`faq5_accordion align-${alignment}`}>
           <div className="faq5_question">
             <div className="faq5_icon-wrapper">
               <div className="icon-embed-small">
@@ -53,7 +65,7 @@ export default function Edit({ attributes, setAttributes }) {
             />
           </div>
 
-          <div className="faq5_answer align-left" style={{ height: defaultOpen ? 'auto' : '0px' }}>
+          <div className={`faq5_answer align-${alignment}`} style={{ height: defaultOpen ? 'auto' : '0px' }}>
             <RichText
               tagName="p"
               className="faq_answer-inner"

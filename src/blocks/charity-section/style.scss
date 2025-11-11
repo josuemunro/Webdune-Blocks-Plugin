@@ -32,16 +32,25 @@
     margin-right: auto;
 
     h2 {
-      color: $color-white;
-
       // Charity highlight format
       .charity-highlight {
         color: var(--charity-highlight-color, $color-primary);
       }
     }
 
-    p {
-      color: $color-white;
+    // InnerBlocks content area
+    .charity-innerblocks {
+      width: 100%;
+      
+      p {
+        text-align: center;
+        margin-bottom: 0;
+      }
+
+      // Hide if empty
+      &:empty {
+        display: none;
+      }
     }
 
     // Responsive width
@@ -53,6 +62,14 @@
     @media screen and (max-width: 767px) {
       width: 100%;
     }
+  }
+
+  // Button after logos
+  .home-charity_button-after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
   }
 
   .home-charity_logos {

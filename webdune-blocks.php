@@ -2,13 +2,13 @@
 
 /**
  * Plugin Name:       Webdune Blocks
- * Plugin URI:        https://webdune.com
+ * Plugin URI:        https://webdune.co.nz
  * Description:       Custom Gutenberg blocks for SellMyCell - providing true inline editing and modern WordPress functionality.
  * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Webdune
- * Author URI:        https://webdune.com
+ * Author URI:        https://webdune.co.nz
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       webdune-blocks
@@ -111,6 +111,7 @@ function webdune_blocks_register_blocks()
     // Tips / Blog
     'tips-grid',
     'related-tips',
+    'tips-meta',
   );
 
   // Register each block
@@ -161,10 +162,14 @@ function webdune_blocks_enqueue_shared_styles()
 
   // Enqueue CSS if it exists
   if (file_exists($shared_css_path)) {
+    // Check if fonts are loaded, if so, depend on them. Otherwise load CSS independently.
+    $font_css_path = WEBDUNE_BLOCKS_PLUGIN_DIR . 'assets/fonts/helvetica-world.css';
+    $dependencies = file_exists($font_css_path) ? array('webdune-fonts') : array();
+
     wp_enqueue_style(
       'webdune-global-styles',
       $shared_css,
-      array('webdune-fonts'), // Depend on fonts so they load first
+      $dependencies, // Depend on fonts only if available
       filemtime($shared_css_path)
     );
   }
@@ -268,23 +273,20 @@ function webdune_blocks_enqueue_swiper()
 add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_swiper');
 
 /**
- * Add custom image sizes for blocks
+ * REMOVED: Custom image sizes
+ * 
+ * CRITICAL FIX: Custom image sizes caused massive storage bloat (3GB+ wasted space)
+ * with 4000+ images on the site, leading to full storage and login failures.
+ * 
+ * Now using WordPress default sizes:
+ * - Phone slider: 'medium' (300x300) - CSS handles aspect ratio
+ * - All thumbnails: 'thumbnail' (150x150)  
+ * - Tips images: 'large' (1024x1024)
+ * - Heroes: 'full' (original)
+ * 
+ * No custom sizes = no storage bloat = happy site 🎉
  */
-function webdune_blocks_image_sizes()
-{
-  // Phone slider thumbnail
-  add_image_size('webdune-phone-thumb', 292, 360, true);
-
-  // Review author avatar
-  add_image_size('webdune-review-avatar', 80, 80, true);
-
-  // Hero background
-  add_image_size('webdune-hero-bg', 1440, 900, false);
-
-  // Content section image
-  add_image_size('webdune-content-image', 632, 520, false);
-}
-add_action('after_setup_theme', 'webdune_blocks_image_sizes');
+// function webdune_blocks_image_sizes() { } // REMOVED ENTIRELY
 
 /**
  * Include helper functions and custom post types
@@ -292,6 +294,7 @@ add_action('after_setup_theme', 'webdune_blocks_image_sizes');
 require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/post-types.php';
 require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/phone-queries.php';
 require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/block-helpers.php';
+require_once WEBDUNE_BLOCKS_PLUGIN_DIR . 'includes/emoji-fix.php';
 
 /**
  * AJAX handler for phone search

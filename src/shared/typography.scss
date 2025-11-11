@@ -59,6 +59,7 @@ html:not(.wp-admin) {
     margin-top: 0;
     margin-bottom: 0;
     letter-spacing: normal; // Reset any inherited letter-spacing
+    text-wrap: balance;
   }
 
   h1 {

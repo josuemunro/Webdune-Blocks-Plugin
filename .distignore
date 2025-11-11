@@ -10,6 +10,7 @@ src
 webpack.config.js
 package.json
 package-lock.json
+add-assets-to-zip.js
 
 # Documentation (keep only README.md)
 START_HERE.md

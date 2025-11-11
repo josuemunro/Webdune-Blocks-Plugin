@@ -58,6 +58,10 @@
     color: $color-blue-grey;
   }
 
+  &:focus {
+    outline: none;
+  }
+
   &.is-active,
   &.w--current {
     border-left-color: $color-brick;

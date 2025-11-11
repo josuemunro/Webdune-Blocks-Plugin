@@ -1,5 +1,20 @@
 @import '../../shared/colors.scss';
 
+/* Hide rich text if it contains only empty paragraphs */
+.two-col-block_rich-text {
+  &:has(> p:empty:only-child),
+  &:has(> p:only-child:not(:has(*))) {
+    display: none;
+  }
+}
+
+/* Fallback for browsers that don't support :has() */
+.two-col-block_rich-text > p:empty:only-child {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* ===================================
    Custom Gradient Underline Format
    =================================== */
@@ -73,13 +88,40 @@
 .two-col-block_grid {
   display: grid;
   gap: 8rem;
-  align-items: start;
+  align-items: center;
 }
 
 @media screen and (max-width: 991px) {
   .two-col-block_grid {
     grid-template-columns: 1fr !important;
     gap: 3rem;
+  }
+
+  .two-col-block_grid:has(.media-single-image.media-single-phone) {
+    grid-template-columns: 4fr 2fr !important;
+    gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .two-col-block_grid:has(.media-single-image.media-single-phone.natural-width) {
+    gap: 10rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .two-col-block_grid:has(.media-single-image.media-single-phone) {
+    grid-template-columns: 1fr !important;
+    gap: 3.5rem;
+  }
+
+  .two-col-block_grid:has(.media-single-image.media-single-phone.natural-width) {
+    gap: 3.5rem;
+
+    img {
+      position: relative;
+      width: 100%;
+    }
   }
 }
 
@@ -108,7 +150,7 @@
 .two-col-block_heading {
   margin: 0;
   color: #3C3C3C;
-  font-size: 3rem;
+  font-size: 3rem !important;
   font-weight: 700;
   letter-spacing: -0.045rem;
 }
@@ -172,6 +214,10 @@
 .two-col-block_media-content {
   position: relative;
   height: 100%;
+
+  @media screen and (max-width: 479px) {
+    order: -9999;
+  }
 }
 
 .media-single-image.media-single-full-height {
@@ -277,9 +323,24 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
+
+      @media screen and (max-width: 479px) {
+        justify-content: flex-start;
+      }
+    }
+
+    img {
+      height: 35rem;
+      object-fit: contain;
+
+      @media screen and (max-width: 479px) {
+        height: 20rem;
+      }
     }
 
     &.natural-width {
+      height: 100%;
+
       .image-wrapper {
         position: relative;
         display: flex;
@@ -289,6 +350,9 @@
 
       img {
         position: absolute;
+        width: 28rem;
+        max-width: none;
+        height: auto;
       }
     }
   }
@@ -383,7 +447,7 @@
   }
 
   .two-col-block_heading {
-    font-size: 2.25rem;
+    font-size: 2.25rem !important;
   }
 }
 
@@ -399,7 +463,7 @@
   }
 
   .two-col-block_heading {
-    font-size: 1.75rem;
+    font-size: 1.75rem !important;
   }
 
   .two-col-block_number {

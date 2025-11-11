@@ -20,14 +20,14 @@ function webdune_get_tips_navigation_block()
 {
   // Check if site-header pattern exists
   $pattern_exists = get_post_status(19396) === 'publish';
-  
+
   if ($pattern_exists) {
     return array('core/block', array(
       'ref' => 19396,
       'lock' => array('move' => true, 'remove' => true),
     ));
   }
-  
+
   // Fallback to Webdune Navigation
   return array('webdune/navigation', array(
     'lock' => array('move' => true, 'remove' => true),
@@ -42,14 +42,14 @@ function webdune_get_tips_footer_block()
 {
   // Check if site-footer pattern exists
   $pattern_exists = get_post_status(19397) === 'publish';
-  
+
   if ($pattern_exists) {
     return array('core/block', array(
       'ref' => 19397,
       'lock' => array('move' => true, 'remove' => true),
     ));
   }
-  
+
   // Fallback to Webdune Footer
   return array('webdune/footer', array(
     'lock' => array('move' => true, 'remove' => true),
@@ -95,7 +95,7 @@ function webdune_register_tips_post_type()
     'label'                 => __('Tip', 'webdune-blocks'),
     'description'           => __('Tips and helpful articles', 'webdune-blocks'),
     'labels'                => $labels,
-    'supports'              => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions'),
+    'supports'              => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes'),
     'taxonomies'            => array('tip_category', 'tip_tag'),
     'hierarchical'          => false,
     'public'                => true,
@@ -120,7 +120,7 @@ function webdune_register_tips_post_type()
     'template'              => array(
       // Navigation - uses site-header pattern (19396) or Webdune Navigation as fallback
       webdune_get_tips_navigation_block(),
-      
+
       // Hero Section
       array('webdune/template-hero', array(
         'lock' => array(
@@ -128,7 +128,7 @@ function webdune_register_tips_post_type()
           'remove' => true,
         ),
       )),
-      
+
       // Content Section (InnerBlocks with allowed blocks)
       array('core/group', array(
         'className' => 'tips-content-section',
@@ -144,18 +144,26 @@ function webdune_register_tips_post_type()
           'level' => 2,
           'placeholder' => 'Introduction',
         )),
-        
+
         // Paragraph blocks
         array('core/paragraph', array(
           'placeholder' => 'Start writing your tip content here...',
         )),
-        
+
         // Placeholder for more content
         array('core/paragraph', array(
           'placeholder' => 'Add more paragraphs, images, quotes, lists, etc.',
         )),
+
+        // Tips Meta - Categories and share buttons
+        array('webdune/tips-meta', array(
+          'lock' => array(
+            'move'   => false,
+            'remove' => false,
+          ),
+        )),
       )),
-      
+
       // Related Tips Section
       array('webdune/related-tips', array(
         'lock' => array(
@@ -163,7 +171,7 @@ function webdune_register_tips_post_type()
           'remove' => true,
         ),
       )),
-      
+
       // CTA Section
       array('webdune/cta-section', array(
         'lock' => array(
@@ -171,7 +179,7 @@ function webdune_register_tips_post_type()
           'remove' => true,
         ),
       )),
-      
+
       // Footer - uses site-footer pattern (19397) or Webdune Footer as fallback
       webdune_get_tips_footer_block(),
     ),
@@ -297,25 +305,25 @@ function webdune_sync_tip_title_from_hero($post_id, $post, $update)
 
   // Get post content (blocks)
   $content = $post->post_content;
-  
+
   // Parse blocks to find Template Hero
   $blocks = parse_blocks($content);
-  
+
   foreach ($blocks as $block) {
     if ($block['blockName'] === 'webdune/template-hero') {
       // Get the heading from Template Hero
       $heading = isset($block['attrs']['heading']) ? $block['attrs']['heading'] : '';
-      
+
       if (!empty($heading) && $heading !== $post->post_title) {
         // Remove this hook temporarily to avoid infinite loop
         remove_action('save_post_tip', 'webdune_sync_tip_title_from_hero', 10);
-        
+
         // Update post title
         wp_update_post(array(
           'ID' => $post_id,
           'post_title' => wp_strip_all_tags($heading),
         ));
-        
+
         // Re-add the hook
         add_action('save_post_tip', 'webdune_sync_tip_title_from_hero', 10, 3);
       }
@@ -346,19 +354,19 @@ function webdune_sync_tip_featured_image_from_hero($post_id, $post, $update)
 
   // Get post content (blocks)
   $content = $post->post_content;
-  
+
   // Parse blocks to find Template Hero
   $blocks = parse_blocks($content);
-  
+
   foreach ($blocks as $block) {
     if ($block['blockName'] === 'webdune/template-hero') {
       // Get the image ID from Template Hero's mainImage attribute
       $main_image = isset($block['attrs']['mainImage']) ? $block['attrs']['mainImage'] : array();
       $image_id = isset($main_image['id']) ? intval($main_image['id']) : 0;
-      
+
       if ($image_id > 0) {
         $current_featured_image = get_post_thumbnail_id($post_id);
-        
+
         if ($image_id !== $current_featured_image) {
           // Update featured image
           set_post_thumbnail($post_id, $image_id);
@@ -449,7 +457,7 @@ function webdune_restrict_tip_content_blocks($allowed_blocks, $block_editor_cont
     'core/list',
     'core/quote',
     'core/pullquote',
-    
+
     // Media
     'core/image',
     'core/gallery',
@@ -457,7 +465,7 @@ function webdune_restrict_tip_content_blocks($allowed_blocks, $block_editor_cont
     'core/audio',
     'core/file',
     'core/embed',
-    
+
     // Formatting
     'core/separator',
     'core/spacer',
@@ -465,13 +473,14 @@ function webdune_restrict_tip_content_blocks($allowed_blocks, $block_editor_cont
     'core/code',
     'core/preformatted',
     'core/html',
-    
+
     // Webdune blocks
     'webdune/template-hero',
     'webdune/related-tips',
+    'webdune/tips-meta',
     'webdune/cta-section',
     'webdune/footer',
-    
+
     // Core structure (for template)
     'core/group',
   );
@@ -484,21 +493,55 @@ add_filter('allowed_block_types_all', 'webdune_restrict_tip_content_blocks', 10,
  * Set default page template for Tips
  * Uses "Webdune Full Width" template if it exists, otherwise default
  */
-function webdune_set_tip_default_template($post_id)
+function webdune_set_tip_default_template($post_id, $post, $update)
 {
   // Only for tip post type
   if (get_post_type($post_id) !== 'tip') {
     return;
   }
 
-  // Check if template is already set
+  // Don't run on autosave or revisions
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+    return;
+  }
+  if (wp_is_post_revision($post_id)) {
+    return;
+  }
+
+  // Check if template is already set (and it's not 'default')
   $current_template = get_page_template_slug($post_id);
-  if ($current_template) {
+  
+  // Debug logging
+  error_log('Webdune Tips Template - Post ID: ' . $post_id);
+  error_log('Webdune Tips Template - Current template: ' . ($current_template ?: 'none'));
+  error_log('Webdune Tips Template - Is update: ' . ($update ? 'yes' : 'no'));
+  
+  if ($current_template && $current_template !== 'default') {
+    error_log('Webdune Tips Template - Template already set, skipping');
     return; // Template already set, don't override
   }
 
-  // Try to set "Webdune Full Width" template
+  // Find the Webdune Full Width template
+  $template_file = webdune_find_full_width_template();
+  
+  if ($template_file) {
+    update_post_meta($post_id, '_wp_page_template', $template_file);
+    error_log('Webdune Tips Template - Set template to: ' . $template_file);
+  } else {
+    error_log('Webdune Tips Template - No full width template found!');
+  }
+}
+add_action('save_post_tip', 'webdune_set_tip_default_template', 10, 3);
+
+/**
+ * Helper function to find the Webdune Full Width template
+ */
+function webdune_find_full_width_template()
+{
   $templates = wp_get_theme()->get_page_templates(null, 'tip');
+  
+  // Debug: Log available templates
+  error_log('Webdune Tips Template - Available templates: ' . print_r($templates, true));
   
   // Look for various possible template file names
   $template_options = array(
@@ -506,18 +549,83 @@ function webdune_set_tip_default_template($post_id)
     'template-webdune-full-width.php',
     'webdune-full-width.php',
     'page-templates/full-width.php',
+    'template-full-width.php',
     'full-width.php',
   );
 
   foreach ($template_options as $template) {
-    if (isset($templates[$template]) || locate_template($template)) {
-      update_post_meta($post_id, '_wp_page_template', $template);
-      return;
+    if (isset($templates[$template])) {
+      error_log('Webdune Tips Template - Found template in theme templates: ' . $template);
+      return $template;
+    }
+    if (locate_template($template)) {
+      error_log('Webdune Tips Template - Found template via locate_template: ' . $template);
+      return $template;
     }
   }
-
-  // If no Webdune Full Width template found, use default
-  update_post_meta($post_id, '_wp_page_template', 'default');
+  
+  error_log('Webdune Tips Template - No template found in options: ' . print_r($template_options, true));
+  return false;
 }
-add_action('save_post_tip', 'webdune_set_tip_default_template', 10, 1);
 
+/**
+ * Set default template for new Tips in the block editor
+ * This ensures the template is pre-selected when creating a new Tip
+ */
+function webdune_tip_default_template_meta($post_id, $post, $update)
+{
+  // Only for tip post type
+  if (!$post || get_post_type($post) !== 'tip') {
+    return;
+  }
+  
+  // Skip if this is an update (not a new post)
+  if ($update) {
+    return;
+  }
+  
+  // Don't run on autosave or revisions
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+    return;
+  }
+  if (wp_is_post_revision($post_id)) {
+    return;
+  }
+  
+  $current_template = get_post_meta($post_id, '_wp_page_template', true);
+  
+  error_log('Webdune Tips Template (wp_insert_post) - Post ID: ' . $post_id . ', Current: ' . ($current_template ?: 'none'));
+  
+  // Only set if no template is set yet
+  if (empty($current_template) || $current_template === 'default') {
+    $template_file = webdune_find_full_width_template();
+    if ($template_file) {
+      update_post_meta($post_id, '_wp_page_template', $template_file);
+      error_log('Webdune Tips Template (wp_insert_post) - Set to: ' . $template_file);
+    }
+  }
+}
+add_action('wp_insert_post', 'webdune_tip_default_template_meta', 10, 3);
+
+/**
+ * Enable template selector for Tips post type
+ * Adds the Template meta box to the Tips edit screen
+ */
+function webdune_add_template_support_to_tips()
+{
+  add_post_type_support('tip', 'page-attributes');
+}
+add_action('init', 'webdune_add_template_support_to_tips', 11);
+
+/**
+ * Force template selector to show for Tips
+ * WordPress hides it for non-hierarchical post types by default
+ */
+function webdune_force_template_on_tips($return, $post)
+{
+  if ($post && $post->post_type === 'tip') {
+    return true;
+  }
+  return $return;
+}
+add_filter('theme_post_templates', 'webdune_force_template_on_tips', 10, 2);

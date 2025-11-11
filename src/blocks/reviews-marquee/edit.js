@@ -3,6 +3,7 @@ import { useBlockProps, RichText, InspectorControls, MediaUpload } from '@wordpr
 import {
   PanelBody,
   TextControl,
+  TextareaControl,
   RangeControl,
   Button,
   IconButton,
@@ -60,22 +61,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   const updateReview = (index, field, value) => {
     const updatedReviews = [...reviews];
     
-    // Limit review text to 300 characters to prevent database issues
-    if (field === 'text' && value && value.length > 300) {
-      value = value.substring(0, 300);
-    }
-    
-    // Limit author name to 50 characters
-    if (field === 'author' && value && value.length > 50) {
-      value = value.substring(0, 50);
+    // Sanitize value to ensure emojis are properly handled
+    if (value && typeof value === 'string') {
+      // Remove any null bytes or invalid UTF-8 sequences
+      value = value.replace(/\0/g, '');
+      
+      // Limit review text to 300 characters to prevent database issues
+      if (field === 'text' && value.length > 300) {
+        value = value.substring(0, 300);
+      }
+      
+      // Limit author name to 50 characters
+      if (field === 'author' && value.length > 50) {
+        value = value.substring(0, 50);
+      }
     }
     
     updatedReviews[index] = {
       ...updatedReviews[index],
-      [field]: value,
+      [field]: value || '',
       // Ensure photo is always a string, never null or undefined
       photo: field === 'photo' ? (value || '') : (updatedReviews[index].photo || ''),
     };
+    
     setAttributes({ reviews: updatedReviews });
   };
 
@@ -144,13 +152,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 __nextHasNoMarginBottom
               />
 
-              <TextControl
+              <TextareaControl
                 label={__('Review Text', 'webdune-blocks')}
                 value={review.text}
                 onChange={(value) => updateReview(index, 'text', value)}
                 help={`${review.text.length}/300 characters`}
-                __next40pxDefaultSize
-                __nextHasNoMarginBottom
+                rows={4}
+                style={{ fontFamily: 'inherit' }}
               />
 
               <TextControl

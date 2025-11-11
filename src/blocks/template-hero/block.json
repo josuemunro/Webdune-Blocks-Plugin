@@ -48,10 +48,35 @@
     "showDownArrow": {
       "type": "boolean",
       "default": true
+    },
+    "columnRatioLeft": {
+      "type": "number",
+      "default": 4
+    },
+    "columnRatioRight": {
+      "type": "number",
+      "default": 7
+    },
+    "showCTA": {
+      "type": "boolean",
+      "default": false
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Learn more"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaOpenInNewTab": {
+      "type": "boolean",
+      "default": false
     }
   },
   "textdomain": "webdune-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
 }

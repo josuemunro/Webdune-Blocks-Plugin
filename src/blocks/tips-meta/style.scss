@@ -1,0 +1,156 @@
+/**
+ * Tips Meta Block - Frontend Styles
+ */
+
+@import '../../shared/colors.scss';
+
+.tips-meta {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+
+  .tips-meta__container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  // Share section
+  .tips-meta__share {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .tips-meta__share-label {
+    font-size: 1.125rem; // 18px
+    line-height: 1.5;
+    margin: 0;
+    color: $color-dark;
+  }
+
+  .tips-meta__share-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .tips-meta__share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    background-color: $color-blue-grey;
+    border: none;
+    border-radius: 64px;
+    color: $color-white;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    flex-shrink: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    &:hover {
+      background-color: darken($color-blue-grey, 10%);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    // Copy button specific behavior
+    &--copy {
+      position: relative;
+
+      &.copied::after,
+      &.copy-failed::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: -32px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: $color-dark;
+        color: $color-white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        animation: fadeInOut 2s ease;
+        z-index: 10;
+      }
+
+      &.copy-failed::after {
+        background-color: #dc3545; // Red for error
+      }
+    }
+  }
+
+  // Categories/Tags section
+  .tips-meta__tags {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+
+  .tips-meta__tag {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px 6px;
+    background-color: $color-medium-grey;
+    border-radius: 16px;
+    font-size: 0.875rem; // 14px
+    line-height: 1.5;
+    color: $color-dark;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: darken($color-medium-grey, 5%);
+    }
+  }
+
+  // Mobile responsive
+  @media screen and (max-width: 767px) {
+    .tips-meta__container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .tips-meta__tags {
+      width: 100%;
+    }
+  }
+}
+
+// Animation for copy confirmation
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+}

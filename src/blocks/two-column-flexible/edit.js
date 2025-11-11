@@ -21,6 +21,16 @@ import {
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
+  // Helper function to safely handle text with emojis and special characters
+  const sanitizeTextAttribute = (value) => {
+    if (!value) return value;
+    // Remove null bytes that can break database saves
+    let sanitized = value.replace(/\0/g, '');
+    // Remove problematic zero-width characters that can break JSON parsing
+    sanitized = sanitized.replace(/[\u200B-\u200D\uFEFF]/g, '');
+    return sanitized;
+  };
+
   // Migrate old h2Text to h3Text (backward compatibility)
   React.useEffect(() => {
     if (attributes.h2Text && !attributes.h3Text) {
@@ -228,7 +238,7 @@ export default function Edit({ attributes, setAttributes }) {
               <TextControl
                 label={__('CTA Text', 'webdune-blocks')}
                 value={ctaText}
-                onChange={(value) => setAttributes({ ctaText: value })}
+                onChange={(value) => setAttributes({ ctaText: sanitizeTextAttribute(value) })}
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
               />
@@ -325,7 +335,7 @@ export default function Edit({ attributes, setAttributes }) {
                     tagName="h2"
                     className="section-header"
                     value={headerText}
-                    onChange={(value) => setAttributes({ headerText: value })}
+                    onChange={(value) => setAttributes({ headerText: sanitizeTextAttribute(value) })}
                     placeholder={__('Enter header text...', 'webdune-blocks')}
                     allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
                   />
@@ -349,7 +359,7 @@ export default function Edit({ attributes, setAttributes }) {
                       tagName="h2"
                       className="two-col-block_heading"
                       value={h2Text}
-                      onChange={(value) => setAttributes({ h2Text: value })}
+                      onChange={(value) => setAttributes({ h2Text: sanitizeTextAttribute(value) })}
                       placeholder={__('Enter H2 heading...', 'webdune-blocks')}
                       allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
                     />
@@ -360,7 +370,7 @@ export default function Edit({ attributes, setAttributes }) {
                       tagName="h3"
                       className="two-col-block_heading"
                       value={h3Text}
-                      onChange={(value) => setAttributes({ h3Text: value })}
+                      onChange={(value) => setAttributes({ h3Text: sanitizeTextAttribute(value) })}
                       placeholder={__('Enter H3 heading...', 'webdune-blocks')}
                       allowedFormats={['core/bold', 'core/italic', 'webdune/gradient-underline']}
                     />
@@ -388,7 +398,7 @@ export default function Edit({ attributes, setAttributes }) {
                       <TextControl
                         label={__('CTA Text', 'webdune-blocks')}
                         value={ctaText}
-                        onChange={(value) => setAttributes({ ctaText: value })}
+                        onChange={(value) => setAttributes({ ctaText: sanitizeTextAttribute(value) })}
                         __next40pxDefaultSize
                         __nextHasNoMarginBottom
                       />

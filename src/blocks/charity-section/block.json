@@ -26,6 +26,10 @@
       "type": "string",
       "default": "#3C3C3C"
     },
+    "textColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
     "heading": {
       "type": "string",
       "source": "html",
@@ -53,6 +57,10 @@
     "buttonOpenInNewTab": {
       "type": "boolean",
       "default": false
+    },
+    "buttonPosition": {
+      "type": "string",
+      "default": "before"
     },
     "charityLogos": {
       "type": "array",
