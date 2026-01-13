@@ -25,7 +25,7 @@ export default function Save({ attributes }) {
       >
         <div className="padding-global z-index-1">
           <div className="w-layout-blockcontainer container-large w-container">
-            <div 
+            <div
               className={`template-hero_content ${layoutType === 'wide-image' ? 'is-wide' : ''}`}
               style={layoutType === 'wide-image' ? { gridTemplateColumns: `${columnRatioLeft}fr ${columnRatioRight}fr` } : {}}
             >
@@ -35,6 +35,7 @@ export default function Save({ attributes }) {
                     tagName="h1"
                     className="text-color-white"
                     value={heading}
+                    data-fade-up="true"
                   />
                 )}
 
@@ -43,11 +44,12 @@ export default function Save({ attributes }) {
                     tagName="p"
                     className="text-size-xlarge text-color-white"
                     value={subheading}
+                    data-fade-up="true"
                   />
                 )}
 
                 {showDownArrow && (
-                  <div className="template-hero_down-arrow w-embed">
+                  <div className="template-hero_down-arrow w-embed" data-fade-in="true" data-fade-delay="0.5" data-bounce-loop="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20 54" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
                       <path d="M9.07488 0L8.82334 49.635L1.63214 42.4326L0 44.0348L9.94975 54L20 44.1344L18.3842 42.5161L11.1203 49.6465L11.3719 0.0114446L9.07488 0Z" fill="currentColor"></path>
                     </svg>
@@ -62,6 +64,8 @@ export default function Save({ attributes }) {
                     loading="lazy"
                     alt={mainImage.alt || ''}
                     className={`template-hero_img-main ${layoutType === 'wide-image' ? 'is-wide' : ''}`}
+                    data-fade-up="true"
+                    data-delay="0.4"
                   />
                 )}
 
@@ -72,6 +76,8 @@ export default function Save({ attributes }) {
                       loading="lazy"
                       alt={phoneImage.alt || ''}
                       className="template-hero_img-phone"
+                      data-fade-up="true"
+                      data-fade-delay="0.6"
                     />
                   </div>
                 )}

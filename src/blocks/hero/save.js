@@ -32,6 +32,9 @@ export default function Save({ attributes }) {
                     tagName="h1"
                     className="text-color-white"
                     value={heading}
+                    data-fade-up="true"
+                    data-fade-delay="0.5"
+                    data-instant="true"
                   />
                 )}
 
@@ -40,10 +43,13 @@ export default function Save({ attributes }) {
                     tagName="div"
                     className="home-hero_subheading"
                     value={subheading}
+                    data-fade-up="true"
+                    data-fade-delay="0.6"
+                    data-instant="true"
                   />
                 )}
 
-                <div className="home-hero_phone-lockup-wrap">
+                <div className="home-hero_phone-lockup-wrap" data-fade-up="true" data-fade-delay="0.7" data-instant="true">
                   <div className="home-hero_phone-lookup">
                     <input
                       className="home-hero_phone-lookup-input w-input"

@@ -16,8 +16,9 @@ export default function Save({ attributes }) {
               tagName="h2"
               className="text-align-center"
               value={heading}
+              data-fade-up="true"
             />
-            <div className="reviews_tag">
+            <div className="reviews_tag" data-fade-up="true">
               <img
                 src="https://cdn.prod.website-files.com/68f9aab9d5bffd1726ea49b3/68f9ca6f3bcb96752c49a939_Google%20Logo.svg"
                 loading="lazy"

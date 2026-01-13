@@ -10,6 +10,7 @@ export default function Save({ attributes }) {
 
   const blockProps = useBlockProps.save({
     className: `faq5_accordion align-${alignment || 'left'}`,
+    'data-fade-up': 'true'
   });
 
   return (

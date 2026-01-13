@@ -302,7 +302,7 @@ function webdune_render_tips_grid_block($attributes)
       <div class="container-large">
         <div class="tips-grid">
           <?php if ($tips_query->have_posts()) : ?>
-            <div class="tips-grid__list tips-grid__list--columns-<?php echo esc_attr($attributes['columns']); ?>">
+            <div class="tips-grid__list tips-grid__list--columns-<?php echo esc_attr($attributes['columns']); ?>" data-stagger-children="true">
               <?php while ($tips_query->have_posts()) : $tips_query->the_post(); ?>
                 <article class="tips-grid__card">
                   <a href="<?php the_permalink(); ?>" class="tips-grid__card-link-wrapper">

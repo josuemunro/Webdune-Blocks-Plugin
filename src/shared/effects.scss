@@ -2,6 +2,12 @@
 // From Webflow custom-styles
 // Used by navigation block
 
+// Gradient Underline FOUC Prevention
+// Prevent flash of unstyled content before animations load
+.gradient-underline {
+  background-size: 0% 0.3rem;
+}
+
 /* Liquid Glass Card Effect */
 .navbar14_container {
   position: relative;

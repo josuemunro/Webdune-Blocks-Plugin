@@ -10,7 +10,7 @@ export default function save({ attributes }) {
       <div id={categoryId} className="scroll_target dynamic is-faq"></div>
       
       {/* Category heading */}
-      <h2 className="faq-h2">{categoryName}</h2>
+      <h2 className="faq-h2" data-fade-up="true">{categoryName}</h2>
 
       {/* FAQ items list */}
       <div className="faq-list">

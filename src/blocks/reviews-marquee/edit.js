@@ -45,7 +45,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       alert('Maximum 10 reviews allowed. Please remove a review before adding a new one.');
       return;
     }
-    
+
     // Generate a simple unique ID that matches the default format
     const maxId = reviews.length > 0 ? Math.max(...reviews.map(r => r.id || 0)) : 0;
     const newReview = {
@@ -60,30 +60,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
   const updateReview = (index, field, value) => {
     const updatedReviews = [...reviews];
-    
+
     // Sanitize value to ensure emojis are properly handled
     if (value && typeof value === 'string') {
       // Remove any null bytes or invalid UTF-8 sequences
       value = value.replace(/\0/g, '');
-      
+
       // Limit review text to 300 characters to prevent database issues
       if (field === 'text' && value.length > 300) {
         value = value.substring(0, 300);
       }
-      
+
       // Limit author name to 50 characters
       if (field === 'author' && value.length > 50) {
         value = value.substring(0, 50);
       }
     }
-    
+
     updatedReviews[index] = {
       ...updatedReviews[index],
       [field]: value || '',
       // Ensure photo is always a string, never null or undefined
       photo: field === 'photo' ? (value || '') : (updatedReviews[index].photo || ''),
     };
-    
+
     setAttributes({ reviews: updatedReviews });
   };
 
@@ -198,12 +198,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </div>
           ))}
 
-          <Button 
-            isPrimary 
+          <Button
+            isPrimary
             onClick={addReview}
             disabled={reviews.length >= 10}
           >
-            {reviews.length >= 10 
+            {reviews.length >= 10
               ? __('Maximum 10 reviews reached', 'webdune-blocks')
               : __(`+ Add Review (${reviews.length}/10)`, 'webdune-blocks')
             }
@@ -238,18 +238,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         <div className="reviews-editor-preview">
           <div className="review-cards-preview">
-            {reviews.slice(0, 3).map((review) => (
-              <div key={review.id} className="review-card-preview">
-                <div className="stars">⭐⭐⭐⭐⭐</div>
-                <p>{review.text.substring(0, 80)}...</p>
-                <div className="author">
-                  <strong>{review.author}</strong> • {review.date}
+            {reviews.slice(0, 3).map((review) => {
+              // Truncate text (same logic as frontend)
+              const truncateText = (text, maxLength = 200) => {
+                if (!text || text.length <= maxLength) return text;
+                let truncated = text.substring(0, maxLength);
+                const lastSpaceIndex = truncated.lastIndexOf(' ');
+                if (lastSpaceIndex > maxLength * 0.8) {
+                  truncated = truncated.substring(0, lastSpaceIndex);
+                }
+                return truncated + '…';
+              };
+
+              return (
+                <div key={review.id} className="review-card-preview">
+                  <div className="stars">⭐⭐⭐⭐⭐</div>
+                  <p>{truncateText(review.text, 200)}</p>
+                  <div className="author">
+                    <strong>{review.author}</strong> • {review.date}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <p className="preview-note">
-            {reviews.length} review{reviews.length !== 1 ? 's' : ''} • Preview shows first 3
+            {reviews.length} review{reviews.length !== 1 ? 's' : ''} • Preview shows first 3 (truncated to 200 chars)
           </p>
         </div>
       </div>

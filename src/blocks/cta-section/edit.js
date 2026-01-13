@@ -82,14 +82,16 @@ export default function Edit({ attributes, setAttributes }) {
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
               />
-              <TextControl
-                label={__('Button URL', 'webdune-blocks')}
-                value={button1.url}
-                onChange={(value) => updateButton(1, 'url', value)}
-                type="url"
-                __next40pxDefaultSize
-                __nextHasNoMarginBottom
-              />
+              {!button1.openChat && (
+                <TextControl
+                  label={__('Button URL', 'webdune-blocks')}
+                  value={button1.url}
+                  onChange={(value) => updateButton(1, 'url', value)}
+                  type="url"
+                  __next40pxDefaultSize
+                  __nextHasNoMarginBottom
+                />
+              )}
               <SelectControl
                 label={__('Button Style', 'webdune-blocks')}
                 value={button1.style}
@@ -101,11 +103,20 @@ export default function Edit({ attributes, setAttributes }) {
                 onChange={(value) => updateButton(1, 'style', value)}
               />
               <ToggleControl
-                label={__('Open in New Tab', 'webdune-blocks')}
-                checked={button1.openInNewTab}
-                onChange={(value) => updateButton(1, 'openInNewTab', value)}
+                label={__('Open Chat', 'webdune-blocks')}
+                checked={button1.openChat}
+                onChange={(value) => updateButton(1, 'openChat', value)}
+                help={__('Opens Tawk chat widget instead of navigating', 'webdune-blocks')}
                 __nextHasNoMarginBottom
               />
+              {!button1.openChat && (
+                <ToggleControl
+                  label={__('Open in New Tab', 'webdune-blocks')}
+                  checked={button1.openInNewTab}
+                  onChange={(value) => updateButton(1, 'openInNewTab', value)}
+                  __nextHasNoMarginBottom
+                />
+              )}
             </>
           )}
         </PanelBody>
@@ -127,14 +138,16 @@ export default function Edit({ attributes, setAttributes }) {
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
               />
-              <TextControl
-                label={__('Button URL', 'webdune-blocks')}
-                value={button2.url}
-                onChange={(value) => updateButton(2, 'url', value)}
-                type="url"
-                __next40pxDefaultSize
-                __nextHasNoMarginBottom
-              />
+              {!button2.openChat && (
+                <TextControl
+                  label={__('Button URL', 'webdune-blocks')}
+                  value={button2.url}
+                  onChange={(value) => updateButton(2, 'url', value)}
+                  type="url"
+                  __next40pxDefaultSize
+                  __nextHasNoMarginBottom
+                />
+              )}
               <SelectControl
                 label={__('Button Style', 'webdune-blocks')}
                 value={button2.style}
@@ -146,11 +159,20 @@ export default function Edit({ attributes, setAttributes }) {
                 onChange={(value) => updateButton(2, 'style', value)}
               />
               <ToggleControl
-                label={__('Open in New Tab', 'webdune-blocks')}
-                checked={button2.openInNewTab}
-                onChange={(value) => updateButton(2, 'openInNewTab', value)}
+                label={__('Open Chat', 'webdune-blocks')}
+                checked={button2.openChat}
+                onChange={(value) => updateButton(2, 'openChat', value)}
+                help={__('Opens Tawk chat widget instead of navigating', 'webdune-blocks')}
                 __nextHasNoMarginBottom
               />
+              {!button2.openChat && (
+                <ToggleControl
+                  label={__('Open in New Tab', 'webdune-blocks')}
+                  checked={button2.openInNewTab}
+                  onChange={(value) => updateButton(2, 'openInNewTab', value)}
+                  __nextHasNoMarginBottom
+                />
+              )}
             </>
           )}
         </PanelBody>
@@ -172,14 +194,16 @@ export default function Edit({ attributes, setAttributes }) {
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
               />
-              <TextControl
-                label={__('Button URL', 'webdune-blocks')}
-                value={button3.url}
-                onChange={(value) => updateButton(3, 'url', value)}
-                type="url"
-                __next40pxDefaultSize
-                __nextHasNoMarginBottom
-              />
+              {!button3.openChat && (
+                <TextControl
+                  label={__('Button URL', 'webdune-blocks')}
+                  value={button3.url}
+                  onChange={(value) => updateButton(3, 'url', value)}
+                  type="url"
+                  __next40pxDefaultSize
+                  __nextHasNoMarginBottom
+                />
+              )}
               <SelectControl
                 label={__('Button Style', 'webdune-blocks')}
                 value={button3.style}
@@ -191,11 +215,20 @@ export default function Edit({ attributes, setAttributes }) {
                 onChange={(value) => updateButton(3, 'style', value)}
               />
               <ToggleControl
-                label={__('Open in New Tab', 'webdune-blocks')}
-                checked={button3.openInNewTab}
-                onChange={(value) => updateButton(3, 'openInNewTab', value)}
+                label={__('Open Chat', 'webdune-blocks')}
+                checked={button3.openChat}
+                onChange={(value) => updateButton(3, 'openChat', value)}
+                help={__('Opens Tawk chat widget instead of navigating', 'webdune-blocks')}
                 __nextHasNoMarginBottom
               />
+              {!button3.openChat && (
+                <ToggleControl
+                  label={__('Open in New Tab', 'webdune-blocks')}
+                  checked={button3.openInNewTab}
+                  onChange={(value) => updateButton(3, 'openInNewTab', value)}
+                  __nextHasNoMarginBottom
+                />
+              )}
             </>
           )}
         </PanelBody>

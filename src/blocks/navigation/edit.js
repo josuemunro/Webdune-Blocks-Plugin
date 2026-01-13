@@ -36,9 +36,34 @@ export default function Edit({ attributes, setAttributes }) {
     setAttributes({
       menuItems: [
         ...menuItems,
-        { text: 'New Link', url: '#', openInNewTab: false }
+        { text: 'New Link', url: '#', openInNewTab: false, subItems: [] }
       ]
     });
+  };
+
+  const addSubMenuItem = (parentIndex) => {
+    const newMenuItems = [...menuItems];
+    if (!newMenuItems[parentIndex].subItems) {
+      newMenuItems[parentIndex].subItems = [];
+    }
+    newMenuItems[parentIndex].subItems.push({
+      text: 'Sub Link',
+      url: '#',
+      openInNewTab: false
+    });
+    setAttributes({ menuItems: newMenuItems });
+  };
+
+  const updateSubMenuItem = (parentIndex, subIndex, key, value) => {
+    const newMenuItems = [...menuItems];
+    newMenuItems[parentIndex].subItems[subIndex][key] = value;
+    setAttributes({ menuItems: newMenuItems });
+  };
+
+  const removeSubMenuItem = (parentIndex, subIndex) => {
+    const newMenuItems = [...menuItems];
+    newMenuItems[parentIndex].subItems = newMenuItems[parentIndex].subItems.filter((_, i) => i !== subIndex);
+    setAttributes({ menuItems: newMenuItems });
   };
 
   const removeMenuItem = (index) => {
@@ -152,6 +177,58 @@ export default function Edit({ attributes, setAttributes }) {
                 checked={item.openInNewTab}
                 onChange={(value) => updateMenuItem(index, 'openInNewTab', value)}
               />
+
+              {/* Dropdown Sub-Items */}
+              {item.subItems && item.subItems.length > 0 && (
+                <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #e0e0e0' }}>
+                  <strong style={{ fontSize: '12px' }}>{__('Dropdown Items', 'webdune-blocks')}</strong>
+                  {item.subItems.map((subItem, subIndex) => (
+                    <div key={subIndex} style={{ marginTop: '8px', padding: '8px', background: '#f9f9f9', borderRadius: '4px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                        <span style={{ fontSize: '11px', fontWeight: '500' }}>{__('Sub-Item', 'webdune-blocks')} {subIndex + 1}</span>
+                        <Button
+                          onClick={() => removeSubMenuItem(index, subIndex)}
+                          isDestructive
+                          isSmall
+                          style={{ fontSize: '10px', padding: '2px 6px' }}
+                        >
+                          {__('×', 'webdune-blocks')}
+                        </Button>
+                      </div>
+                      <TextControl
+                        label={__('Text', 'webdune-blocks')}
+                        value={subItem.text}
+                        onChange={(value) => updateSubMenuItem(index, subIndex, 'text', value)}
+                        __next40pxDefaultSize
+                        __nextHasNoMarginBottom
+                      />
+                      <div style={{ marginTop: '4px' }}>
+                        <label style={{ display: 'block', marginBottom: '4px', fontSize: '10px', fontWeight: '500' }}>
+                          {__('URL', 'webdune-blocks')}
+                        </label>
+                        <URLInput
+                          value={subItem.url}
+                          onChange={(value) => updateSubMenuItem(index, subIndex, 'url', value)}
+                        />
+                      </div>
+                      <ToggleControl
+                        label={__('Open in new tab', 'webdune-blocks')}
+                        checked={subItem.openInNewTab}
+                        onChange={(value) => updateSubMenuItem(index, subIndex, 'openInNewTab', value)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <Button
+                onClick={() => addSubMenuItem(index)}
+                variant="tertiary"
+                isSmall
+                style={{ marginTop: '8px' }}
+              >
+                {__('+ Add Dropdown Item', 'webdune-blocks')}
+              </Button>
             </div>
           ))}
 
@@ -231,16 +308,40 @@ export default function Edit({ attributes, setAttributes }) {
               <div className="navbar14_menu-link-wrapper">
                 <div className="navbar14_menu-links">
                   {menuItems.map((item, index) => (
-                    <a
-                      key={index}
-                      href={item.url}
-                      className="navbar14_link w-nav-link"
-                      target={item.openInNewTab ? '_blank' : '_self'}
-                      rel={item.openInNewTab ? 'noopener noreferrer' : undefined}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      {item.text}
-                    </a>
+                    <div key={index} className={`navbar14_link-wrapper ${item.subItems && item.subItems.length > 0 ? 'has-dropdown' : ''}`}>
+                      <a
+                        href={item.url}
+                        className="navbar14_link w-nav-link"
+                        target={item.openInNewTab ? '_blank' : '_self'}
+                        rel={item.openInNewTab ? 'noopener noreferrer' : undefined}
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        {item.text}
+                        {item.subItems && item.subItems.length > 0 && (
+                          <span className="navbar14_dropdown-arrow">
+                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </span>
+                        )}
+                      </a>
+                      {item.subItems && item.subItems.length > 0 && (
+                        <div className="navbar14_dropdown-menu">
+                          {item.subItems.map((subItem, subIndex) => (
+                            <a
+                              key={subIndex}
+                              href={subItem.url}
+                              className="navbar14_dropdown-link"
+                              target={subItem.openInNewTab ? '_blank' : '_self'}
+                              rel={subItem.openInNewTab ? 'noopener noreferrer' : undefined}
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              {subItem.text}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
 

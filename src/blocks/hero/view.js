@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     resultsContainer.innerHTML = `
       <div class="phone-search-no-results">
         <p>No phones found matching "${currentSearch}"</p>
-        <p class="text-size-tiny">Try a different search or <a href="/select-model/?phone=${encodeURIComponent(currentSearch)}">view all models</a></p>
+        <p class="text-size-tiny">Try a different search or <a href="/select-model/">view all models</a></p>
       </div>
     `;
     resultsWrapper.style.display = 'block';
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       const searchValue = searchInput.value.trim();
       if (searchValue.length > 0) {
-        window.location.href = `/select-model/?phone=${encodeURIComponent(searchValue)}`;
+        window.location.href = `/select-model/`;
       } else {
         window.location.href = '/select-model/';
       }

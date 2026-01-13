@@ -20,4 +20,8 @@ import './formats.js';
 // These only run on frontend (not in editor)
 import './animations.js';
 
+// Scroll-based animations for blocks
+// Data-attribute driven fade-up, fade-in, stagger effects
+import './scroll-animations.js';
+
 

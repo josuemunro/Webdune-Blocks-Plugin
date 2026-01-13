@@ -40,6 +40,7 @@ export default function save({ attributes }) {
                 tagName="h2"
                 className="heading-style-h2 text-align-center"
                 value={heading}
+                data-fade-up="true"
               />
               <div className="charity-innerblocks">
                 <InnerBlocks.Content />
@@ -49,16 +50,17 @@ export default function save({ attributes }) {
                   tagName="p"
                   className="text-align-center"
                   value={content}
+                  data-fade-up="true"
                 />
               )}
               {buttonText && buttonPosition === 'before' && (
-                <a href={buttonUrl} className="button w-button" target={buttonTarget} rel={buttonRel}>
+                <a href={buttonUrl} className="button w-button" target={buttonTarget} rel={buttonRel} data-fade-up="true">
                   {buttonText}
                 </a>
               )}
             </div>
             {charityLogos && charityLogos.length > 0 && (
-              <div className="home-charity_logos">
+              <div className="home-charity_logos" data-stagger-children="true">
                 {charityLogos
                   .filter(logo => logo && logo.url && logo.url.trim() !== '')
                   .map((logo, index) => (
@@ -75,7 +77,7 @@ export default function save({ attributes }) {
             )}
             {buttonText && buttonPosition === 'after' && (
               <div className="home-charity_button-after">
-                <a href={buttonUrl} className="button w-button" target={buttonTarget} rel={buttonRel}>
+                <a href={buttonUrl} className="button w-button" target={buttonTarget} rel={buttonRel} data-fade-up="true">
                   {buttonText}
                 </a>
               </div>

@@ -31,6 +31,7 @@ export default function Save({ attributes }) {
             <h2
               className="text-align-center"
               dangerouslySetInnerHTML={{ __html: heading }}
+              data-fade-up="true"
             />
           </div>
         </div>
@@ -46,12 +47,12 @@ export default function Save({ attributes }) {
       <div className="padding-global z-index-1">
         <div className="w-layout-blockcontainer container-xsmall w-container">
           <div className="home-phones_bottom-content">
-            <div className="margin-bottom margin-small">
+            <div className="margin-bottom margin-small" data-fade-up="true">
               <div className="text-align-center">
                 <p className="text-color-grey">{bottomText}</p>
               </div>
             </div>
-            <div className="button-group justify-center">
+            <div className="button-group justify-center" data-fade-up="true">
               <a
                 href={buttonUrl}
                 className="button is-filled is-icon w-inline-block"

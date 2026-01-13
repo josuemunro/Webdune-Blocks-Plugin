@@ -51,13 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const counter = { value: 0 };
 
       // Create ScrollTrigger animation
+      // Delay slightly to allow fade-up animation to complete first
       gsap.to(counter, {
         value: numericValue,
         duration: 2,
+        delay: 0.4, // Wait for fade-up to mostly complete (0.8s duration)
         ease: 'power2.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%', // Start animation when section is 80% down the viewport
+          start: 'top 75%', // Match fade-up trigger point
           once: true, // Only animate once
           onEnter: () => {
             statElement.setAttribute('data-animated', 'true');

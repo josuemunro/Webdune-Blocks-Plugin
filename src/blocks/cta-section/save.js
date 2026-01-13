@@ -20,15 +20,18 @@ export default function save({ attributes }) {
     if (button.style === 'is-white') buttonClass = 'button is-white';
     if (button.style === 'is-secondary') buttonClass = 'button is-secondary';
 
+    // Chat buttons don't need URL
+    const href = button.openChat ? '#' : button.url;
     const target = button.openInNewTab ? '_blank' : undefined;
     const rel = button.openInNewTab ? 'noopener noreferrer' : undefined;
 
     return (
       <a
-        href={button.url}
+        href={href}
         className={buttonClass}
         target={target}
         rel={rel}
+        data-open-chat={button.openChat ? 'true' : undefined}
       >
         {button.text}
       </a>
@@ -45,8 +48,9 @@ export default function save({ attributes }) {
                 tagName="h2"
                 className="heading-style-h2 text-align-center"
                 value={heading}
+                data-fade-up="true"
               />
-              <div className="cta_buttons">
+              <div className="cta_buttons" data-stagger-children="true">
                 {renderButton(button1)}
                 {renderButton(button2)}
                 {renderButton(button3)}

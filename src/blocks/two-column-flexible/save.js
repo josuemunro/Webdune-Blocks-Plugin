@@ -21,6 +21,7 @@ export default function Save({ attributes }) {
     ctaStyle,
     ctaText,
     ctaUrl,
+    ctaOpenInNewTab,
     showDownArrow,
     mediaType,
     videoAspectRatio,
@@ -36,13 +37,13 @@ export default function Save({ attributes }) {
 
   // Check if block has any content - hide if completely empty
   const hasTextContent = (showH2 && h2Text) || (showH3 && h3Text) || (showCTA && ctaText);
-  const hasMediaContent = 
+  const hasMediaContent =
     (mediaType === 'video' && videoUrl) ||
     (mediaType === 'single-image' && singleImage?.url) ||
     (mediaType === 'double-images' && (doubleImageFirst?.url || doubleImageSecond?.url));
-  
+
   const hasContent = hasTextContent || hasMediaContent || (showHeader && headerText);
-  
+
   // Return null if block is empty (won't render on frontend)
   if (!hasContent) {
     return null;
@@ -85,6 +86,7 @@ export default function Save({ attributes }) {
                   tagName="h2"
                   className="section-header"
                   value={headerText}
+                  data-fade-up="true"
                 />
               </div>
             )}
@@ -96,7 +98,7 @@ export default function Save({ attributes }) {
               {/* Text Content Column */}
               <div className={`two-col-block_text-content ${centerAlignText ? 'center-align' : ''}`}>
                 {showNumber && numberValue && (
-                  <div className="two-col-block_number">
+                  <div className="two-col-block_number" data-fade-up="true">
                     {numberValue}.
                   </div>
                 )}
@@ -107,6 +109,7 @@ export default function Save({ attributes }) {
                     tagName="h2"
                     className="two-col-block_heading"
                     value={h2Text}
+                    data-fade-up="true"
                   />
                 )}
                 {showH3 && h3Text && (
@@ -114,11 +117,12 @@ export default function Save({ attributes }) {
                     tagName="h3"
                     className="two-col-block_heading"
                     value={h3Text}
+                    data-fade-up="true"
                   />
                 )}
 
                 {showRichText && (
-                  <div className="two-col-block_rich-text">
+                  <div className="two-col-block_rich-text" data-fade-up="true">
                     <InnerBlocks.Content />
                   </div>
                 )}
@@ -128,6 +132,9 @@ export default function Save({ attributes }) {
                     <a
                       href={ctaUrl || '#'}
                       className={ctaStyle === 'button' ? 'button' : 'underline-cta'}
+                      target={ctaOpenInNewTab ? '_blank' : undefined}
+                      rel={ctaOpenInNewTab ? 'noopener noreferrer' : undefined}
+                      data-fade-up="true"
                     >
                       {ctaText}
                     </a>
@@ -144,7 +151,7 @@ export default function Save({ attributes }) {
               </div>
 
               {/* Media Content Column */}
-              <div className="two-col-block_media-content">
+              <div className="two-col-block_media-content" data-fade-up="true">
                 {mediaType === 'video' && videoUrl && (
                   <div className={`media-video media-video-${videoAspectRatio}`}>
                     <div className="video-wrapper">
@@ -158,7 +165,6 @@ export default function Save({ attributes }) {
                       </div>
                       <video
                         src={videoUrl}
-                        controls
                         controlsList="nodownload"
                         playsInline
                       />

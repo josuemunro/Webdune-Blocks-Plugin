@@ -21,8 +21,9 @@ export default function save({ attributes }) {
                 tagName="h2"
                 className="heading-style-h2 text-align-center"
                 value={heading}
+                data-fade-up="true"
               />
-              <div className="stats_grid">
+              <div className="stats_grid" data-stagger-children="true">
                 {stats.map((stat, index) => (
                   <div key={index} className="stats_item">
                     <div

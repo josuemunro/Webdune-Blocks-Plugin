@@ -101,6 +101,10 @@
       "type": "string",
       "default": ""
     },
+    "ctaOpenInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
     "showDownArrow": {
       "type": "boolean",
       "default": false
@@ -149,5 +153,6 @@
   "textdomain": "webdune-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
 }

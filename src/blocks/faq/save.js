@@ -21,6 +21,7 @@ export default function Save({ attributes }) {
               tagName="h2"
               className="text-align-center"
               value={heading}
+              data-fade-up="true"
             />
 
             {buttonText && (
@@ -29,13 +30,14 @@ export default function Save({ attributes }) {
                 className="button w-button"
                 target={buttonOpenInNewTab ? '_blank' : '_self'}
                 rel={buttonOpenInNewTab ? 'noopener noreferrer' : undefined}
+                data-fade-up="true"
               >
                 {buttonText}
               </a>
             )}
           </div>
 
-          <div className="faq5_list">
+          <div className="faq5_list" data-stagger-children="true">
             <InnerBlocks.Content />
           </div>
         </div>

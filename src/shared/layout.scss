@@ -10,6 +10,11 @@
 .padding-global {
   padding-left: 5%;
   padding-right: 5%;
+
+  @media screen and (max-width: 479px) {
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+  }
 }
 
 // Container utilities

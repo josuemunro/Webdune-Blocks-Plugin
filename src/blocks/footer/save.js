@@ -58,7 +58,7 @@ export default function save({ attributes }) {
       <footer className="footer2_component">
         <div className="padding-global">
           <div className="container-medium">
-            <div className="w-layout-grid footer2_top-wrapper">
+            <div className="w-layout-grid footer2_top-wrapper" data-stagger-children="true">
               {/* Logo & Tagline */}
               <div className="footer_logo-wrap">
                 {logo?.url && (

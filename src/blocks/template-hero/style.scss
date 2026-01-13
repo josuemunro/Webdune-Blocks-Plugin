@@ -11,6 +11,13 @@
 
     // Default background color (can be overridden)
     background-color: #597AA1;
+
+    // Prevent flash of content before animations load (FOUC)
+    [data-fade-up],
+    [data-fade-in],
+    [data-stagger-children]>* {
+      opacity: 0;
+    }
   }
 
   .template-hero_content {
@@ -110,13 +117,15 @@
     display: flex;
     height: 100%;
     align-items: center;
+    overflow: visible;
+    z-index: 2;
   }
 
   .template-hero_img-phone {
     position: relative;
     display: block;
-    left: -50%;
     height: 80%;
+    transform: translateX(-50%);
   }
 
   // Responsive: Tablet
@@ -200,6 +209,7 @@
     .template-hero_img-main {
       border-radius: 1.25rem;
       aspect-ratio: 1 / 1;
+      height: auto;
     }
   }
 }

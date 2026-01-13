@@ -37,8 +37,8 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      <section 
-        className={`section_content-image ${!showContent ? 'no-content' : ''}`} 
+      <section
+        className={`section_content-image ${!showContent ? 'no-content' : ''}`}
         style={{ color: textColor }}
       >
         {showContent && (
@@ -50,6 +50,7 @@ export default function save({ attributes }) {
                   className="text-align-center"
                   value={heading}
                   style={{ color: textColor }}
+                  data-fade-up="true"
                 />
                 {content && (
                   <RichText.Content
@@ -57,6 +58,7 @@ export default function save({ attributes }) {
                     className="text-align-center"
                     value={content}
                     style={{ color: textColor }}
+                    data-fade-up="true"
                   />
                 )}
                 {buttonEnabled && buttonText && (

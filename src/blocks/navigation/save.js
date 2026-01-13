@@ -65,15 +65,38 @@ export default function Save({ attributes }) {
             <div className="navbar14_menu-link-wrapper">
               <div className="navbar14_menu-links">
                 {menuItems.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.url}
-                    className="navbar14_link w-nav-link"
-                    target={item.openInNewTab ? '_blank' : '_self'}
-                    rel={item.openInNewTab ? 'noopener noreferrer' : undefined}
-                  >
-                    {item.text}
-                  </a>
+                  <div key={index} className={`navbar14_link-wrapper ${item.subItems && item.subItems.length > 0 ? 'has-dropdown' : ''}`}>
+                    <a
+                      href={item.url}
+                      className="navbar14_link w-nav-link"
+                      target={item.openInNewTab ? '_blank' : '_self'}
+                      rel={item.openInNewTab ? 'noopener noreferrer' : undefined}
+                    >
+                      {item.text}
+                      {item.subItems && item.subItems.length > 0 && (
+                        <span className="navbar14_dropdown-arrow">
+                          <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      )}
+                    </a>
+                    {item.subItems && item.subItems.length > 0 && (
+                      <div className="navbar14_dropdown-menu">
+                        {item.subItems.map((subItem, subIndex) => (
+                          <a
+                            key={subIndex}
+                            href={subItem.url}
+                            className="navbar14_dropdown-link"
+                            target={subItem.openInNewTab ? '_blank' : '_self'}
+                            rel={subItem.openInNewTab ? 'noopener noreferrer' : undefined}
+                          >
+                            {subItem.text}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
 

@@ -1,15 +1,14 @@
 @import '../../shared/colors.scss';
 
-/* Hide rich text if it contains only empty paragraphs */
-.two-col-block_rich-text {
-  &:has(> p:empty:only-child),
-  &:has(> p:only-child:not(:has(*))) {
-    display: none;
-  }
+/* Hide .two-col-block_rich-text if it only contains a single empty <p> */
+.two-col-block_rich-text:has(> p:only-child:empty) {
+  display: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Fallback for browsers that don't support :has() */
-.two-col-block_rich-text > p:empty:only-child {
+.two-col-block_rich-text>p:empty:only-child {
   display: none;
   margin: 0;
   padding: 0;
@@ -75,6 +74,14 @@
    =================================== */
 .section-header-wrapper {
   margin-bottom: 7.5rem;
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 5rem;
+  }
+
+  @media screen and (max-width: 479px) {
+    margin-bottom: 3.5rem;
+  }
 }
 
 .section-header {
@@ -156,8 +163,13 @@
 }
 
 .two-col-block_rich-text {
+
   // InnerBlocks will use core block styling for paragraphs and lists
   // Override if needed
+  a {
+    color: $color-brick;
+    text-decoration: underline;
+  }
 
   p {
     &:first-child {
@@ -271,7 +283,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
-  pointer-events: none;
+  cursor: pointer;
   z-index: 1;
   transition: opacity 0.3s ease;
 
@@ -325,7 +337,7 @@
       align-items: center;
 
       @media screen and (max-width: 479px) {
-        justify-content: flex-start;
+        justify-content: center;
       }
     }
 
@@ -479,5 +491,18 @@
     .double-image-second {
       top: 3rem;
     }
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .media-double-images.media-double-tall-overlaid .double-image-first {
+    margin-right: 8rem;
+    margin-bottom: 0rem;
+  }
+
+  .media-double-images.media-double-tall-overlaid .double-image-second {
+    left: auto;
+    right: 2rem;
+    width: 10rem;
   }
 }

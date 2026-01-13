@@ -106,6 +106,21 @@
     gap: 0;
   }
 
+  // Dropdown wrapper
+  .navbar14_link-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &.has-dropdown {
+      .navbar14_link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+
   .navbar14_link {
     padding: 0.5rem 2rem;
     transition: color 0.2s;
@@ -119,6 +134,63 @@
 
     &.w--current {
       color: $color-dark;
+    }
+  }
+
+  // Dropdown arrow
+  .navbar14_dropdown-arrow {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.25rem;
+    transition: transform 0.3s ease;
+
+    svg {
+      width: 12px;
+      height: 7px;
+    }
+  }
+
+  // Dropdown menu (desktop)
+  .navbar14_dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: $color-white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 0.75rem 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    z-index: 1001;
+  }
+
+  .navbar14_dropdown-link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: $color-dark;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.1);
+      color: $color-primary;
+    }
+  }
+
+  // Show dropdown on hover (desktop)
+  .navbar14_link-wrapper.has-dropdown:hover {
+    .navbar14_dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .navbar14_dropdown-arrow {
+      transform: rotate(180deg);
     }
   }
 
@@ -234,10 +306,43 @@
       margin-top: 1rem;
     }
 
+    .navbar14_link-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .navbar14_link {
       padding: 1rem;
       padding-left: 0;
       text-align: center;
+    }
+
+    // Mobile dropdown styles - always visible, relatively positioned
+    .navbar14_dropdown-arrow {
+      display: none; // Hide arrow on mobile
+    }
+
+    .navbar14_dropdown-menu {
+      position: relative;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      background: transparent;
+      padding: 0;
+      padding-left: 1.5rem; // Indent dropdown items
+      margin-top: 0.5rem;
+      min-width: auto;
+    }
+
+    .navbar14_dropdown-link {
+      padding: 0.75rem 0;
+      color: $color-white;
+
+      &:hover {
+        background-color: transparent;
+        color: $color-primary;
+      }
     }
 
     .navbar14_button-wrapper {

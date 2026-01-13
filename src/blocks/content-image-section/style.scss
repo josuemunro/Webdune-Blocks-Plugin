@@ -71,6 +71,10 @@
     height: 130%;
     position: absolute;
     inset: -20% 0% 0%;
+
+    @media screen and (max-width: 991px) {
+      object-position: 35% 50%;
+    }
   }
 
   // Background overlay - matches Webflow exactly

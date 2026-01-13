@@ -31,22 +31,26 @@
         {
           "text": "Sell",
           "url": "#",
-          "openInNewTab": false
+          "openInNewTab": false,
+          "subItems": []
         },
         {
           "text": "How it works",
           "url": "#",
-          "openInNewTab": false
+          "openInNewTab": false,
+          "subItems": []
         },
         {
           "text": "About",
           "url": "#",
-          "openInNewTab": false
+          "openInNewTab": false,
+          "subItems": []
         },
         {
           "text": "Tips",
           "url": "#",
-          "openInNewTab": false
+          "openInNewTab": false,
+          "subItems": []
         }
       ]
     },

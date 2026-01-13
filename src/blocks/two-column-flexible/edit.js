@@ -63,6 +63,7 @@ export default function Edit({ attributes, setAttributes }) {
     ctaStyle,
     ctaText,
     ctaUrl,
+    ctaOpenInNewTab,
     showDownArrow,
     mediaType,
     videoAspectRatio,
@@ -240,6 +241,12 @@ export default function Edit({ attributes, setAttributes }) {
                 value={ctaText}
                 onChange={(value) => setAttributes({ ctaText: sanitizeTextAttribute(value) })}
                 __next40pxDefaultSize
+                __nextHasNoMarginBottom
+              />
+              <ToggleControl
+                label={__('Open in New Tab', 'webdune-blocks')}
+                checked={ctaOpenInNewTab}
+                onChange={(value) => setAttributes({ ctaOpenInNewTab: value })}
                 __nextHasNoMarginBottom
               />
             </>
