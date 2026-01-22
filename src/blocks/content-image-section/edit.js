@@ -28,7 +28,11 @@ export default function Edit({ attributes, setAttributes }) {
     buttonEnabled,
     buttonOpenInNewTab,
     enableParallax,
-    showContent
+    showContent,
+    bgPositionDesktop,
+    bgPositionTablet,
+    bgPositionMobileLandscape,
+    bgPositionMobilePortrait
   } = attributes;
 
   const blockProps = useBlockProps({
@@ -45,6 +49,24 @@ export default function Edit({ attributes, setAttributes }) {
 
   const overlayStyle = {
     backgroundColor: hexToRgba(overlayColor, overlayOpacity / 100)
+  };
+
+  // Background image style with positioning (editor preview uses background-image)
+  const backgroundStyle = {
+    backgroundImage: backgroundImage.url ? `url(${backgroundImage.url})` : 'none',
+    backgroundPosition: `${bgPositionDesktop.x}% ${bgPositionDesktop.y}%`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    color: textColor,
+    // CSS custom properties for consistency
+    '--bg-pos-desktop-x': `${bgPositionDesktop.x}%`,
+    '--bg-pos-desktop-y': `${bgPositionDesktop.y}%`,
+    '--bg-pos-tablet-x': `${bgPositionTablet.x}%`,
+    '--bg-pos-tablet-y': `${bgPositionTablet.y}%`,
+    '--bg-pos-mobile-landscape-x': `${bgPositionMobileLandscape.x}%`,
+    '--bg-pos-mobile-landscape-y': `${bgPositionMobileLandscape.y}%`,
+    '--bg-pos-mobile-portrait-x': `${bgPositionMobilePortrait.x}%`,
+    '--bg-pos-mobile-portrait-y': `${bgPositionMobilePortrait.y}%`,
   };
 
   return (
@@ -104,6 +126,123 @@ export default function Edit({ attributes, setAttributes }) {
             onChange={(value) => setAttributes({ enableParallax: value })}
             help={__('Adds a subtle parallax scroll effect to the background image', 'webdune-blocks')}
           />
+          
+          <hr style={{ margin: '24px 0', borderTop: '1px solid #ddd' }} />
+          
+          <h3 style={{ marginTop: '16px', marginBottom: '12px', fontSize: '13px', fontWeight: '600' }}>
+            {__('Background Position', 'webdune-blocks')}
+          </h3>
+          <p style={{ marginBottom: '16px', fontSize: '12px', color: '#757575' }}>
+            {__('Control how the background image is positioned at different screen sizes.', 'webdune-blocks')}
+          </p>
+
+          {/* Desktop Position */}
+          <div style={{ marginBottom: '20px', padding: '12px', background: '#f0f0f0', borderRadius: '4px' }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: '600' }}>
+              {__('Desktop', 'webdune-blocks')}
+            </h4>
+            <RangeControl
+              label={__('Horizontal Position (%)', 'webdune-blocks')}
+              value={bgPositionDesktop.x}
+              onChange={(value) => setAttributes({ 
+                bgPositionDesktop: { ...bgPositionDesktop, x: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+            <RangeControl
+              label={__('Vertical Position (%)', 'webdune-blocks')}
+              value={bgPositionDesktop.y}
+              onChange={(value) => setAttributes({ 
+                bgPositionDesktop: { ...bgPositionDesktop, y: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+          </div>
+
+          {/* Tablet Position */}
+          <div style={{ marginBottom: '20px', padding: '12px', background: '#f0f0f0', borderRadius: '4px' }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: '600' }}>
+              {__('Tablet (≤991px)', 'webdune-blocks')}
+            </h4>
+            <RangeControl
+              label={__('Horizontal Position (%)', 'webdune-blocks')}
+              value={bgPositionTablet.x}
+              onChange={(value) => setAttributes({ 
+                bgPositionTablet: { ...bgPositionTablet, x: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+            <RangeControl
+              label={__('Vertical Position (%)', 'webdune-blocks')}
+              value={bgPositionTablet.y}
+              onChange={(value) => setAttributes({ 
+                bgPositionTablet: { ...bgPositionTablet, y: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+          </div>
+
+          {/* Mobile Landscape Position */}
+          <div style={{ marginBottom: '20px', padding: '12px', background: '#f0f0f0', borderRadius: '4px' }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: '600' }}>
+              {__('Mobile Landscape (≤767px)', 'webdune-blocks')}
+            </h4>
+            <RangeControl
+              label={__('Horizontal Position (%)', 'webdune-blocks')}
+              value={bgPositionMobileLandscape.x}
+              onChange={(value) => setAttributes({ 
+                bgPositionMobileLandscape: { ...bgPositionMobileLandscape, x: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+            <RangeControl
+              label={__('Vertical Position (%)', 'webdune-blocks')}
+              value={bgPositionMobileLandscape.y}
+              onChange={(value) => setAttributes({ 
+                bgPositionMobileLandscape: { ...bgPositionMobileLandscape, y: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+          </div>
+
+          {/* Mobile Portrait Position */}
+          <div style={{ marginBottom: '20px', padding: '12px', background: '#f0f0f0', borderRadius: '4px' }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: '600' }}>
+              {__('Mobile Portrait (≤479px)', 'webdune-blocks')}
+            </h4>
+            <RangeControl
+              label={__('Horizontal Position (%)', 'webdune-blocks')}
+              value={bgPositionMobilePortrait.x}
+              onChange={(value) => setAttributes({ 
+                bgPositionMobilePortrait: { ...bgPositionMobilePortrait, x: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+            <RangeControl
+              label={__('Vertical Position (%)', 'webdune-blocks')}
+              value={bgPositionMobilePortrait.y}
+              onChange={(value) => setAttributes({ 
+                bgPositionMobilePortrait: { ...bgPositionMobilePortrait, y: value }
+              })}
+              min={0}
+              max={100}
+              step={1}
+            />
+          </div>
         </PanelBody>
 
         {/* Overlay Settings */}
@@ -182,10 +321,7 @@ export default function Edit({ attributes, setAttributes }) {
       <div {...blockProps}>
         <section
           className={`section_content-image ${!showContent ? 'no-content' : ''}`}
-          style={{
-            backgroundImage: backgroundImage.url ? `url(${backgroundImage.url})` : 'none',
-            color: textColor
-          }}
+          style={backgroundStyle}
         >
           {showContent && (
             <div className="padding-global z-index-2">

@@ -43,7 +43,7 @@ This plugin creates a suite of custom WordPress blocks specifically designed for
 
 **Total Core Blocks: 14**
 
-See [BLOCK_INVENTORY.md](BLOCK_INVENTORY.md) for detailed block specifications.
+See [PROJECT_REFERENCE.md](PROJECT_REFERENCE.md) for complete project details and block list.
 
 ## 🚀 Quick Start
 
@@ -82,7 +82,7 @@ See [BLOCK_INVENTORY.md](BLOCK_INVENTORY.md) for detailed block specifications.
    - Click "+" to add a block
    - Find blocks under "Webdune Blocks" category
 
-See [START_HERE.md](START_HERE.md) for detailed project overview and setup instructions.
+See [PROJECT_REFERENCE.md](PROJECT_REFERENCE.md) for detailed project overview and setup instructions.
 
 ## 🛠️ Development
 
@@ -114,10 +114,14 @@ webdune-blocks/
 ├── webdune-blocks.php      # Main plugin file
 ├── package.json            # Dependencies & scripts
 ├── README.md               # This file
-├── START_HERE.md          # Project overview & quick start
-├── PROJECT_STATUS.md      # Current progress & next steps
-├── BLOCK_INVENTORY.md     # Detailed block specifications
+├── PROJECT_REFERENCE.md    # Quick reference (START HERE!)
+├── PROJECT_STATUS.md       # Current progress & next steps
 ├── THEME-INTEGRATION-GUIDE.md  # Integration instructions
+│
+├── WORK_LOGS/              # Implementation details
+│   ├── phone-search.md    # Phone search implementation
+│   ├── phone-slider.md    # Phone slider implementation
+│   └── user-roles.md      # User roles & permissions
 │
 ├── src/                    # Source files
 │   ├── blocks/            # Individual blocks
@@ -127,8 +131,10 @@ webdune-blocks/
 ├── build/                  # Compiled files (gitignored)
 │
 └── includes/              # PHP helper functions
-    ├── phone-queries.php
-    └── block-helpers.php
+    ├── post-types.php     # Custom post types
+    ├── phone-queries.php  # Phone search
+    ├── block-helpers.php  # Block utilities
+    └── emoji-fix.php      # Emoji sanitization
 ```
 
 ### Creating a New Block
@@ -376,12 +382,12 @@ GPL v2 or later
 ## 🆘 Support
 
 **Documentation:**
-- Setup Guide: [SETUP_GUIDE.md](SETUP_GUIDE.md)
-- Block Inventory: [BLOCK_INVENTORY.md](BLOCK_INVENTORY.md)
+- **START HERE**: [PROJECT_REFERENCE.md](PROJECT_REFERENCE.md) - Quick reference & setup
+- Implementation Details: [WORK_LOGS/](WORK_LOGS/) - Phone search, roles, etc.
 - WordPress Block Editor Docs: https://developer.wordpress.org/block-editor/
 
 **Troubleshooting:**
-See [SETUP_GUIDE.md](SETUP_GUIDE.md) → Troubleshooting section
+See [PROJECT_REFERENCE.md](PROJECT_REFERENCE.md) → Troubleshooting section
 
 ## 📊 Project Status
 

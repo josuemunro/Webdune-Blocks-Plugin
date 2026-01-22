@@ -50,3 +50,17 @@ id_rsa.pub
 github_rsa
 *.ppk
 
+# Credentials and sensitive documentation
+CREDENTIALS*.md
+*.local.md
+AI_AGENT_HANDOFF*.md
+SECURITY_HANDOFF*.md
+LOGIN_FIX*.md
+REDIRECT_DIAGNOSIS*.md
+HARD_REDIRECT_FIX*.md
+*_HANDOFF*.md
+
+# Local theme files (contain credentials)
+functions.php
+nginx_*.conf
+

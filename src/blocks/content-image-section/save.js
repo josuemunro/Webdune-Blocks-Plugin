@@ -13,7 +13,11 @@ export default function save({ attributes }) {
     buttonEnabled,
     buttonOpenInNewTab,
     enableParallax,
-    showContent
+    showContent,
+    bgPositionDesktop,
+    bgPositionTablet,
+    bgPositionMobileLandscape,
+    bgPositionMobilePortrait
   } = attributes;
 
   const blockProps = useBlockProps.save({
@@ -35,11 +39,24 @@ export default function save({ attributes }) {
   const target = buttonOpenInNewTab ? '_blank' : undefined;
   const rel = buttonOpenInNewTab ? 'noopener noreferrer' : undefined;
 
+  // Create inline styles with CSS custom properties for responsive positioning
+  const sectionStyle = {
+    color: textColor,
+    '--bg-pos-desktop-x': `${bgPositionDesktop.x}%`,
+    '--bg-pos-desktop-y': `${bgPositionDesktop.y}%`,
+    '--bg-pos-tablet-x': `${bgPositionTablet.x}%`,
+    '--bg-pos-tablet-y': `${bgPositionTablet.y}%`,
+    '--bg-pos-mobile-landscape-x': `${bgPositionMobileLandscape.x}%`,
+    '--bg-pos-mobile-landscape-y': `${bgPositionMobileLandscape.y}%`,
+    '--bg-pos-mobile-portrait-x': `${bgPositionMobilePortrait.x}%`,
+    '--bg-pos-mobile-portrait-y': `${bgPositionMobilePortrait.y}%`,
+  };
+
   return (
     <div {...blockProps}>
       <section
         className={`section_content-image ${!showContent ? 'no-content' : ''}`}
-        style={{ color: textColor }}
+        style={sectionStyle}
       >
         {showContent && (
           <div className="padding-global z-index-2">

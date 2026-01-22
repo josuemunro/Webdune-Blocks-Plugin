@@ -71,9 +71,22 @@
     height: 130%;
     position: absolute;
     inset: -20% 0% 0%;
+    // Default desktop positioning using CSS custom properties
+    object-position: var(--bg-pos-desktop-x, 50%) var(--bg-pos-desktop-y, 50%);
 
+    // Tablet
     @media screen and (max-width: 991px) {
-      object-position: 35% 50%;
+      object-position: var(--bg-pos-tablet-x, 35%) var(--bg-pos-tablet-y, 50%);
+    }
+
+    // Mobile Landscape
+    @media screen and (max-width: 767px) {
+      object-position: var(--bg-pos-mobile-landscape-x, 35%) var(--bg-pos-mobile-landscape-y, 50%);
+    }
+
+    // Mobile Portrait
+    @media screen and (max-width: 479px) {
+      object-position: var(--bg-pos-mobile-portrait-x, 35%) var(--bg-pos-mobile-portrait-y, 50%);
     }
   }
 

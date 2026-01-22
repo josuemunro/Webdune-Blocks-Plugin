@@ -20,11 +20,13 @@ That's it! The script will:
 
 The deployment script is configured in `deploy-to-production.sh`:
 
+> **Note**: Get the actual `REMOTE_HOST` IP from `CREDENTIALS.local.md`
+
 ```bash
 # Current Configuration
 SSH_KEY="$HOME/.ssh/github_rsa"
 REMOTE_USER="root"
-REMOTE_HOST="170.64.232.219"
+REMOTE_HOST="<see CREDENTIALS.local.md>"
 REMOTE_PATH="/home/sellmycell/htdocs/sellmycell.co.nz/wp-content/plugins/"
 ```
 
@@ -58,7 +60,8 @@ ls -la ~/.ssh/github_rsa
 ### Test SSH Connection
 
 ```bash
-ssh -i ~/.ssh/github_rsa root@170.64.232.219
+# Replace <SERVER_IP> with value from CREDENTIALS.local.md
+ssh -i ~/.ssh/github_rsa root@<SERVER_IP>
 ```
 
 If this works, deployment will work!
@@ -82,7 +85,7 @@ SSH_KEY="$HOME/.ssh/your-actual-key-name"
 chmod 600 ~/.ssh/github_rsa
 
 # Or use a different key
-ssh -i ~/.ssh/another-key root@170.64.232.219
+ssh -i ~/.ssh/another-key root@<SERVER_IP>
 ```
 
 ### Error: Build failed
@@ -115,12 +118,12 @@ Then upload `webdune-blocks.zip` via WordPress admin.
 ### Option 2: SCP Only
 ```bash
 npm run plugin-zip
-scp -i ~/.ssh/github_rsa webdune-blocks.zip root@170.64.232.219:/home/sellmycell/htdocs/sellmycell.co.nz/wp-content/plugins/
+scp -i ~/.ssh/github_rsa webdune-blocks.zip root@<SERVER_IP>:/home/sellmycell/htdocs/sellmycell.co.nz/wp-content/plugins/
 ```
 
 Then SSH in and extract manually:
 ```bash
-ssh -i ~/.ssh/github_rsa root@170.64.232.219
+ssh -i ~/.ssh/github_rsa root@<SERVER_IP>
 cd /home/sellmycell/htdocs/sellmycell.co.nz/wp-content/plugins/
 rm -rf webdune-blocks
 unzip webdune-blocks.zip
@@ -154,7 +157,7 @@ Every deployment automatically creates a backup:
 
 **To restore from backup:**
 ```bash
-ssh -i ~/.ssh/github_rsa root@170.64.232.219
+ssh -i ~/.ssh/github_rsa root@<SERVER_IP>
 cd /home/sellmycell/htdocs/sellmycell.co.nz/wp-content/plugins/
 rm -rf webdune-blocks
 unzip /home/sellmycell/backups/webdune-blocks-backup-YYYYMMDD-HHMMSS.zip
