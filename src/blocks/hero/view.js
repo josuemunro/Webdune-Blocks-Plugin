@@ -3,6 +3,8 @@
  * Handles live search with debouncing and AJAX
  */
 
+import { pushEvent } from '../../shared/analytics.js';
+
 document.addEventListener('DOMContentLoaded', function () {
   console.log('🔍 Phone search initialized');
 
@@ -58,8 +60,16 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         if (data.success && data.data) {
+          pushEvent( 'phone_search', {
+            search_term: searchTerm,
+            result_count: data.data.length,
+          } );
           displayResults(data.data);
         } else {
+          pushEvent( 'phone_search', {
+            search_term: searchTerm,
+            result_count: 0,
+          } );
           showNoResults();
         }
       })
@@ -182,6 +192,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!searchInput.contains(e.target) && !resultsWrapper.contains(e.target) && !searchButton.contains(e.target)) {
       hideResults();
     }
+  });
+
+  // Track phone_search_click on result selection (WEB-92)
+  resultsContainer.addEventListener('click', function (e) {
+    const link = e.target.closest('.phone-lookup_item');
+    if ( ! link ) {
+      return;
+    }
+    const items = resultsContainer.querySelectorAll('.phone-lookup_item');
+    pushEvent( 'phone_search_click', {
+      phone_name: link.textContent.replace(/\s+/g, ' ').trim().split('Get')[0].trim(),
+      phone_url: link.getAttribute('href') || '',
+      result_position: Array.from( items ).indexOf( link ) + 1,
+    } );
   });
 
   // Prevent dropdown from closing when clicking inside it

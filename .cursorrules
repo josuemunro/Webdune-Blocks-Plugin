@@ -100,3 +100,44 @@ wp block list      # List registered blocks
 ## Next Priority
 Footer block (see NEXT_STEPS.md for detailed guide)
 
+## AI Safety Rules ⚠️
+
+**CRITICAL**: Read AI_SAFETY_RULES.md for full details. Key rules:
+
+### ✅ SAFE - Auto-Run Allowed
+- `SELECT` queries (read-only)
+- Reading files: `cat`, `grep`, `ls`, `head`, `tail`
+- Site checks: `curl -I`, HTTP status codes
+- Creating backups: `mysqldump`, `tar`, `cp file.backup`
+- Clearing caches: `wp cache flush`, `rm -rf /tmp/*`, `/wp-content/cache/*`
+
+### ⚠️ REQUIRES USER CONFIRMATION - ASK FIRST!
+- `UPDATE`, `INSERT`, `DELETE` (any database modifications)
+- `DROP TABLE` or `DROP DATABASE` ⚠️⚠️⚠️
+- `TRUNCATE` (any table)
+- `rm` (any file deletion)
+- `rm -rf` (recursive deletion)
+- Database restores (even from backup)
+- Editing production PHP/config files
+- Deploying code to production
+- `chmod`, `chown` (permission changes)
+- Any operation that modifies production data
+
+### 🚫 NEVER Auto-Run Without Extensive Discussion
+- Dropping core WordPress tables
+- Deleting user data or orders
+- Modifying credentials or secrets
+- Stopping/restarting MySQL or Nginx
+- `git push --force` to main/master
+- Batch operations affecting multiple records without WHERE clause
+
+### When In Doubt
+1. Show the exact command you want to run
+2. Explain what it does and potential risks
+3. Confirm backup exists and location
+4. Get explicit "yes, proceed" from user
+5. THEN execute
+
+**Remember**: User's peace of mind > speed. Always ASK FIRST for destructive operations!
+
+See AI_SAFETY_RULES.md for full guidelines and incident log.

@@ -24,4 +24,18 @@ import './animations.js';
 // Data-attribute driven fade-up, fade-in, stagger effects
 import './scroll-animations.js';
 
+// Pre-checkout analytics — scroll depth + global button tracking (WEB-92)
+import { trackScrollDepth, trackButtonClicks } from './analytics.js';
+if ( typeof window !== 'undefined' && ! window.__WEBDUNE_EDITOR ) {
+	if ( document.readyState === 'loading' ) {
+		document.addEventListener( 'DOMContentLoaded', () => {
+			trackScrollDepth();
+			trackButtonClicks();
+		} );
+	} else {
+		trackScrollDepth();
+		trackButtonClicks();
+	}
+}
+
 
