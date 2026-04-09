@@ -30,6 +30,9 @@ function initScrollAnimations() {
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // Skip footer animations on /checkout — dynamic content causes ScrollTrigger misfires
+  const isCheckout = window.location.pathname.indexOf('/checkout') !== -1;
+
   // Animation defaults
   const DURATION = 0.8;
   const STAGGER_DELAY = 0.15;
@@ -105,6 +108,11 @@ function initScrollAnimations() {
   const staggerParents = document.querySelectorAll('[data-stagger-children]');
 
   staggerParents.forEach((parent) => {
+    // On /checkout, skip footer animations — show children immediately
+    if (isCheckout && parent.closest('.webdune-footer-block')) {
+      return;
+    }
+
     const staggerDelay = parseFloat(parent.getAttribute('data-stagger-delay')) || STAGGER_DELAY;
     const parentDelay = parseFloat(parent.getAttribute('data-delay')) || 0;
     const instant = parent.getAttribute('data-instant') === 'true';

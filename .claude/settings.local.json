@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"e:/Josue Munro/Documents/Projects/WebDune/CLIENTS/SellmyCell/DEVELOPMENT/Webdune Blocks Plugin\" ls-tree --name-only HEAD)",
+      "Bash(git ls-tree:*)",
+      "Bash(git -C \"e:/Josue Munro/Documents/Projects/WebDune/CLIENTS/SellmyCell/DEVELOPMENT/Webdune Blocks Plugin\" log --oneline -3)"
+    ]
+  }
+}
