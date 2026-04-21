@@ -1,15 +1,13 @@
 /**
- * Pre-checkout analytics — dataLayer events for GA4/GTM (WEB-92).
- *
- * Pushes events to window.dataLayer for Google Tag Manager to forward
- * to GA4. Mirrors the pattern used in phone-orders-v2 checkout analytics.
+ * Pre-checkout analytics — gtag events for GA4 (WEB-92, WEB-214).
  *
  * No PII is included in any event parameters.
  */
 
 function pushEvent( eventName, params = {} ) {
-	window.dataLayer = window.dataLayer || [];
-	window.dataLayer.push( { event: eventName, ...params } );
+	if ( typeof window.gtag === 'function' ) {
+		window.gtag( 'event', eventName, params );
+	}
 }
 
 export { pushEvent };

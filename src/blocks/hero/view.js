@@ -147,6 +147,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function redirectToSelectModel() {
     const searchValue = searchInput.value.trim();
     if (searchValue.length > 0) {
+      pushEvent( 'phone_search_submit', {
+        search_term: searchValue,
+      } );
       window.location.href = `/select-model/?phone=${encodeURIComponent(searchValue)}`;
     }
   }
@@ -178,12 +181,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (viewAllLink) {
     viewAllLink.addEventListener('click', function (e) {
       e.preventDefault();
-      const searchValue = searchInput.value.trim();
-      if (searchValue.length > 0) {
-        window.location.href = `/select-model/`;
-      } else {
-        window.location.href = '/select-model/';
-      }
+      pushEvent( 'phone_search_view_all', {
+        search_term: searchInput.value.trim(),
+      } );
+      window.location.href = '/select-model/';
     });
   }
 
