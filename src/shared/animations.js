@@ -155,7 +155,10 @@ if (typeof window !== 'undefined') {
   
   if (!isEditor) {
     window.addEventListener('DOMContentLoaded', () => {
-      const lenis = initSmoothScroll();
+      const noSmoothScroll = ['/checkout', '/my-account'].some(
+        (slug) => window.location.pathname.includes(slug)
+      );
+      const lenis = noSmoothScroll ? null : initSmoothScroll();
       
       // Expose Lenis globally so other scripts (like FAQ) can trigger resize
       if (lenis) {
