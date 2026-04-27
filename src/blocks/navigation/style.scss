@@ -281,6 +281,10 @@
       flex-flow: column;
       justify-content: center;
       align-items: center;
+
+      &.nav-menu-open {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+      }
     }
 
     .navbar14_menu {
@@ -298,12 +302,14 @@
       flex-direction: column;
       align-items: stretch;
       width: 100%;
+      padding-left: 0.5rem;
     }
 
     .navbar14_menu-links {
       flex-direction: column;
       align-items: flex-start;
       margin-top: 1rem;
+      font-size: 1.25rem;
     }
 
     .navbar14_link-wrapper {
