@@ -61,6 +61,22 @@ function initParallax(lenis) {
       },
     });
   });
+
+  // Recalculate ScrollTrigger positions when lazy-loaded parallax images finish loading
+  let refreshQueued = false;
+  parallaxElements.forEach((el) => {
+    if (el.tagName === 'IMG' && !el.complete) {
+      el.addEventListener('load', () => {
+        if (!refreshQueued) {
+          refreshQueued = true;
+          requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+            refreshQueued = false;
+          });
+        }
+      }, { once: true });
+    }
+  });
 }
 
 /**
