@@ -174,14 +174,24 @@ function webdune_blocks_enqueue_shared_styles()
     );
   }
 
-  // Enqueue JS (includes custom format registrations and animations) if it exists
+  // Enqueue JS (animations + analytics on frontend, shared styles in editor)
   if (file_exists($shared_js_path)) {
     $asset_file = file_exists($shared_asset_path) ? require($shared_asset_path) : array('dependencies' => array(), 'version' => WEBDUNE_BLOCKS_VERSION);
 
-    // On frontend, add GSAP/Lenis dependencies for animations
-    // On editor, use default dependencies for formats only
     $dependencies = $asset_file['dependencies'];
     if (!is_admin()) {
+      // Strip editor-only dependencies that should never load on the frontend
+      $editor_only_deps = array(
+        'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-commands',
+        'wp-preferences', 'wp-preferences-persistence', 'wp-notices',
+        'wp-keyboard-shortcuts', 'wp-style-engine', 'wp-token-list',
+        'wp-rich-text', 'wp-primitives', 'wp-autop', 'wp-blob',
+        'wp-block-serialization-default-parser', 'wp-shortcode', 'wp-warning',
+        'wp-deprecated', 'moment', 'wp-date', 'wp-compose', 'wp-data',
+        'wp-redux-routine', 'wp-private-apis', 'wp-html-entities',
+        'wp-keycodes', 'wp-priority-queue', 'wp-is-shallow-equal', 'wp-dom',
+      );
+      $dependencies = array_diff($dependencies, $editor_only_deps);
       $dependencies = array_merge($dependencies, array('gsap', 'gsap-scrolltrigger', 'lenis'));
     }
 
@@ -196,6 +206,30 @@ function webdune_blocks_enqueue_shared_styles()
 }
 add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles', 15); // Priority 15 to load after animations
 add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_shared_styles', 10);
+
+/**
+ * Enqueue editor-only scripts (rich text format registrations)
+ * These register toolbar buttons and must NOT load on the frontend
+ */
+function webdune_blocks_enqueue_editor_formats()
+{
+  $editor_js = WEBDUNE_BLOCKS_BUILD_URL . 'shared/editor-formats.js';
+  $editor_js_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/editor-formats.js';
+  $editor_asset_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/editor-formats.asset.php';
+
+  if (file_exists($editor_js_path)) {
+    $asset_file = file_exists($editor_asset_path) ? require($editor_asset_path) : array('dependencies' => array(), 'version' => WEBDUNE_BLOCKS_VERSION);
+
+    wp_enqueue_script(
+      'webdune-editor-formats',
+      $editor_js,
+      $asset_file['dependencies'],
+      $asset_file['version'],
+      true
+    );
+  }
+}
+add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_editor_formats', 10);
 
 /**
  * Enqueue GSAP and animation libraries from CDN
