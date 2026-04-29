@@ -55,23 +55,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
   
   // Function to add a new FAQ item
   const addFaqItem = () => {
-    console.log('Adding FAQ item. Current count:', innerBlocks.length);
-    
     const newBlock = createBlock('webdune/faq-item', {
       question: 'New question?',
       answer: 'Add your answer here.'
     });
-    
-    console.log('New block created:', newBlock.clientId);
-    
-    // Append new block to existing inner blocks
+
     const updatedBlocks = [...innerBlocks, newBlock];
-    console.log('Updating inner blocks to count:', updatedBlocks.length);
-    
-    // Replace all inner blocks with the updated array (including the new one)
     replaceInnerBlocks(clientId, updatedBlocks, false);
-    
-    console.log('✅ FAQ item added successfully!');
   };
 
   return (

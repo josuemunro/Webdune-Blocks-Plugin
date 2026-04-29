@@ -4,9 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 Phone Slider view.js loading... [BUILD: v1.0.4-arrows-check]');
-
-  // Find all phone slider blocks
   const sliderBlocks = document.querySelectorAll('.section_home-phones');
 
   sliderBlocks.forEach((block) => {
@@ -18,9 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const config = JSON.parse(configScript.textContent);
     const blockId = configScript.dataset.blockId;
-
-    console.group('📱 Phone Slider - ' + blockId);
-    console.log('Config:', config);
 
     // Build REST API query
     const queryParams = new URLSearchParams({
@@ -40,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const apiUrl = `/wp-json/wp/v2/posts?${queryParams.toString()}`;
-    console.log('Fetching:', apiUrl);
 
     // Fetch phones
     fetch(apiUrl)
@@ -51,20 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json();
       })
       .then((posts) => {
-        console.log(`Found ${posts.length} posts`);
-
         if (posts.length === 0) {
           renderEmptyState(block, blockId, config);
         } else {
           renderPhoneSlider(block, blockId, posts, config);
         }
-
-        console.groupEnd();
       })
       .catch((error) => {
         console.error('Phone Slider error:', error);
         renderErrorState(block, blockId, error);
-        console.groupEnd();
       });
   });
 });
@@ -122,17 +110,24 @@ function renderPhoneSlider(block, blockId, posts, config) {
   container.innerHTML = sliderHTML;
   container.removeAttribute('data-loading');
 
-  // Initialize Swiper after DOM is fully rendered
-  // Use requestAnimationFrame to ensure browser has painted the DOM
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      if (typeof Swiper !== 'undefined') {
-        initializeSwiper(blockId, config);
-      } else {
-        console.warn('Swiper not loaded, slider will display as static grid');
+  // Defer Swiper init until the slider is near the viewport to avoid forced reflows
+  const swiperElement = container.querySelector('.home-phones_slider');
+  if (!swiperElement) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        obs.unobserve(entry.target);
+        requestAnimationFrame(() => {
+          if (typeof Swiper !== 'undefined') {
+            initializeSwiper(blockId, config);
+          }
+        });
       }
     });
-  });
+  }, { rootMargin: '200px' });
+
+  observer.observe(swiperElement);
 }
 
 function initializeSwiper(blockId, config) {
@@ -187,23 +182,14 @@ function initializeSwiper(blockId, config) {
         nextEl: '.phones-slider_arrow.next',
         prevEl: '.phones-slider_arrow.prev',
       };
-      console.log('✅ Navigation arrows found');
-    } else {
-      console.warn('⚠️ Navigation arrows not found - disabling navigation');
-      console.log('Next:', nextArrow, 'Prev:', prevArrow);
     }
   }
 
   // Wrap in try-catch to gracefully handle any Swiper initialization errors
   try {
     new Swiper(swiperElement, swiperConfig);
-    console.log('✅ Swiper initialized for:', blockId);
   } catch (error) {
-    console.error('❌ Failed to initialize Swiper for:', blockId, error);
-    // Log element state for debugging
-    console.log('Element:', swiperElement);
-    console.log('Wrapper:', swiperWrapper);
-    console.log('Slides:', slides.length);
+    console.error('Failed to initialize Swiper for:', blockId, error);
   }
 }
 
@@ -248,5 +234,3 @@ function renderErrorState(block, blockId, error) {
   `;
   container.removeAttribute('data-loading');
 }
-
-console.log('✅ Phone Slider view.js loaded');

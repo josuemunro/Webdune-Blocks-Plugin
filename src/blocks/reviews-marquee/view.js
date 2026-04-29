@@ -60,116 +60,113 @@ function createReviewSlide(review) {
   `;
 }
 
-function initReviewsMarquee() {
+function initSwiperForBlock(dataScript) {
   if (typeof Swiper === 'undefined') {
-    console.warn('⚠️ Swiper.js not loaded yet, retrying...');
-    setTimeout(initReviewsMarquee, 100);
+    setTimeout(() => initSwiperForBlock(dataScript), 100);
     return;
   }
 
-  console.log('🎠 Initializing reviews marquees...');
+  try {
+    const data = JSON.parse(dataScript.textContent);
+    const { blockId, reviews, autoplaySpeed } = data;
 
-  // Find all review marquee data scripts
-  const dataScripts = document.querySelectorAll('.reviews-marquee-data[data-block-id]');
+    if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
+      console.warn(`No reviews found for block: ${blockId || 'unknown'}`);
+      return;
+    }
 
-  dataScripts.forEach((dataScript) => {
-    try {
-      // Parse JSON data - emojis are safely handled
-      const data = JSON.parse(dataScript.textContent);
-      const { blockId, reviews, autoplaySpeed } = data;
+    const topSlider = document.querySelector(`.${blockId}-top`);
+    const bottomSlider = document.querySelector(`.${blockId}-bottom`);
 
-      // Validate reviews data
-      if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
-        console.warn(`⚠️ No reviews found for block: ${blockId || 'unknown'}`);
-        return;
-      }
+    if (!topSlider || !bottomSlider) {
+      console.warn(`Review sliders not found: ${blockId}`);
+      return;
+    }
 
-      // Initialize both top and bottom sliders
-      const topSlider = document.querySelector(`.${blockId}-top`);
-      const bottomSlider = document.querySelector(`.${blockId}-bottom`);
+    if (topSlider.classList.contains('swiper-initialized')) {
+      return;
+    }
 
-      if (!topSlider || !bottomSlider) {
-        console.warn(`⚠️ Review sliders not found: ${blockId}`);
-        return;
-      }
+    const reviewsHTML = reviews.map(review => createReviewSlide(review)).join('');
 
-      // Check if already initialized
-      if (topSlider.classList.contains('swiper-initialized')) {
-        console.log(`✅ Reviews already initialized: ${blockId}`);
-        return;
-      }
+    const topWrapper = topSlider.querySelector('.swiper-wrapper');
+    const bottomWrapper = bottomSlider.querySelector('.swiper-wrapper');
 
-      // Render reviews into both sliders
-      const reviewsHTML = reviews.map(review => createReviewSlide(review)).join('');
+    if (topWrapper) topWrapper.innerHTML = reviewsHTML;
+    if (bottomWrapper) bottomWrapper.innerHTML = reviewsHTML;
 
-      const topWrapper = topSlider.querySelector('.swiper-wrapper');
-      const bottomWrapper = bottomSlider.querySelector('.swiper-wrapper');
+    new Swiper(topSlider, {
+      slidesPerView: 'auto',
+      spaceBetween: 32,
+      centeredSlides: true,
+      loop: true,
+      speed: autoplaySpeed || 7000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+        reverseDirection: false,
+      },
+      allowTouchMove: true,
+    });
 
-      if (topWrapper) topWrapper.innerHTML = reviewsHTML;
-      if (bottomWrapper) bottomWrapper.innerHTML = reviewsHTML;
-
-      // Top Row Swiper (Desktop - scrolls left)
-      new Swiper(topSlider, {
-        slidesPerView: 'auto',
-        spaceBetween: 32,
-        centeredSlides: true,
-        loop: true,
-        speed: autoplaySpeed || 7000,
-        autoplay: {
-          delay: 0,
-          disableOnInteraction: false,
-          reverseDirection: false,
-        },
-        allowTouchMove: true, // Disable dragging
-      });
-
-      // Bottom Row Swiper (scrolls right, mobile uses this)
-      new Swiper(bottomSlider, {
-        slidesPerView: 1,
-        spaceBetween: 32,
-        centeredSlides: true,
-        loop: true,
-        speed: 300,
-        autoplay: {
-          delay: 0,
-          disableOnInteraction: false,
-          reverseDirection: true, // Opposite direction
-          enabled: false,
-        },
-
-        breakpoints: {
-          // when window width is >= 480px
-          480: {
-            slidesPerView: 'auto',
-            speed: autoplaySpeed || 7000,
-            autoplay: {
-              enabled: true,
-              delay: 0,
-              reverseDirection: true,
-            },
+    new Swiper(bottomSlider, {
+      slidesPerView: 1,
+      spaceBetween: 32,
+      centeredSlides: true,
+      loop: true,
+      speed: 300,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+        reverseDirection: true,
+        enabled: false,
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 'auto',
+          speed: autoplaySpeed || 7000,
+          autoplay: {
+            enabled: true,
+            delay: 0,
+            reverseDirection: true,
           },
         },
-        allowTouchMove: true, // Allow touch on mobile
-        // Navigation arrows for mobile
-        navigation: {
-          nextEl: `.${blockId}-nav-next`,
-          prevEl: `.${blockId}-nav-prev`,
-        },
-      });
+      },
+      allowTouchMove: true,
+      navigation: {
+        nextEl: `.${blockId}-nav-next`,
+        prevEl: `.${blockId}-nav-prev`,
+      },
+    });
 
-      console.log(`✅ Reviews marquee initialized: ${blockId}`);
-    } catch (error) {
-      console.error(`❌ Error initializing reviews marquee:`, error);
+  } catch (error) {
+    console.error('Error initializing reviews marquee:', error);
+  }
+}
 
-      // Check if it's a JSON parse error (could be emoji-related)
-      if (error instanceof SyntaxError) {
-        console.error('💡 This may be caused by special characters or emojis in review text. The block has been updated to handle this.');
+function initReviewsMarquee() {
+  const dataScripts = document.querySelectorAll('.reviews-marquee-data[data-block-id]');
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        obs.unobserve(entry.target);
+        const dataScript = entry.target.querySelector('.reviews-marquee-data[data-block-id]');
+        if (dataScript) initSwiperForBlock(dataScript);
       }
+    });
+  }, { rootMargin: '200px' });
+
+  dataScripts.forEach((dataScript) => {
+    const section = dataScript.closest('section') || dataScript.parentElement;
+    if (section) {
+      observer.observe(section);
+    } else {
+      initSwiperForBlock(dataScript);
     }
   });
 }
 
-// Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initReviewsMarquee);
 } else {

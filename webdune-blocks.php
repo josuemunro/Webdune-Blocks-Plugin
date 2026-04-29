@@ -190,7 +190,7 @@ function webdune_blocks_enqueue_shared_styles()
       $shared_js,
       $dependencies,
       $asset_file['version'],
-      true
+      is_admin() ? true : array('in_footer' => true, 'strategy' => 'defer')
     );
   }
 }
@@ -208,13 +208,13 @@ function webdune_blocks_enqueue_animations()
     return;
   }
 
-  // GSAP from CDN
+  // GSAP from CDN (deferred to avoid render-blocking)
   wp_enqueue_script(
     'gsap',
     'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
     array(),
     '3.12.2',
-    true
+    array('in_footer' => true, 'strategy' => 'defer')
   );
 
   wp_enqueue_script(
@@ -222,16 +222,16 @@ function webdune_blocks_enqueue_animations()
     'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
     array('gsap'),
     '3.12.2',
-    true
+    array('in_footer' => true, 'strategy' => 'defer')
   );
 
-  // Lenis smooth scroll
+  // Lenis smooth scroll (deferred to avoid render-blocking)
   wp_enqueue_script(
     'lenis',
     'https://unpkg.com/lenis@1.3.11/dist/lenis.min.js',
     array(),
     '1.3.11',
-    true
+    array('in_footer' => true, 'strategy' => 'defer')
   );
 
   // Note: Our custom animations (parallax, nav behaviors, etc.) are loaded
@@ -260,13 +260,13 @@ function webdune_blocks_enqueue_swiper()
       '11.0.0'
     );
 
-    // Swiper JS
+    // Swiper JS (deferred to avoid render-blocking)
     wp_enqueue_script(
       'swiper-js',
       'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
       array(),
       '11.0.0',
-      true
+      array('in_footer' => true, 'strategy' => 'defer')
     );
   }
 }

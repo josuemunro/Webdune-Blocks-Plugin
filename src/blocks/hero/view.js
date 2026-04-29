@@ -6,8 +6,6 @@
 import { pushEvent } from '../../shared/analytics.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('🔍 Phone search initialized');
-
   const searchInput = document.getElementById('phone-search');
   const searchButton = document.querySelector('.home-hero_phone-lookup .button');
   const resultsWrapper = document.querySelector('.phone-lookup');
@@ -15,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const viewAllLink = document.querySelector('.phone-lookup .text-style-link');
 
   if (!searchInput || !resultsWrapper || !resultsContainer) {
-    console.warn('⚠️ Phone search elements not found');
+    console.warn('Phone search elements not found');
     return;
   }
 
@@ -60,21 +58,21 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         if (data.success && data.data) {
-          pushEvent( 'phone_search', {
+          pushEvent('phone_search', {
             search_term: searchTerm,
             result_count: data.data.length,
-          } );
+          });
           displayResults(data.data);
         } else {
-          pushEvent( 'phone_search', {
+          pushEvent('phone_search', {
             search_term: searchTerm,
             result_count: 0,
-          } );
+          });
           showNoResults();
         }
       })
       .catch(error => {
-        console.error('❌ Phone search error:', error);
+        console.error('Phone search error:', error);
         showError();
       });
   }
@@ -114,8 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function showNoResults() {
     resultsContainer.innerHTML = `
       <div class="phone-search-no-results">
-        <p>No phones found matching "${currentSearch}"</p>
-        <p class="text-size-tiny">Try a different search or <a href="/select-model/">view all models</a></p>
+        <p>Sorry we don't currently have your phone listed, <a href="/contact/" style="text-decoration: underline;">contact us</a> for a custom quote.</p>
       </div>
     `;
     resultsWrapper.style.display = 'block';
@@ -147,9 +144,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function redirectToSelectModel() {
     const searchValue = searchInput.value.trim();
     if (searchValue.length > 0) {
-      pushEvent( 'phone_search_submit', {
+      pushEvent('phone_search_submit', {
         search_term: searchValue,
-      } );
+      });
       window.location.href = `/select-model/?phone=${encodeURIComponent(searchValue)}`;
     }
   }
@@ -181,9 +178,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (viewAllLink) {
     viewAllLink.addEventListener('click', function (e) {
       e.preventDefault();
-      pushEvent( 'phone_search_view_all', {
+      pushEvent('phone_search_view_all', {
         search_term: searchInput.value.trim(),
-      } );
+      });
       window.location.href = '/select-model/';
     });
   }
@@ -198,15 +195,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // Track phone_search_click on result selection (WEB-92)
   resultsContainer.addEventListener('click', function (e) {
     const link = e.target.closest('.phone-lookup_item');
-    if ( ! link ) {
+    if (!link) {
       return;
     }
     const items = resultsContainer.querySelectorAll('.phone-lookup_item');
-    pushEvent( 'phone_search_click', {
+    pushEvent('phone_search_click', {
       phone_name: link.textContent.replace(/\s+/g, ' ').trim().split('Get')[0].trim(),
       phone_url: link.getAttribute('href') || '',
-      result_position: Array.from( items ).indexOf( link ) + 1,
-    } );
+      result_position: Array.from(items).indexOf(link) + 1,
+    });
   });
 
   // Prevent dropdown from closing when clicking inside it

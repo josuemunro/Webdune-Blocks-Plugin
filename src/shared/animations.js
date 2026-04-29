@@ -105,15 +105,20 @@ function initNavScrollBehavior(lenis) {
   if (lenis) {
     let lastScrollY = 0;
     let isHidden = false;
+    let fullHeight = 0;
 
-    // Get the full bounding box height including margins
-    const navbarRect = navbarComponent.getBoundingClientRect();
-    const navbarStyles = window.getComputedStyle(navbarComponent);
-    const marginTop = parseFloat(navbarStyles.marginTop);
-    const marginBottom = parseFloat(navbarStyles.marginBottom);
-    const fullHeight = navbarRect.height + marginTop + marginBottom;
+    // Defer layout read to first scroll event to avoid forced reflow during init
+    let measured = false;
+    function measureNav() {
+      if (measured) return;
+      measured = true;
+      const navbarRect = navbarComponent.getBoundingClientRect();
+      const navbarStyles = window.getComputedStyle(navbarComponent);
+      fullHeight = navbarRect.height + parseFloat(navbarStyles.marginTop) + parseFloat(navbarStyles.marginBottom);
+    }
 
     lenis.on('scroll', ({ scroll }) => {
+      measureNav();
       const currentScrollY = scroll;
 
       if (currentScrollY > lastScrollY && currentScrollY > 300) {

@@ -150,22 +150,24 @@ function initScrollAnimations() {
    */
   const underlineElements = document.querySelectorAll('.gradient-underline');
 
-  underlineElements.forEach((element) => {
-    // Check for custom delay, otherwise use default 0.4s
-    const delay = parseFloat(element.getAttribute('data-delay')) || 0.4;
-    const instant = element.getAttribute('data-instant') === 'true';
-
-    // Get the computed background-size to preserve the height value
+  // Batch all DOM reads first to avoid forced reflows between read/write cycles
+  const underlineData = Array.from(underlineElements).map((element) => {
     const computedStyle = window.getComputedStyle(element);
     const bgSize = computedStyle.backgroundSize || '100% 0.3rem';
-    const height = bgSize.split(' ')[1] || '0.3rem'; // Extract height value
+    return {
+      element,
+      height: bgSize.split(' ')[1] || '0.3rem',
+      delay: parseFloat(element.getAttribute('data-delay')) || 0.4,
+      instant: element.getAttribute('data-instant') === 'true',
+    };
+  });
 
-    // Set initial state - 0% width, preserve height
+  // Now write — no layout thrashing
+  underlineData.forEach(({ element, height, delay, instant }) => {
     gsap.set(element, {
       backgroundSize: `0% ${height}`
     });
 
-    // Animate on scroll - expand to full width
     gsap.to(element, {
       backgroundSize: `100% ${height}`,
       duration: DURATION,
@@ -230,44 +232,20 @@ if (typeof window !== 'undefined') {
       initScrollAnimations();
     });
 
-    // Refresh ScrollTrigger after full page load (images, fonts, etc.)
+    // Single post-load refresh — wait for fonts + images, then refresh once
     window.addEventListener('load', () => {
-      // Initial refresh after page load
-      setTimeout(() => {
+      const doRefresh = () => {
         if (typeof ScrollTrigger !== 'undefined') {
           ScrollTrigger.refresh();
-          console.log('ScrollTrigger: Refreshed after page load');
         }
-      }, 100);
+      };
 
-      // Second refresh to catch any lazy-loaded content
-      setTimeout(() => {
-        if (typeof ScrollTrigger !== 'undefined') {
-          ScrollTrigger.refresh();
-          console.log('ScrollTrigger: Second refresh complete');
-        }
-      }, 500);
-
-      // Second refresh for slow connections
-      setTimeout(() => {
-        if (typeof ScrollTrigger !== 'undefined') {
-          ScrollTrigger.refresh();
-          console.log('ScrollTrigger: Final refresh complete');
-        }
-      }, 1500);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => requestAnimationFrame(doRefresh));
+      } else {
+        requestAnimationFrame(doRefresh);
+      }
     });
-
-    // Refresh after fonts are loaded (prevents layout shift from font swapping)
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        setTimeout(() => {
-          if (typeof ScrollTrigger !== 'undefined') {
-            ScrollTrigger.refresh();
-            console.log('ScrollTrigger: Refreshed after fonts loaded');
-          }
-        }, 50);
-      });
-    }
   }
 }
 

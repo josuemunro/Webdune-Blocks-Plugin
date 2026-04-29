@@ -30,7 +30,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     // Only update if data was actually cleaned
     if (JSON.stringify(cleanedReviews) !== JSON.stringify(reviews)) {
-      console.log('🧹 Cleaned reviews data on load');
       setAttributes({ reviews: cleanedReviews });
     }
   }, []);

@@ -4,8 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('🎯 FAQ Item view script loaded');
-
   const faqItems = document.querySelectorAll('[data-faq-trigger]');
 
   faqItems.forEach(trigger => {
