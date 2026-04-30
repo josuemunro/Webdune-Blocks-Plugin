@@ -366,9 +366,12 @@ function webdune_blocks_dequeue_frontend_bloat()
     }
   }
 
-  // Contact Form 7: only needed on pages that actually have a form
+  // Contact Form 7 + reCAPTCHA: only keep on pages that actually have a CF7 form
   global $post;
-  if (is_a($post, 'WP_Post') && !has_shortcode($post->post_content, 'contact-form-7') && !has_block('contact-form-7/contact-form-selector', $post)) {
+  $has_cf7 = is_a($post, 'WP_Post')
+    && (has_shortcode($post->post_content, 'contact-form-7')
+      || has_block('contact-form-7/contact-form-selector', $post));
+  if (!$has_cf7) {
     wp_dequeue_style('contact-form-7');
     wp_dequeue_script('contact-form-7');
     wp_dequeue_script('wpcf7-recaptcha');

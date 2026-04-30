@@ -18,7 +18,9 @@
       "PowerShell(npm run build)",
       "PowerShell(.\\\\deploy-to-staging.ps1 -SkipBuild)",
       "PowerShell(npm run build 2>&1)",
-      "mcp__claude_ai_Linear__list_issues"
+      "mcp__claude_ai_Linear__list_issues",
+      "mcp__claude_ai_Linear__list_comments",
+      "mcp__claude_ai_Linear__list_milestones"
     ]
   }
 }
