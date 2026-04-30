@@ -174,14 +174,24 @@ function webdune_blocks_enqueue_shared_styles()
     );
   }
 
-  // Enqueue JS (includes custom format registrations and animations) if it exists
+  // Enqueue JS (animations + analytics on frontend, shared styles in editor)
   if (file_exists($shared_js_path)) {
     $asset_file = file_exists($shared_asset_path) ? require($shared_asset_path) : array('dependencies' => array(), 'version' => WEBDUNE_BLOCKS_VERSION);
 
-    // On frontend, add GSAP/Lenis dependencies for animations
-    // On editor, use default dependencies for formats only
     $dependencies = $asset_file['dependencies'];
     if (!is_admin()) {
+      // Strip editor-only dependencies that should never load on the frontend
+      $editor_only_deps = array(
+        'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-commands',
+        'wp-preferences', 'wp-preferences-persistence', 'wp-notices',
+        'wp-keyboard-shortcuts', 'wp-style-engine', 'wp-token-list',
+        'wp-rich-text', 'wp-primitives', 'wp-autop', 'wp-blob',
+        'wp-block-serialization-default-parser', 'wp-shortcode', 'wp-warning',
+        'wp-deprecated', 'moment', 'wp-date', 'wp-compose', 'wp-data',
+        'wp-redux-routine', 'wp-private-apis', 'wp-html-entities',
+        'wp-keycodes', 'wp-priority-queue', 'wp-is-shallow-equal', 'wp-dom',
+      );
+      $dependencies = array_diff($dependencies, $editor_only_deps);
       $dependencies = array_merge($dependencies, array('gsap', 'gsap-scrolltrigger', 'lenis'));
     }
 
@@ -196,6 +206,30 @@ function webdune_blocks_enqueue_shared_styles()
 }
 add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_shared_styles', 15); // Priority 15 to load after animations
 add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_shared_styles', 10);
+
+/**
+ * Enqueue editor-only scripts (rich text format registrations)
+ * These register toolbar buttons and must NOT load on the frontend
+ */
+function webdune_blocks_enqueue_editor_formats()
+{
+  $editor_js = WEBDUNE_BLOCKS_BUILD_URL . 'shared/editor-formats.js';
+  $editor_js_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/editor-formats.js';
+  $editor_asset_path = WEBDUNE_BLOCKS_BUILD_DIR . 'shared/editor-formats.asset.php';
+
+  if (file_exists($editor_js_path)) {
+    $asset_file = file_exists($editor_asset_path) ? require($editor_asset_path) : array('dependencies' => array(), 'version' => WEBDUNE_BLOCKS_VERSION);
+
+    wp_enqueue_script(
+      'webdune-editor-formats',
+      $editor_js,
+      $asset_file['dependencies'],
+      $asset_file['version'],
+      true
+    );
+  }
+}
+add_action('enqueue_block_editor_assets', 'webdune_blocks_enqueue_editor_formats', 10);
 
 /**
  * Enqueue GSAP and animation libraries from CDN
@@ -271,6 +305,62 @@ function webdune_blocks_enqueue_swiper()
   }
 }
 add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_swiper');
+
+/**
+ * Preload critical fonts to eliminate the CSS→font discovery chain.
+ * Without this, fonts only start downloading after helvetica-world.css is parsed.
+ */
+function webdune_blocks_preload_fonts()
+{
+  if (is_admin()) {
+    return;
+  }
+
+  $font_url = WEBDUNE_BLOCKS_ASSETS_URL . 'fonts/';
+  $fonts = array('HelveticaWorld-Regular.woff2', 'HelveticaWorld-Bold.woff2');
+
+  foreach ($fonts as $font) {
+    printf(
+      '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+      esc_url($font_url . $font)
+    );
+  }
+}
+add_action('wp_head', 'webdune_blocks_preload_fonts', 1);
+
+/**
+ * Dequeue third-party plugin assets that should not load on the frontend.
+ * Runs at priority 999 so it fires after all plugins have enqueued.
+ */
+function webdune_blocks_dequeue_frontend_bloat()
+{
+  if (is_admin()) {
+    return;
+  }
+
+  global $wp_styles, $wp_scripts;
+
+  // copy-delete-posts: admin-only plugin loading 5 CSS + 6 JS on every page
+  foreach ($wp_styles->registered as $handle => $style) {
+    if (isset($style->src) && strpos($style->src, 'copy-delete-posts') !== false) {
+      wp_dequeue_style($handle);
+    }
+  }
+  foreach ($wp_scripts->registered as $handle => $script) {
+    if (isset($script->src) && strpos($script->src, 'copy-delete-posts') !== false) {
+      wp_dequeue_script($handle);
+    }
+  }
+
+  // Contact Form 7: only needed on pages that actually have a form
+  global $post;
+  if (is_a($post, 'WP_Post') && !has_shortcode($post->post_content, 'contact-form-7') && !has_block('contact-form-7/contact-form-selector', $post)) {
+    wp_dequeue_style('contact-form-7');
+    wp_dequeue_script('contact-form-7');
+    wp_dequeue_script('wpcf7-recaptcha');
+  }
+}
+add_action('wp_enqueue_scripts', 'webdune_blocks_dequeue_frontend_bloat', 999);
 
 /**
  * REMOVED: Custom image sizes

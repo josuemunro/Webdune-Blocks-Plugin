@@ -12,10 +12,6 @@ import './utilities.scss';
 import './effects.scss';
 import './tips-content.scss';
 
-// Custom rich text formats (gradient underlines, etc.)
-// IMPORTANT: Import BEFORE animations.js to ensure formats register immediately
-import './formats.js';
-
 // Shared animations (GSAP, Lenis, parallax)
 // These only run on frontend (not in editor)
 import './animations.js';

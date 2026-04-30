@@ -130,6 +130,22 @@
   }
 }
 
+// Hero H1 uses CSS animation instead of GSAP so it paints immediately (LCP element)
+.home-hero_content h1[data-fade-up] {
+  animation: heroFadeUp 0.8s ease-out both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .home-hero_wrap {
   height: 100%;
   display: flex;
