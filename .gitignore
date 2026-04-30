@@ -64,3 +64,4 @@ HARD_REDIRECT_FIX*.md
 functions.php
 nginx_*.conf
 
+/.claude
