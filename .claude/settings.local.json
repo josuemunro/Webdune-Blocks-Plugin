@@ -5,7 +5,13 @@
       "Bash(git ls-tree:*)",
       "Bash(git -C \"e:/Josue Munro/Documents/Projects/WebDune/CLIENTS/SellmyCell/DEVELOPMENT/Webdune Blocks Plugin\" log --oneline -3)",
       "mcp__claude_ai_Linear__get_issue",
-      "mcp__claude_ai_Linear__save_issue"
+      "mcp__claude_ai_Linear__save_issue",
+      "mcp__claude_ai_Linear__save_comment",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__emulate",
+      "mcp__chrome-devtools__performance_start_trace",
+      "mcp__chrome-devtools__performance_analyze_insight"
     ]
   }
 }
