@@ -307,6 +307,62 @@ function webdune_blocks_enqueue_swiper()
 add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_swiper');
 
 /**
+ * Preload critical fonts to eliminate the CSS→font discovery chain.
+ * Without this, fonts only start downloading after helvetica-world.css is parsed.
+ */
+function webdune_blocks_preload_fonts()
+{
+  if (is_admin()) {
+    return;
+  }
+
+  $font_url = WEBDUNE_BLOCKS_ASSETS_URL . 'fonts/';
+  $fonts = array('HelveticaWorld-Regular.woff2', 'HelveticaWorld-Bold.woff2');
+
+  foreach ($fonts as $font) {
+    printf(
+      '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+      esc_url($font_url . $font)
+    );
+  }
+}
+add_action('wp_head', 'webdune_blocks_preload_fonts', 1);
+
+/**
+ * Dequeue third-party plugin assets that should not load on the frontend.
+ * Runs at priority 999 so it fires after all plugins have enqueued.
+ */
+function webdune_blocks_dequeue_frontend_bloat()
+{
+  if (is_admin()) {
+    return;
+  }
+
+  global $wp_styles, $wp_scripts;
+
+  // copy-delete-posts: admin-only plugin loading 5 CSS + 6 JS on every page
+  foreach ($wp_styles->registered as $handle => $style) {
+    if (isset($style->src) && strpos($style->src, 'copy-delete-posts') !== false) {
+      wp_dequeue_style($handle);
+    }
+  }
+  foreach ($wp_scripts->registered as $handle => $script) {
+    if (isset($script->src) && strpos($script->src, 'copy-delete-posts') !== false) {
+      wp_dequeue_script($handle);
+    }
+  }
+
+  // Contact Form 7: only needed on pages that actually have a form
+  global $post;
+  if (is_a($post, 'WP_Post') && !has_shortcode($post->post_content, 'contact-form-7') && !has_block('contact-form-7/contact-form-selector', $post)) {
+    wp_dequeue_style('contact-form-7');
+    wp_dequeue_script('contact-form-7');
+    wp_dequeue_script('wpcf7-recaptcha');
+  }
+}
+add_action('wp_enqueue_scripts', 'webdune_blocks_dequeue_frontend_bloat', 999);
+
+/**
  * REMOVED: Custom image sizes
  * 
  * CRITICAL FIX: Custom image sizes caused massive storage bloat (3GB+ wasted space)
