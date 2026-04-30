@@ -127,6 +127,20 @@ function webdune_blocks_register_blocks()
 add_action('init', 'webdune_blocks_register_blocks');
 
 /**
+ * Always enqueue the navigation viewScript on the frontend.
+ * Templates that render the nav outside the block API (e.g. checkout_termplate.php)
+ * don't auto-enqueue it, so the hamburger menu JS never loads.
+ */
+function webdune_blocks_enqueue_nav_view_script()
+{
+  if (is_admin()) {
+    return;
+  }
+  wp_enqueue_script('webdune-navigation-view-script');
+}
+add_action('wp_enqueue_scripts', 'webdune_blocks_enqueue_nav_view_script');
+
+/**
  * Enqueue fonts globally
  * These fonts apply to both editor and frontend
  */
