@@ -47,6 +47,9 @@ function initScrollAnimations() {
   const fadeUpElements = document.querySelectorAll('[data-fade-up]');
 
   fadeUpElements.forEach((element) => {
+    // Hero H1 is animated by CSS for faster LCP — skip it here
+    if (element.tagName === 'H1' && element.closest('.section_home-hero')) return;
+
     const delay = parseFloat(element.getAttribute('data-fade-delay')) || 0;
     const instant = element.getAttribute('data-instant') === 'true';
 
