@@ -166,6 +166,8 @@ export default function Edit({ attributes, setAttributes }) {
                         </div>
                       </div>
                     </div>
+
+                    <a href="/select-model/" className="text-size-tiny text-style-link home-hero_browse-link" onClick={(e) => e.preventDefault()}>Browse all models</a>
                   </div>
                 </div>
               </div>

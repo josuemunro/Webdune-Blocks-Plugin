@@ -76,6 +76,8 @@ export default function Save({ attributes }) {
                     </div>
                     <a href="#" className="text-size-tiny text-style-link">View all models</a>
                   </div>
+
+                  <a href="/select-model/" className="text-size-tiny text-style-link home-hero_browse-link" data-fade-up="true" data-fade-delay="0.8" data-instant="true">Browse all models</a>
                 </div>
               </div>
             </div>

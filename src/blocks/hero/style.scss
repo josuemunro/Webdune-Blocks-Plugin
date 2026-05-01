@@ -298,6 +298,17 @@
   }
 }
 
+.home-hero_browse-link {
+  position: absolute;
+  top: 100%;
+  margin-top: 0.75rem;
+
+  &:hover {
+    color: $color-primary;
+    opacity: 1;
+  }
+}
+
 .button.is-secondary {
   background-color: transparent;
   border: 1px solid currentColor;
