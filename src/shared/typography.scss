@@ -197,9 +197,11 @@ html:not(.wp-admin) {
   color: $color-dark;
   text-align: center;
   border-radius: 100px;
-  padding: 1rem 1.25rem;
+  // Helvetica World sits low in its line box, so equal vertical padding
+  // reads as off-centre — the 0.2rem top/bottom skew re-centres it (WEB-359)
+  padding: 0.9rem 1.25rem 1.1rem;
   font-size: 1.125rem;
-  line-height: 1.25;
+  line-height: 1;
   text-decoration: none;
   transition: color .2s, background-color .2s, border-color .2s;
   display: inline-block;

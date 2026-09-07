@@ -67,10 +67,10 @@
   letter-spacing: -0.01rem;
   background-color: $color-primary;
   border-radius: 100px;
-  padding: 1rem 2rem;
+  padding: 0.9rem 2rem 1.1rem;
   font-size: 1.125rem;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1;
   text-decoration: none;
   transition: all 0.2s;
   display: inline-block;
@@ -83,6 +83,13 @@
   justify-content: center;
   align-items: center;
   display: flex;
+
+  // The button's padding skew lifts all flex children to optically centre
+  // the Helvetica World text (WEB-359); the arrow has no font metrics, so
+  // nudge it back down to the geometric centre.
+  .icon-embed-arrow {
+    transform: translateY(2.5px);
+  }
 }
 
 // W-inline-block utility
@@ -315,7 +322,7 @@
 }
 
 .button.is-secondary.is-small {
-  padding: 0.375rem 0.75rem;
+  padding: 0.3rem 0.75rem 0.45rem;
   font-size: 0.8125rem;
 }
 
@@ -492,7 +499,7 @@
 
   .button.is-icon {
     width: 100%;
-    padding: 0.875rem 1.5rem;
+    padding: 0.775rem 1.5rem 0.975rem;
   }
 
   .container-large.home-hero_img-container {
@@ -531,7 +538,7 @@
   }
 
   .button {
-    padding: 0.875rem 1.5rem;
+    padding: 0.775rem 1.5rem 0.975rem;
     font-size: 1rem;
   }
 }

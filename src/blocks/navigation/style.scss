@@ -128,8 +128,12 @@
     color: inherit;
     white-space: nowrap;
 
-    &:hover {
-      color: $color-primary; // Yellow
+    // Hover-capable devices only: on touch screens :hover sticks after a tap,
+    // leaving the link yellow as if permanently selected (WEB-350).
+    @media (hover: hover) {
+      &:hover {
+        color: $color-primary; // Yellow
+      }
     }
 
     &.w--current {

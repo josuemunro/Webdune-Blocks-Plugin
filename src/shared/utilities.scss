@@ -1,6 +1,13 @@
 // Utility Classes
 // From Webflow custom-styles
 
+// WEB-350: mobile browsers paint a grey/blue highlight box over the whole
+// padded box of tapped links and buttons ("click blocks" in Rob's words).
+// Interactive elements provide their own feedback, so suppress it site-wide.
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Visibility utilities */
 .hide {
   display: none !important;
