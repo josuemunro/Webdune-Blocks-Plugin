@@ -136,6 +136,16 @@
       }
     }
 
+    // Touch feedback: dropping :hover on touch devices (above) left taps with
+    // no highlight at all (Rob, Jul/Aug 2026). :active covers the press itself
+    // and .is-pressed (set in view.js on tap) keeps the link yellow while the
+    // next page loads. No transition so a quick tap still shows it.
+    &:active,
+    &.is-pressed {
+      color: $color-primary;
+      transition: none;
+    }
+
     &.w--current {
       color: $color-dark;
     }
@@ -179,9 +189,20 @@
     transition: background-color 0.2s, color 0.2s;
     white-space: nowrap;
 
-    &:hover {
+    // Same hover/press split as .navbar14_link: hover only where hover exists,
+    // an instant pressed state everywhere.
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba($color-primary, 0.1);
+        color: $color-primary;
+      }
+    }
+
+    &:active,
+    &.is-pressed {
       background-color: rgba($color-primary, 0.1);
       color: $color-primary;
+      transition: none;
     }
   }
 
@@ -349,7 +370,9 @@
       padding: 0.75rem 0;
       color: $color-white;
 
-      &:hover {
+      &:hover,
+      &:active,
+      &.is-pressed {
         background-color: transparent;
         color: $color-primary;
       }

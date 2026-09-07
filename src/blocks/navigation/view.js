@@ -6,6 +6,31 @@
 document.addEventListener('DOMContentLoaded', () => {
   const navComponents = document.querySelectorAll('.navbar14_component');
 
+  // Touch press feedback for nav links. iOS Safari only applies :active when a
+  // touchstart listener exists, and :active ends on touchend — before the new
+  // page paints — so the highlight barely registers. Instead flag the tapped
+  // link with .is-pressed (styled yellow) and clear it if the page is restored
+  // from the back/forward cache or navigation is cancelled.
+  const NAV_LINK_SELECTOR = '.navbar14_link, .navbar14_dropdown-link';
+  document.addEventListener('touchstart', () => {}, { passive: true });
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest(NAV_LINK_SELECTOR);
+    if (!link) {
+      return;
+    }
+    document.querySelectorAll(`${NAV_LINK_SELECTOR}.is-pressed`).forEach((el) => {
+      if (el !== link) {
+        el.classList.remove('is-pressed');
+      }
+    });
+    link.classList.add('is-pressed');
+  });
+  window.addEventListener('pageshow', () => {
+    document.querySelectorAll(`${NAV_LINK_SELECTOR}.is-pressed`).forEach((el) => {
+      el.classList.remove('is-pressed');
+    });
+  });
+
   navComponents.forEach((navComponent) => {
     const menuButton = navComponent.querySelector('.navbar14_menu-button');
     const navMenu = navComponent.querySelector('.navbar14_menu');
